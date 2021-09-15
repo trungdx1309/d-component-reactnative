@@ -18,6 +18,7 @@ import {
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
 import Button from "../component/button/Button";
+import InputText from "../component/input/InputText";
 import Text from "../component/text/Text";
 import SafeAreaView from "../component/view/SafeAreaView";
 import ScrollView from "../component/view/ScrollView";
@@ -32,10 +33,11 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-light">
+    <SafeAreaView className="flex-1">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-      <ScrollView className="bg-white">
+      <ScrollView>
         <View>
+          <InputText label="Input" className="my-3" />
           <Text>123</Text>
           <Button>Button</Button>
         </View>
