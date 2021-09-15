@@ -21,7 +21,7 @@ const getBase64ImageFromUrl = async (imageUrl: string) => {
 
     reader.onerror = () => {
       // eslint-disable-next-line prefer-promise-reject-errors
-      return reject(this);
+      return reject();
     };
     reader.readAsDataURL(blob);
   });
