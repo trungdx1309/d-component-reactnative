@@ -11,7 +11,7 @@ import {
   Platform,
 } from "react-native";
 import _ from "lodash";
-import Messages from "../../i18n/Messages";
+// import Messages from "../../i18n/Messages";
 import AppSizes from "../../style/constant/AppSizes";
 import AppColors from "../../style/constant/AppColors";
 
@@ -243,7 +243,7 @@ class Progress extends Component<IProgressProps, IProgressState> {
             }
           } else {
             this.setError({
-              message: Messages.notResponseServer,
+              // message: Messages.notResponseServer,
             });
           }
         })
@@ -286,7 +286,7 @@ class Progress extends Component<IProgressProps, IProgressState> {
         {!error && this.renderLoadingView()}
         {error && (
           <View style={styles.dialog}>
-            <Text style={styles.title}>{Messages.error}</Text>
+            {/* <Text style={styles.title}>{Messages.error}</Text> */}
             <Text style={styles.textContent}>{error.message}</Text>
 
             {this.renderHorizontalDivider()}
@@ -297,14 +297,14 @@ class Progress extends Component<IProgressProps, IProgressState> {
                 style={styles.buttonStyle}
                 onPress={() => this.retry()}
               >
-                <Text style={styles.buttonText}>{Messages.retry}</Text>
+                {/* <Text style={styles.buttonText}>{Messages.retry}</Text> */}
               </TouchableOpacity>
               {this.renderVerticalDivider()}
               <TouchableOpacity
                 style={styles.buttonStyle}
                 onPress={() => this.cancel()}
               >
-                <Text style={styles.buttonText}>{Messages.cancel}</Text>
+                {/* <Text style={styles.buttonText}>{Messages.cancel}</Text> */}
               </TouchableOpacity>
             </View>
           </View>

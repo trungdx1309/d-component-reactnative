@@ -1,7 +1,7 @@
 import ClassNames from "classnames";
 import React from "react";
 import { TouchableOpacityProps } from "react-native";
-import { isDark } from "../../style/constant/AppColors";
+import { isDark } from "../../style/color/_color";
 import { getColorValue } from "../../style/modifier";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";

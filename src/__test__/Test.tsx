@@ -16,7 +16,6 @@ import {
   StyleSheet,
   Text,
   useColorScheme,
-  View,
 } from "react-native";
 
 import {
@@ -26,6 +25,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
+import View from "../component/view/View";
+import "./configurationStyle";
 
 const Section: React.FC<{
   title: string;
@@ -72,11 +73,7 @@ const App = () => {
         style={backgroundStyle}
       >
         <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}
-        >
+        <View className="bg-primary p-4">
           <Section title="Step One">
             Edit <Text style={styles.highlight}>Test.tsx</Text> to change this
             screen and then come back to see your edits.

@@ -1,11 +1,6 @@
 import tinycolor from "tinycolor2";
 
-export const isDark = (color: string) => {
-  const lum = tinycolor(color).getLuminance();
-  return lum < 0.55;
-};
-
-const Colors = {
+const DefaultColors = {
   primary: "#041B47",
   primaryColor: "#041B47",
   secondary: "rgba(211, 15, 15, 0.87)",
@@ -32,4 +27,4 @@ const Colors = {
   muted: "#F5F5F5",
 };
 
-export default Colors;
+export default DefaultColors;
