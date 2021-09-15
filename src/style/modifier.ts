@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { isEmpty, isArray } from "lodash";
-import Colors from "./constant/AppColors";
+import Colors from "./color/_color";
 
 export const generateStyleValue = (
   variants: any,

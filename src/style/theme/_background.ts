@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import Colors from "../color/_color";
-import AppColors from "../constant/AppColors";
 import { generateStyleValue } from "../modifier";
 
 export const BACKGROUND_VARIATIONS = {

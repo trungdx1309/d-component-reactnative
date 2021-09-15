@@ -1,6 +1,6 @@
 import React from "react";
 import { View as ViewRN, ViewProps, useColorScheme } from "react-native";
-import Colors from "../../style/constant/AppColors";
+import Colors from "../../style/color/_color";
 import { getStyleProps } from "../../style/style";
 
 export interface IViewProps extends ViewProps {

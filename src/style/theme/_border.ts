@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { StyleSheet } from "react-native";
-import AppColors from "../constant/AppColors";
+import Colors from "../color/_color";
 import AppSizes from "../constant/AppSizes";
 import { generateStyleValue } from "../modifier";
 
@@ -17,7 +17,7 @@ const {
   borderRadiusXLarge,
 } = AppSizes;
 
-const { greyColor } = AppColors;
+const { greyColor } = Colors;
 
 export const BORDER_WIDTH_VARIATIONS = {
   border: "borderWidth",
@@ -59,10 +59,7 @@ export const BORDER_RADIUS_VALUES = {
   4: borderRadiusXLarge,
 };
 
-const borderColorClass = generateStyleValue(
-  { border: "borderColor" },
-  AppColors
-);
+const borderColorClass = generateStyleValue({ border: "borderColor" }, Colors);
 
 const borderWidthClass = generateStyleValue(
   BORDER_WIDTH_VARIATIONS,

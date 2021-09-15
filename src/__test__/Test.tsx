@@ -9,15 +9,7 @@
  */
 
 import React from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-} from "react-native";
-
+import { StatusBar, StyleSheet, useColorScheme } from "react-native";
 import {
   Colors,
   DebugInstructions,
@@ -25,38 +17,12 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
+import Button from "../component/button/Button";
+import Text from "../component/text/Text";
+import SafeAreaView from "../component/view/SafeAreaView";
+import ScrollView from "../component/view/ScrollView";
 import View from "../component/view/View";
 import "./configurationStyle";
-
-const Section: React.FC<{
-  title: string;
-}> = ({ children, title }) => {
-  const isDarkMode = useColorScheme() === "dark";
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}
-      >
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}
-      >
-        {children}
-      </Text>
-    </View>
-  );
-};
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
@@ -66,28 +32,12 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView className="flex-1 bg-light">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}
-      >
-        <Header />
-        <View className="bg-primary p-4">
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>Test.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+      <ScrollView className="bg-white">
+        <View>
+          <Text>123</Text>
+          <Button>Button</Button>
         </View>
       </ScrollView>
     </SafeAreaView>

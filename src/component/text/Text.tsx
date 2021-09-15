@@ -2,7 +2,7 @@ import React from "react";
 import { Text as RNText, TextProps, useColorScheme } from "react-native";
 import { getStyleProps } from "../../style/style";
 import { base } from "../../style/font/_text";
-import Colors from "../../style/constant/AppColors";
+import Colors from "../../style/color/_color";
 
 export interface ITextProps extends TextProps {
   className?: string;

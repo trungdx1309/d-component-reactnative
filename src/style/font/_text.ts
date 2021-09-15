@@ -1,8 +1,8 @@
 import { StyleSheet, Platform } from "react-native";
-import AppColors from "../constant/AppColors";
+import Colors from "../color/_color";
 import { generateStyleValue } from "../modifier";
 
-const textColorClass = generateStyleValue({ text: "color" }, AppColors);
+const textColorClass = generateStyleValue({ text: "color" }, Colors);
 
 export const base = {
   fontSize: 10,

@@ -4,7 +4,7 @@ import {
   ScrollViewProps,
   useColorScheme,
 } from "react-native";
-import Colors from "../../style/constant/AppColors";
+import Colors from "../../style/color/_color";
 import { getStyleProps } from "../../style/style";
 
 export interface IScrollViewProps extends ScrollViewProps {
