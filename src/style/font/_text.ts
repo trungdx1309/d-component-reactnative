@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import { StyleSheet, Platform } from "react-native";
 import Colors from "../color/_color";
 import { generateStyleValue } from "../modifier";
@@ -20,6 +21,13 @@ export const base = {
 export const TEXT_ALIGN_VARIANTS = { text: "textAlign" };
 export const TEXT_DECOR_VARIANTS = { text: "textDecorationLine" };
 export const TEXT_TRANSFORM_VARIANTS = { text: "textTransform" };
+
+const textSizeClass: any = {};
+for (let i = 0; i < 100; i++) {
+  textSizeClass[`size-${i}`] = {
+    fontSize: i,
+  };
+}
 
 export const TEXT_ALIGN_VALUE = {
   auto: "auto",
@@ -94,6 +102,7 @@ const textStyle = StyleSheet.create({
   ...textAlignClass,
   ...textDecorClass,
   ...textTransformClass,
+  ...textSizeClass,
 });
 
 export default textStyle;

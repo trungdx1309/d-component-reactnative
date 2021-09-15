@@ -7,6 +7,7 @@ import borderStyle from "./theme/_border";
 import widthHeightStyle from "./layout/_width-height";
 import textStyle from "./font/_text";
 import positionStyle from "./layout/_position";
+import imageStyle from "./image/_image";
 
 export const getStyleProps = (props: any) => {
   const classStr = props?.className ?? "";
@@ -28,6 +29,7 @@ const style = StyleSheet.create({
   ...widthHeightStyle,
   ...textStyle,
   ...positionStyle,
+  ...imageStyle,
 });
 
 export default style;
