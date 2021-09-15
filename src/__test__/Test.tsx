@@ -24,6 +24,8 @@ import SafeAreaView from "../component/view/SafeAreaView";
 import ScrollView from "../component/view/ScrollView";
 import View from "../component/view/View";
 import "./configurationStyle";
+import TestAvatar from "./testAvatar/TestAvatar";
+import TestImages from "./testImage/TestImages";
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
@@ -37,6 +39,8 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <ScrollView>
         <View>
+          <TestImages />
+          <TestAvatar />
           <InputText label="Input" className="my-3" />
           <Text>123</Text>
           <Button>Button</Button>

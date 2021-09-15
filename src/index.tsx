@@ -51,6 +51,15 @@ export { default as Button } from "./component/button/Button";
 export type { IImageProps } from "./component/image/Image";
 export { default as Image } from "./component/image/Image";
 
+export type { IAvatarProps } from "./component/avatar/Avatar";
+export { default as Avatar } from "./component/avatar/Avatar";
+
+export type {
+  IAvatarNameProps,
+  IUserBasic,
+} from "./component/avatar/AvatarName";
+export { default as AvatarName } from "./component/avatar/AvatarName";
+
 /* ----------------------------------------
 // Icon
 // ---------------------------------------- */
