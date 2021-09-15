@@ -7,13 +7,16 @@ import {
   TouchableOpacity,
   ViewStyle,
   TextStyle,
+  useColorScheme,
 } from "react-native";
 import Text from "../text/Text";
 import View from "../view/View";
 import { getStyleProps } from "../../style/style";
 import Icon from "../icon/Icon";
 import AppSizes from "../../style/constant/AppSizes";
+import Colors from "../../style/color/_color";
 
+const { light } = Colors;
 export interface IInputTextProps extends TextInputProps {
   variant?: "standard" | "outline" | "rounded" | "pill";
   label?: any;
@@ -53,6 +56,7 @@ const InputText: React.ForwardRefRenderFunction<
   },
   ref
 ) => {
+  const isDarkMode = useColorScheme() === "dark";
   const [focusing, setFocusing] = useState(false);
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
@@ -103,7 +107,10 @@ const InputText: React.ForwardRefRenderFunction<
             setFocusing(false);
           }}
           {...rest}
-          style={[{ height, flex: 1 }, styleInput]}
+          style={[
+            { height, flex: 1, color: isDarkMode ? light : undefined },
+            styleInput,
+          ]}
         />
         {iconName && (
           <Icon
