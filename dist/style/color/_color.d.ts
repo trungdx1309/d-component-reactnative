@@ -11,5 +11,5 @@ export declare class ColorsClass {
     }): void;
 }
 export declare const isDark: (color: string) => boolean;
-declare const Colors: any;
+declare const Colors: ColorsClass;
 export default Colors;

@@ -29,5 +29,5 @@ export declare class SchemaClass {
      */
     setScheme(scheme: SchemeType): void;
 }
-declare const Scheme: any;
+declare const Scheme: SchemaClass;
 export default Scheme;
