@@ -53,16 +53,31 @@ const flexStyle = StyleSheet.create({
   "align-center": {
     alignItems: "center",
   },
+  "align-items-center": {
+    alignItems: "center",
+  },
   "align-end": {
+    alignItems: "flex-end",
+  },
+  "align-items-end": {
     alignItems: "flex-end",
   },
   "align-start": {
     alignItems: "flex-start",
   },
+  "align-items-start": {
+    alignItems: "flex-start",
+  },
   "align-base": {
     alignItems: "baseline",
   },
+  "align-items-base": {
+    alignItems: "baseline",
+  },
   "align-stretch": {
+    alignItems: "stretch",
+  },
+  "align-items-stretch": {
     alignItems: "stretch",
   },
   "align-self-center": {
