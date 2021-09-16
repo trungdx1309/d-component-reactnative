@@ -8,7 +8,11 @@
   ],
   "scripts": {
     "android": "react-native run-android",
+    "android:clean": "cd android && ./gradlew clean && cd .. && react-native run-android",
     "ios": "react-native run-ios",
+    "ios:iPhoneX": "react-native --port=8088 run-ios --simulator='iPhone X'",
+    "ios:iPhone8": "react-native --port=8088 run-ios --simulator='iPhone 8'",
+    "iPad": "react-native run-ios --simulator='iPad Pro (9.7 inch)'",
     "start": "react-native start",
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --p tsconfig.build.json",
