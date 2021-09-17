@@ -57,6 +57,7 @@ export const BORDER_RADIUS_VALUES = {
   2: borderRadiusMedium,
   3: borderRadiusLarge,
   4: borderRadiusXLarge,
+  pilled: 999,
 };
 
 const borderColorClass = generateStyleValue({ border: "borderColor" }, Colors);

@@ -43,7 +43,7 @@ const App = () => {
           <TestAvatar />
           <InputText label="Input" className="my-3" />
           <Text>123</Text>
-          <Button>Button</Button>
+          <Button className="rounded-left-pilled">Button</Button>
         </View>
       </ScrollView>
     </SafeAreaView>
