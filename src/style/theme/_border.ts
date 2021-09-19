@@ -45,6 +45,7 @@ export const BORDER_RADIUS_VARIATIONS = {
 
 export const BORDER_WIDTH_VALUES = {
   "": borderTiny,
+  0: 0,
   1: borderSmall,
   2: borderMedium,
   3: borderLarge,
@@ -53,6 +54,7 @@ export const BORDER_WIDTH_VALUES = {
 
 export const BORDER_RADIUS_VALUES = {
   "": borderRadiusTiny,
+  0: 0,
   1: borderRadiusSmall,
   2: borderRadiusMedium,
   3: borderRadiusLarge,
@@ -73,8 +75,6 @@ const borderRadiusClass = generateStyleValue(
   BORDER_RADIUS_VALUES,
   { borderColor: greyColor }
 );
-
-console.log({ borderRadiusClass });
 
 const borderStyle = StyleSheet.create({
   "border-dashed": {
