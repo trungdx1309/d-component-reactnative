@@ -92,3 +92,13 @@ export { default as TimeUtils } from "./utils/TimeUtils";
 export { default as ObjectUtils } from "./utils/ObjectUtils";
 export { default as MapUtils } from "./utils/MapUtils";
 export { default as ImageUtils } from "./utils/ImageUtils";
+
+/* ----------------------------------------
+// Utils
+// ---------------------------------------- */
+
+export { default as useDidUpdate } from "./hooks/useDidUpdate";
+export { default as useFirstTime } from "./hooks/useFirstTime";
+export { default as useForceUpdate } from "./hooks/useForceUpdate";
+export { useForceUpdateConstraint } from "./hooks/useForceUpdate";
+export { default as usePrevious } from "./hooks/usePrevious";
