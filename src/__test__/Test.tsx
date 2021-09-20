@@ -17,6 +17,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
+import DatePicker from "react-native-datepicker";
 import Button from "../component/button/Button";
 import InputText from "../component/input/InputText";
 import Text from "../component/text/Text";
@@ -26,6 +27,7 @@ import View from "../component/view/View";
 import "./configurationStyle";
 import TestAvatar from "./testAvatar/TestAvatar";
 import TestImages from "./testImage/TestImages";
+import TestInput from "./testInput/TestInput";
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
@@ -39,10 +41,10 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <ScrollView>
         <View>
-          <TestImages />
-          <TestAvatar />
+          {/* <TestImages /> */}
+          {/* <TestAvatar /> */}
           <InputText label="Input" className="my-3" />
-          <Text>123</Text>
+          <TestInput />
           <Button className="rounded-left-pilled">Button</Button>
         </View>
       </ScrollView>

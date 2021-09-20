@@ -8,6 +8,12 @@ export type {
 } from "./component/input/InputText";
 export { default as InputText } from "./component/input/InputText";
 
+export type {
+  IInputDateProps,
+  IInputDateMethod,
+} from "./component/input/InputDate";
+export { default as InputDate } from "./component/input/InputDate";
+
 /* ----------------------------------------
 // View
 // ---------------------------------------- */
