@@ -23,6 +23,7 @@ export interface IButtonProps extends TouchableOpacityProps {
     | "yellow"
     | "blue"
     | "gray"
+    | "grey"
     | "dark"
     | "light"
     | "error"

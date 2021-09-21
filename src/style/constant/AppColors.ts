@@ -13,6 +13,7 @@ const DefaultColors = {
   warning: "#FF963C",
   warnColor: "#FF963C",
   grey: "#d9d9d9",
+  gray: "#d9d9d9",
   greyColor: "#d9d9d9",
   disabled: "#9E9EA1",
 
