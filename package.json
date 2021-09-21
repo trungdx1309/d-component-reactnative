@@ -38,6 +38,7 @@
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.172",
     "@types/react-native": "^0.64.5",
+    "@types/react-native-calendars": "^1.1264.2",
     "@types/react-native-datepicker": "^1.7.1",
     "@types/react-test-renderer": "^16.9.2",
     "@types/tinycolor2": "^1.4.3",

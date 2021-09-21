@@ -31,6 +31,7 @@ import TestInput from "./testInput/TestInput";
 import TestModal from "./testModal/TestModal";
 import Modal from "../component/modal/Modal";
 import TestHeader from "./testHeader/TestHeader";
+import TestCalendar from "./testCalendar/TestCalendar";
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
@@ -45,6 +46,7 @@ const App = () => {
       <View>
         {/* <TestImages />
         <TestAvatar /> */}
+        <TestCalendar />
         <TestHeader />
         <InputText label="Input" className="my-3" />
         <TestInput />
@@ -54,7 +56,7 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="bg-white flex-1">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <ScrollView>
         {renderMainView()}
@@ -63,7 +65,7 @@ const App = () => {
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
-        size="medium"
+        size="fullscreen"
         showHeader
         useScrollView
         showFooter
