@@ -10,10 +10,11 @@ import ScrollView from "../view/ScrollView";
 import Button, { IButtonProps } from "../button/Button";
 
 export interface IModalProps
-  extends Omit<ModalProps, "isVisible,children">,
+  extends Partial<ModalProps>,
     Omit<IHeaderProps, "children"> {
   open: boolean;
   size?: "fullscreen" | "large" | "medium" | "small";
+  position?: "bottom" | "center" | "top";
   className?: string;
   classNameModal?: string;
   classNameContainer?: string;
@@ -23,6 +24,7 @@ export interface IModalProps
   saveText?: string;
   showHeader?: boolean;
   showFooter?: boolean;
+  showCancelButton?: boolean;
   useScrollView?: boolean;
   disabledSave?: boolean;
   onClose?: (props?: any) => void;
@@ -31,6 +33,7 @@ export interface IModalProps
   customFooter?: ((props?: any) => Element) | Element;
   cancelButtonProps?: IButtonProps;
   saveButtonProps?: IButtonProps;
+  swipeable?: boolean;
 }
 
 const Modal: React.FC<IModalProps> = ({
@@ -39,8 +42,11 @@ const Modal: React.FC<IModalProps> = ({
   onClose,
   onSave,
   size = "fullscreen",
+  position = "center",
   showHeader,
   showFooter,
+  showCancelButton = true,
+  swipeable = true,
   disabledSave,
   className,
   classNameModal,
@@ -57,15 +63,22 @@ const Modal: React.FC<IModalProps> = ({
   onRightPress,
   customHeader,
   customFooter,
+  leftIcon,
+  leftText,
+  rightIcon,
+  rightText,
+  theme,
   ...rest
 }) => {
   const modalClass = ClassNames(
     "",
     {
       "m-0": size === "fullscreen",
-      "mx-4": size === "large",
+      "mx-0": size === "large",
       "mx-6": size === "medium",
       "mx-10": size === "small",
+      "justify-content-end": position === "bottom",
+      "justify-content-start": position === "top",
     },
     classNameModal
   );
@@ -73,11 +86,14 @@ const Modal: React.FC<IModalProps> = ({
     { "flex-1": size === "fullscreen" },
     classNameContainer
   );
-  const contentClass = ClassNames("w-100 h-100 px-3 py-2", className);
+  const contentClass = ClassNames("px-3 py-2", className);
 
   const headerClass = ClassNames(classNameHeader);
   const footerClass = ClassNames(
     "flex-center-y justify-content-between px-3 py-2",
+    {
+      "justify-content-end": !showCancelButton,
+    },
     classNameFooter
   );
 
@@ -99,6 +115,11 @@ const Modal: React.FC<IModalProps> = ({
         }}
         onRightPress={onRightPress}
         className={headerClass}
+        leftIcon={leftIcon}
+        rightIcon={rightIcon}
+        leftText={leftText}
+        rightText={rightText}
+        theme={theme}
       />
     );
   };
@@ -123,9 +144,11 @@ const Modal: React.FC<IModalProps> = ({
     }
     return (
       <View className={footerClass}>
-        <Button onPress={onClose} color="grey" {...cancelButtonProps}>
-          {cancelText}
-        </Button>
+        {showCancelButton && (
+          <Button onPress={onClose} color="grey" {...cancelButtonProps}>
+            {cancelText}
+          </Button>
+        )}
         <Button disabled={disabledSave} onPress={onSave} {...saveButtonProps}>
           {saveText}
         </Button>
@@ -136,8 +159,11 @@ const Modal: React.FC<IModalProps> = ({
   return (
     <ModalTrans
       onSwipeMove={onClose}
-      swipeDirection={useScrollView ? undefined : "down"}
-      {...rest}
+      swipeDirection={
+        // eslint-disable-next-line no-nested-ternary
+        useScrollView ? undefined : swipeable ? "down" : undefined
+      }
+      {...(rest as any)}
       isVisible={open}
       backdropTransitionInTiming={700}
       backdropTransitionOutTiming={300}

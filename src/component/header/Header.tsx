@@ -18,7 +18,7 @@ export interface IHeaderProps {
   leftText?: string;
   rightIcon?: string;
   rightText?: string;
-  color?: IButtonProps["color"];
+  theme?: IButtonProps["color"];
   className?: string;
 }
 
@@ -32,12 +32,12 @@ const Header: React.FC<IHeaderProps> = ({
   leftText,
   rightIcon = "more-horiz",
   rightText,
-  color = "primary",
+  theme = "primary",
   className,
 }) => {
-  const bgColor = getColorValue(color);
+  const bgColor = getColorValue(theme);
   const wrapperClass = ClassNames(
-    `flex-center-y px-2 py-3 bg-${color}`,
+    `flex-center-y px-2 py-3 bg-${theme}`,
     className
   );
   const titleClass = ClassNames(
