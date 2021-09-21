@@ -5,7 +5,7 @@ import { generateStyleValue } from "../modifier";
 
 const widthClass: any = {};
 const heightClass: any = {};
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i <= 200; i += 5) {
   widthClass[`width-${i}`] = {
     width: i,
   };
@@ -31,8 +31,6 @@ const heightPercentageClass = generateStyleValue(
   { h: "height" },
   WIDTH_HEIGHT_PERCENTAGE_VALUE
 );
-
-console.log({ widthPercentageClass });
 
 const widthHeightStyle = StyleSheet.create({
   "h-full": {

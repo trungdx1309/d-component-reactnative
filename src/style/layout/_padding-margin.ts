@@ -2,7 +2,13 @@ import { StyleSheet } from "react-native";
 import AppSizes from "../constant/AppSizes";
 import { generateStyleValue } from "../modifier";
 
-const { paddingTiny, paddingXSml, paddingMedium, paddingXXLarge } = AppSizes;
+const {
+  paddingTiny,
+  paddingXSml,
+  paddingMedium,
+  paddingXXLarge,
+  paddingXXXLarge,
+} = AppSizes;
 
 export const PADDING_KEY_PATTERN = new RegExp(`p[ltrbxy]?-([0-9]*)`);
 
@@ -32,6 +38,12 @@ export const MARGIN_PADDING_VALUES = {
   2: paddingXSml,
   3: paddingMedium,
   4: paddingXXLarge,
+  5: paddingXXXLarge,
+  6: paddingXXXLarge + 4,
+  7: paddingXXXLarge + 8,
+  8: paddingXXXLarge + 12,
+  9: paddingXXXLarge + 16,
+  10: paddingXXXLarge + 20,
 };
 
 export type PaddingLiterals = keyof typeof PADDING_VARIATIONS;
