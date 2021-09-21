@@ -1,8 +1,8 @@
 import ClassNames from "classnames";
 import React from "react";
 import { TouchableOpacityProps } from "react-native";
-import AppSizes from "../../../dist/style/constant/AppSizes";
 import { isDark } from "../../style/color/_color";
+import AppSizes from "../../style/constant/AppSizes";
 import { getColorValue } from "../../style/modifier";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
