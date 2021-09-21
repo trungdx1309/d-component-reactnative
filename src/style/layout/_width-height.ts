@@ -39,11 +39,23 @@ const widthHeightStyle = StyleSheet.create({
   "height-full": {
     height: AppSizes.screenHeight,
   },
+  "h-auto": {
+    height: "auto",
+  },
+  "height-auto": {
+    height: "auto",
+  },
   "w-full": {
-    height: AppSizes.screenWidth,
+    width: AppSizes.screenWidth,
   },
   "width-full": {
-    height: AppSizes.screenWidth,
+    width: AppSizes.screenWidth,
+  },
+  "w-auto": {
+    width: "auto",
+  },
+  "width-auto": {
+    width: "auto",
   },
   ...widthClass,
   ...heightClass,
