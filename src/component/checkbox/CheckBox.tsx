@@ -23,7 +23,7 @@ const CheckBox: React.FC<ICheckBoxProps> = ({
 }) => {
   const wrapperClass = ClassNames("flex-row", className);
   const boxClass = ClassNames(
-    "width-14 height-14 border border-grey",
+    "width-15 height-15 border border-grey",
     {
       "bg-primary": checked,
     },
