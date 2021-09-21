@@ -1,6 +1,7 @@
 import ClassNames from "classnames";
 import React from "react";
 import { TouchableOpacityProps } from "react-native";
+import AppSizes from "../../../dist/style/constant/AppSizes";
 import { isDark } from "../../style/color/_color";
 import { getColorValue } from "../../style/modifier";
 import Icon from "../icon/Icon";
@@ -28,12 +29,14 @@ export interface IButtonProps extends TouchableOpacityProps {
     | "success"
     | "warning"
     | "muted";
+  textColor?: string;
   iconName?: string;
   iconSize?: number;
   suffixIcon?: string;
   suffixElement?: any;
   prefixElement?: any;
   label?: string;
+  height?: number | string;
 }
 
 const Button: React.FC<IButtonProps> = ({
@@ -46,11 +49,14 @@ const Button: React.FC<IButtonProps> = ({
   children,
   iconName,
   iconSize = 14,
+  height = AppSizes.inputHeight,
   suffixIcon,
   suffixElement,
   prefixElement,
   label,
   disabled,
+  style,
+  textColor,
   ...rest
 }) => {
   const buttonColor = getColorValue(color);
@@ -97,7 +103,11 @@ const Button: React.FC<IButtonProps> = ({
   }
 
   if (typeof content === "string") {
-    mainView = <Text className={labelClass}>{content}</Text>;
+    mainView = (
+      <Text className={labelClass} color={textColor}>
+        {content}
+      </Text>
+    );
   }
 
   if (React.isValidElement(content)) {
@@ -118,7 +128,7 @@ const Button: React.FC<IButtonProps> = ({
   return (
     <TouchableOpacity
       className={wrapperClass}
-      style={{ height: 40 }}
+      style={[{ height }, style]}
       disabled={disabled}
       {...rest}
     >
