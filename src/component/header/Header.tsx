@@ -12,13 +12,14 @@ export interface IHeaderProps {
   title?: string;
   onLeftPress?: (props?: any) => any;
   onRightPress?: (props?: any) => any;
-  customLeft?: (props?: any) => React.ReactElement | Element;
-  customRight?: (props?: any) => React.ReactElement | Element;
+  customLeft?: ((props?: any) => Element) | Element;
+  customRight?: ((props?: any) => Element) | Element;
   leftIcon?: string;
   leftText?: string;
   rightIcon?: string;
   rightText?: string;
   color?: IButtonProps["color"];
+  className?: string;
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -32,9 +33,13 @@ const Header: React.FC<IHeaderProps> = ({
   rightIcon = "more-horiz",
   rightText,
   color = "primary",
+  className,
 }) => {
   const bgColor = getColorValue(color);
-  const wrapperClass = ClassNames(`flex-center-y px-2 py-3 bg-${color}`);
+  const wrapperClass = ClassNames(
+    `flex-center-y px-2 py-3 bg-${color}`,
+    className
+  );
   const titleClass = ClassNames(
     "flex-1 h3 font-weight-bold text-center text-white",
     {
