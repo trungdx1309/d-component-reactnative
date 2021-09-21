@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar, StyleSheet, useColorScheme } from "react-native";
 import {
   Colors,
@@ -28,26 +28,48 @@ import "./configurationStyle";
 import TestAvatar from "./testAvatar/TestAvatar";
 import TestImages from "./testImage/TestImages";
 import TestInput from "./testInput/TestInput";
+import TestModal from "./testModal/TestModal";
+import Modal from "../component/modal/Modal";
+import TestHeader from "./testHeader/TestHeader";
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
+  const [openModal, setOpenModal] = useState(false);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
+  const renderMainView = () => {
+    return (
+      <View>
+        {/* <TestImages />
+        <TestAvatar /> */}
+        <TestHeader />
+        <InputText label="Input" className="my-3" />
+        <TestInput />
+        <Button className="rounded-left-pilled">Button</Button>
+      </View>
+    );
   };
 
   return (
     <SafeAreaView className="flex-1">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <ScrollView>
-        <View>
-          {/* <TestImages /> */}
-          {/* <TestAvatar /> */}
-          <InputText label="Input" className="my-3" />
-          <TestInput />
-          <Button className="rounded-left-pilled">Button</Button>
-        </View>
+        {renderMainView()}
+        <TestModal onPress={() => setOpenModal(true)} />
       </ScrollView>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        size="medium"
+        showHeader
+        useScrollView
+        showFooter
+      >
+        {renderMainView()}
+      </Modal>
     </SafeAreaView>
   );
 };

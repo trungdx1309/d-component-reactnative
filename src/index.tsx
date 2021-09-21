@@ -37,6 +37,20 @@ export type {
 export { default as TouchableOpacity } from "./component/view/TouchableOpacity";
 
 /* ----------------------------------------
+// Header
+// ---------------------------------------- */
+
+export type { IHeaderProps } from "./component/header/Header";
+export { default as Header } from "./component/header/Header";
+
+/* ----------------------------------------
+// Modal
+// ---------------------------------------- */
+
+export type { IModalProps, IModalTransProps } from "./component/modal/Modal";
+export { default as Modal, ModalTrans } from "./component/modal/Modal";
+
+/* ----------------------------------------
 // Text
 // ---------------------------------------- */
 
