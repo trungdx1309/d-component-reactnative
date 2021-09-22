@@ -45,6 +45,7 @@ export interface IAwesomeListProps<T>
   emptyText?: string;
   filterEmptyText?: string;
   pageSize?: number;
+  className?: string;
 }
 
 class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
@@ -357,11 +358,12 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
       renderErrorView,
       renderProgress,
       filterEmptyText,
+      className,
       ...rest
     } = this.props;
 
     return (
-      <View style={containerStyle}>
+      <View style={containerStyle} className={className}>
         {this.isSectionsList() ? (
           <SectionList
             style={listStyle}

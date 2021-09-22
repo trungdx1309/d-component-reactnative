@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
-import AwesomeListMode from './AwesomeListMode';
-import AwesomeListStyle from './AwesomeListStyle';
-import PropTypes from 'prop-types';
+/* eslint-disable react/sort-comp */
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import AwesomeListMode from "./AwesomeListMode";
+import AwesomeListStyle from "./AwesomeListStyle";
 
 // create a component
-class EmptyView extends Component {
+class EmptyView extends Component<any, any> {
   static propTypes = {
     mode: PropTypes.any,
     renderEmptyView: PropTypes.func,
@@ -14,7 +15,7 @@ class EmptyView extends Component {
     retry: PropTypes.func,
     emptyText: PropTypes.string,
     filterEmptyText: PropTypes.string,
-  }
+  };
 
   static defaultProps = {
     mode: AwesomeListMode.HIDDEN,
@@ -22,16 +23,18 @@ class EmptyView extends Component {
     renderProgress: null,
     renderErrorView: null,
     retry: null,
-    emptyText: 'No result',
-    filterEmptyText: 'No filter results',
-  }
+    emptyText: "No result",
+    filterEmptyText: "No filter results",
+  };
 
   /**
    * Should not be override this method
    */
   renderEmptyViewInternal() {
     if (this.props.mode !== AwesomeListMode.EMPTY) return null;
-    return this.props.renderEmptyView ? this.props.renderEmptyView() : this.renderEmptyView();
+    return this.props.renderEmptyView
+      ? this.props.renderEmptyView()
+      : this.renderEmptyView();
   }
 
   /**
@@ -39,7 +42,9 @@ class EmptyView extends Component {
    */
   renderFilterEmptyViewInternal() {
     if (this.props.mode !== AwesomeListMode.FILTER_EMPTY) return null;
-    return this.props.renderFilterEmptyView ? this.props.renderFilterEmptyView() : this.renderFilterEmptyView();
+    return this.props.renderFilterEmptyView
+      ? this.props.renderFilterEmptyView()
+      : this.renderFilterEmptyView();
   }
 
   /**
@@ -79,24 +84,30 @@ class EmptyView extends Component {
    * Incase change only few cases, we should use props.renderEmptyView
    */
   renderEmptyView() {
-    return (<Text style={AwesomeListStyle.textEmpty}>{this.props.emptyText}</Text>);
+    return (
+      <Text style={AwesomeListStyle.textEmpty}>{this.props.emptyText}</Text>
+    );
   }
 
   /**
-  * Override incase build another EmptyView in whole system
-  * Incase change only few cases, we should use props.renderFilterEmptyView
-  */
+   * Override incase build another EmptyView in whole system
+   * Incase change only few cases, we should use props.renderFilterEmptyView
+   */
   renderFilterEmptyView() {
-    return (<Text style={AwesomeListStyle.textEmpty}>{this.props.filterEmptyText}</Text>);
+    return (
+      <Text style={AwesomeListStyle.textEmpty}>
+        {this.props.filterEmptyText}
+      </Text>
+    );
   }
 
   /**
    * Override incase build another EmptyView in whole system
    * Incase change only few cases, we should use props.renderProgress
    */
-  renderProgress() {
-    return (<ActivityIndicator />);
-  }
+  renderProgress = () => {
+    return <ActivityIndicator />;
+  };
 
   /**
    * Override incase build another EmptyView in whole system
@@ -105,9 +116,13 @@ class EmptyView extends Component {
   renderErrorView() {
     return (
       <View>
-        <Text style={AwesomeListStyle.textError}>{'No result'}</Text>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => this.retryInternal()} style={AwesomeListStyle.buttonRetry}>
-          <Text style={AwesomeListStyle.textButtonRetry}>{'Retry'}</Text>
+        <Text style={AwesomeListStyle.textError}>No result</Text>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => this.retryInternal()}
+          style={AwesomeListStyle.buttonRetry}
+        >
+          <Text style={AwesomeListStyle.textButtonRetry}>Retry</Text>
         </TouchableOpacity>
       </View>
     );
@@ -130,13 +145,4 @@ class EmptyView extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  locale: state.i18n.locale
-
-});
-
-// Any actions to map to the component?
-const mapDispatchToProps = {}
-
 export default EmptyView;
-
