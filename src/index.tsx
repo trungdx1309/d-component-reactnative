@@ -37,6 +37,15 @@ export type {
 export { default as TouchableOpacity } from "./component/view/TouchableOpacity";
 
 /* ----------------------------------------
+// List
+// ---------------------------------------- */
+
+export type { IAwesomeListProps } from "./component/list/awesomeList/AwesomeList";
+export { default as AwesomeList } from "./component/list/awesomeList/AwesomeList";
+export { default as AwesomeListMode } from "./component/list/awesomeList/AwesomeListMode";
+export { default as EmptyView } from "./component/list/awesomeList/EmptyView";
+
+/* ----------------------------------------
 // Header
 // ---------------------------------------- */
 
