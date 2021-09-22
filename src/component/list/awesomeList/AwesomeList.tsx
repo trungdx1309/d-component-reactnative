@@ -20,19 +20,22 @@ import PagingView from "./PagingView";
 
 const DEFAULT_PAGE_SIZE = 20;
 
+//@ts-ignore
 export interface IAwesomeListProps<T>
   extends Omit<
-      FlatListProps<T>,
+      Partial<FlatListProps<T>>,
       "data" | "getItemLayout" | "viewabilityConfig"
     >,
-    Omit<SectionListProps<T>, "data" | "getItemLayout" | "viewabilityConfig"> {
+    Omit<
+      Partial<SectionListProps<T>>,
+      "data" | "getItemLayout" | "viewabilityConfig"
+    > {
   containerStyle?: ViewStyle;
   listStyle?: ViewStyle;
   emptyViewStyle?: ViewStyle;
   source: (props: any) => any;
-  keyExtractor: (props: any, index: number) => any;
+  keyExtractor?: (props: any, index: number) => any;
   type?: string;
-  renderItem: (props: any) => any;
   renderSeparator?: () => SectionListProps<T>["ItemSeparatorComponent"];
   transformer?: (res: any) => any;
   isPaging?: boolean;
@@ -46,6 +49,7 @@ export interface IAwesomeListProps<T>
   filterEmptyText?: string;
   pageSize?: number;
   className?: string;
+  renderItem: SectionListProps<T>["renderItem"];
 }
 
 class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
@@ -367,8 +371,10 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
         {this.isSectionsList() ? (
           <SectionList
             style={listStyle}
-            renderItem={(item) => renderItem(item)}
-            keyExtractor={(item, index) => keyExtractor(item, index)}
+            renderItem={renderItem}
+            keyExtractor={(item, index) =>
+              keyExtractor && keyExtractor(item, index)
+            }
             ItemSeparatorComponent={renderSeparator && renderSeparator()}
             stickySectionHeadersEnabled
             onRefresh={() => this.onRefresh()}
@@ -381,8 +387,10 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
           <FlatList
             style={listStyle}
             data={this.state.data}
-            renderItem={(item) => renderItem(item)}
-            keyExtractor={(item, index) => keyExtractor(item, index)}
+            renderItem={renderItem as any}
+            keyExtractor={(item, index) =>
+              keyExtractor && keyExtractor(item, index)
+            }
             ItemSeparatorComponent={renderSeparator && renderSeparator()}
             refreshing={this.state.refreshing}
             onRefresh={() => this.onRefresh()}
