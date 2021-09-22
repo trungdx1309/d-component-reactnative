@@ -50,6 +50,7 @@ export interface IAwesomeListProps<T>
   pageSize?: number;
   className?: string;
   renderItem: SectionListProps<T>["renderItem"];
+  data?: any;
 }
 
 class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
@@ -363,6 +364,12 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
       renderProgress,
       filterEmptyText,
       className,
+      pageSize,
+      createSections,
+      source,
+      transformer,
+      data,
+      numColumns,
       ...rest
     } = this.props;
 
@@ -375,12 +382,14 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
             keyExtractor={(item, index) =>
               keyExtractor && keyExtractor(item, index)
             }
-            ItemSeparatorComponent={renderSeparator && renderSeparator()}
+            ItemSeparatorComponent={() =>
+              renderSeparator && (renderSeparator() as any)
+            }
             stickySectionHeadersEnabled
             onRefresh={() => this.onRefresh()}
             ListHeaderComponent={listHeaderComponent}
             refreshing={this.state.refreshing}
-            {...rest}
+            // {...rest}
             sections={this.state.sections}
           />
         ) : (
@@ -391,7 +400,9 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
             keyExtractor={(item, index) =>
               keyExtractor && keyExtractor(item, index)
             }
-            ItemSeparatorComponent={renderSeparator && renderSeparator()}
+            ItemSeparatorComponent={() =>
+              renderSeparator && (renderSeparator() as any)
+            }
             refreshing={this.state.refreshing}
             onRefresh={() => this.onRefresh()}
             onEndReached={() => this.onEndReached()}
@@ -403,6 +414,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
             )}
             onEndReachedThreshold={0.5}
             ListHeaderComponent={listHeaderComponent}
+            numColumns={numColumns}
             {...rest}
           />
         )}
