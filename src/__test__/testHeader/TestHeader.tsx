@@ -12,7 +12,7 @@ const TestHeader: React.FC<ITestHeaderProps> = ({ id }) => {
     <View className="my-4">
       <Header
         title="Header"
-        color="primary"
+        theme="light"
         leftText="Left"
         onLeftPress={() => {}}
         onRightPress={() => {}}
@@ -22,6 +22,7 @@ const TestHeader: React.FC<ITestHeaderProps> = ({ id }) => {
             <Icon name="explore" />
           </View>
         }
+        showSearch
       />
     </View>
   );

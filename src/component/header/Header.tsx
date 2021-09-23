@@ -7,6 +7,7 @@ import TouchableOpacity from "../view/TouchableOpacity";
 import Icon from "../icon/Icon";
 import { getColorValue } from "../../style/modifier";
 import { isDark } from "../../style/color/_color";
+import InputSearch from "../input/InputSearch";
 
 export interface IHeaderProps {
   title?: string;
@@ -14,12 +15,15 @@ export interface IHeaderProps {
   onRightPress?: (props?: any) => any;
   customLeft?: ((props?: any) => Element) | Element;
   customRight?: ((props?: any) => Element) | Element;
+  customTitle?: ((props?: any) => Element) | Element;
   leftIcon?: string;
   leftText?: string;
   rightIcon?: string;
   rightText?: string;
   theme?: IButtonProps["color"];
   className?: string;
+  classNameSearch?: string;
+  showSearch?: boolean;
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -28,16 +32,22 @@ const Header: React.FC<IHeaderProps> = ({
   onRightPress,
   customLeft,
   customRight,
+  customTitle,
   leftIcon = "arrow-back",
   leftText,
   rightIcon = "more-horiz",
   rightText,
   theme = "primary",
   className,
+  classNameSearch,
+  showSearch,
 }) => {
   const bgColor = getColorValue(theme);
   const wrapperClass = ClassNames(
     `flex-center-y px-2 py-3 bg-${theme}`,
+    {
+      "py-2": showSearch,
+    },
     className
   );
   const titleClass = ClassNames(
@@ -46,6 +56,8 @@ const Header: React.FC<IHeaderProps> = ({
       "text-dark": !isDark(bgColor),
     }
   );
+
+  const searchClass = ClassNames("flex-1 mx-3", classNameSearch);
 
   const getTextColor = () => {
     if (isDark(bgColor)) {
@@ -83,6 +95,22 @@ const Header: React.FC<IHeaderProps> = ({
     );
   };
 
+  const renderCenter = () => {
+    if (customTitle) {
+      if (typeof customTitle === "function") {
+        return customTitle();
+      }
+      return customTitle;
+    }
+    if (showSearch) {
+      return <InputSearch className={searchClass} />;
+    }
+    if (title) {
+      return <Text className={titleClass}>{title}</Text>;
+    }
+    return <View className="flex-1" />;
+  };
+
   const renderRight = () => {
     if (customRight) {
       if (typeof customRight === "function") {
@@ -115,7 +143,7 @@ const Header: React.FC<IHeaderProps> = ({
   return (
     <View className={wrapperClass}>
       {onLeftPress && renderLeft()}
-      {title && <Text className={titleClass}>{title}</Text>}
+      {renderCenter()}
       {onRightPress && renderRight()}
     </View>
   );

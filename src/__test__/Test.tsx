@@ -57,7 +57,7 @@ const App = () => {
     return (
       <View style={{ flex: 1, width: "100%", height: "100%" }}>
         {/* <TestImages /> */}
-        <TestAvatar />
+        {/* <TestAvatar /> */}
         <TestCalendar />
         <TestHeader />
         <InputText label="Input" className="my-3" />
