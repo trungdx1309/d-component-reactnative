@@ -18,13 +18,13 @@ export interface IAvatarProps extends Omit<IImageProps, "source"> {
   color?: string;
   classNameImage?: string;
   classNameLetter?: string;
-  source?: IImageProps["source"];
+  avatar?: IImageProps["source"];
   styleImage?: IImageProps["style"];
 }
 
 const Avatar: React.FC<IAvatarProps> = ({
   size = "medium",
-  source,
+  avatar,
   variant = "rounded",
   className,
   classNameImage,
@@ -67,10 +67,10 @@ const Avatar: React.FC<IAvatarProps> = ({
     const firstLetter = text.charAt(0);
     content = <Text className={letterClass}>{firstLetter}</Text>;
   }
-  if (source) {
+  if (avatar) {
     content = (
       <Image
-        source={source}
+        source={avatar}
         className={imageClass}
         resizeMode={resizeMode}
         resizeMethod={resizeMethod}

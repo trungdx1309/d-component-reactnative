@@ -56,8 +56,8 @@ const App = () => {
   const renderMainView = () => {
     return (
       <View style={{ flex: 1, width: "100%", height: "100%" }}>
-        {/* <TestImages />
-        <TestAvatar /> */}
+        {/* <TestImages /> */}
+        <TestAvatar />
         <TestCalendar />
         <TestHeader />
         <InputText label="Input" className="my-3" />

@@ -9,6 +9,8 @@ export interface ITestAvatarProps {
 }
 
 const TestAvatar: React.FC<ITestAvatarProps> = ({ id }) => {
+  const imageType = typeof images.birthdayCake;
+  console.log({ imageType });
   return (
     <View>
       <View>

@@ -6,7 +6,7 @@ import Avatar, { IAvatarProps } from "./Avatar";
 
 export interface IUserBasic {
   fullName?: string;
-  avatar?: string | null;
+  avatar?: IAvatarProps["avatar"];
   name?: string;
   [key: string]: any;
 }
@@ -78,7 +78,7 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
   return (
     <View className={wrapperClass}>
       {position === "before" && renderName()}
-      {avatar && <Avatar source={avatar as any} size={size} />}
+      {avatar && <Avatar avatar={avatar as any} size={size} />}
       {!avatar && <Avatar text={displayName.charAt(0)} size={size} />}
       {position === "after" && renderName()}
     </View>
