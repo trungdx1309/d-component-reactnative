@@ -21,6 +21,7 @@ export const base = {
 export const TEXT_ALIGN_VARIANTS = { text: "textAlign" };
 export const TEXT_DECOR_VARIANTS = { text: "textDecorationLine" };
 export const TEXT_TRANSFORM_VARIANTS = { text: "textTransform" };
+export const FONT_WEIGHT_VARIANT = { "font-weight": "fontWeight" };
 
 const textSizeClass: any = {};
 for (let i = 0; i < 100; i++) {
@@ -28,6 +29,20 @@ for (let i = 0; i < 100; i++) {
     fontSize: i,
   };
 }
+
+export const FONT_WEIGHT_VALUE = {
+  100: "100",
+  200: "200",
+  300: "300",
+  400: "400",
+  500: "500",
+  600: "600",
+  700: "700",
+  800: "800",
+  900: "900",
+  normal: "normal",
+  bold: "bold",
+};
 
 export const TEXT_ALIGN_VALUE = {
   auto: "auto",
@@ -67,6 +82,11 @@ const textTransformClass = generateStyleValue(
   TEXT_TRANSFORM_VALUE
 );
 
+const fontWeightClass = generateStyleValue(
+  FONT_WEIGHT_VARIANT,
+  FONT_WEIGHT_VALUE
+);
+
 const textStyle = StyleSheet.create({
   h0: {
     ...base,
@@ -95,14 +115,12 @@ const textStyle = StyleSheet.create({
   },
   h5: { ...base },
   text: { ...base },
-  "font-weight-bold": {
-    fontWeight: "bold",
-  },
   ...textColorClass,
   ...textAlignClass,
   ...textDecorClass,
   ...textTransformClass,
   ...textSizeClass,
+  ...fontWeightClass,
 });
 
 export default textStyle;

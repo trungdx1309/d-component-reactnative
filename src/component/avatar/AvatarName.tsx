@@ -3,6 +3,7 @@ import React from "react";
 import Text from "../text/Text";
 import View from "../view/View";
 import Avatar, { IAvatarProps } from "./Avatar";
+import { IButtonProps } from "../button/Button";
 
 export interface IUserBasic {
   fullName?: string;
@@ -18,6 +19,8 @@ export interface IAvatarNameProps {
   subLabel?: string;
   className?: string;
   classNameText?: string;
+  classNameSubText?: string;
+  color?: IButtonProps["color"];
 }
 
 const AvatarName: React.FC<IAvatarNameProps> = ({
@@ -27,6 +30,8 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
   subLabel,
   className,
   classNameText,
+  classNameSubText,
+  color,
 }) => {
   const { avatar, fullName, name = "" } = user;
   let displayName = name;
@@ -40,38 +45,38 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
     "ml-1": position === "after",
   });
   const nameTextClass = ClassNames(
-    "text-nowrap",
+    `text-nowrap text-${color}`,
     {
-      "size-70": size === "xx-large",
-      "size-56": size === "x-large",
-      "size-48": size === "large",
-      "size-40": size === "medium",
-      h0: size === "small",
-      h2: size === "x-small",
+      "size-60": size === "xx-large",
+      "size-50": size === "x-large",
+      "size-40": size === "large",
+      "size-32": size === "medium",
+      "h1 font-weight-500": size === "small",
+      "h3 font-weight-500": size === "x-small",
       "size-12": size === "xx-small",
     },
     classNameText
   );
 
-  const subTextClass = ClassNames({
-    "text-large": size === "large",
-    "text-medium": size === "medium",
-    "text-x-small": size === "small",
-    "text-xx-small": size === "x-small" || size === "xx-small",
-  });
+  const subTextClass = ClassNames(
+    `text-gray`,
+    {
+      "size-50": size === "xx-large",
+      "size-40": size === "x-large",
+      "size-30": size === "large",
+      "size-24": size === "medium",
+      "h4 font-weight-400": size === "small",
+      "size-10": size === "x-small",
+      "size-9": size === "xx-small",
+    },
+    classNameSubText
+  );
 
   const renderName = () => {
     return (
       <View className={nameClass}>
         <Text className={`${nameTextClass}`}>{displayName}</Text>
-        {subLabel && (
-          <Text
-            className={subTextClass}
-            style={{ fontSize: size === "x-large" ? 32 : undefined }}
-          >
-            {subLabel}
-          </Text>
-        )}
+        {subLabel && <Text className={subTextClass}>{subLabel}</Text>}
       </View>
     );
   };
