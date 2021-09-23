@@ -18,7 +18,7 @@ import Colors from "../../style/color/_color";
 
 const { light } = Colors;
 export interface IInputTextProps extends TextInputProps {
-  variant?: "standard" | "outline" | "rounded" | "pill";
+  variant?: "standard" | "outline" | "rounded" | "pill" | "trans";
   label?: any;
   error?: any;
   height?: number;
