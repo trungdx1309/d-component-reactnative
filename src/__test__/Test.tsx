@@ -32,6 +32,18 @@ import TestModal from "./testModal/TestModal";
 import Modal from "../component/modal/Modal";
 import TestHeader from "./testHeader/TestHeader";
 import TestCalendar from "./testCalendar/TestCalendar";
+import AwesomeList from "../component/list/awesomeList/AwesomeList";
+
+interface ITestData {
+  id: string;
+  info: any;
+}
+
+const DATA = [
+  { id: 1, info: "qeqe" },
+  { id: 2, info: "sdf" },
+  { id: 3, info: "fsff" },
+];
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
@@ -58,10 +70,20 @@ const App = () => {
   return (
     <SafeAreaView className="bg-white flex-1">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-      <ScrollView>
+      <AwesomeList<ITestData>
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item.id}</Text>
+          </View>
+        )}
+        source={() => Promise.resolve()}
+        transformer={(res) => DATA}
+        className="bg-primary"
+      />
+      {/* <ScrollView>
         {renderMainView()}
         <TestModal onPress={() => setOpenModal(true)} />
-      </ScrollView>
+      </ScrollView> */}
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}

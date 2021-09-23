@@ -10,6 +10,7 @@ import {
   ViewStyle,
   FlatListProps,
   SectionListProps,
+//   View,
 } from "react-native";
 import View from "../../view/View";
 import AwesomeListMode from "./AwesomeListMode";
@@ -33,7 +34,7 @@ export interface IAwesomeListProps<T>
   containerStyle?: ViewStyle;
   listStyle?: ViewStyle;
   emptyViewStyle?: ViewStyle;
-  source: (props: any) => any;
+  source: (props: { pageIndex: number; pageSize: number }) => any;
   keyExtractor?: (props: any, index: number) => any;
   type?: string;
   renderSeparator?: () => SectionListProps<T>["ItemSeparatorComponent"];
@@ -374,7 +375,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
     } = this.props;
 
     return (
-      <View style={containerStyle} className={className}>
+      <View style={containerStyle}>
         {this.isSectionsList() ? (
           <SectionList
             style={listStyle}
