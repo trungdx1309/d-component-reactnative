@@ -55,7 +55,7 @@ const App = () => {
 
   const renderMainView = () => {
     return (
-      <View>
+      <View style={{ flex: 1, width: "100%", height: "100%" }}>
         {/* <TestImages />
         <TestAvatar /> */}
         <TestCalendar />
@@ -78,12 +78,11 @@ const App = () => {
         )}
         source={() => Promise.resolve()}
         transformer={(res) => DATA}
-        className="bg-primary"
       />
-      {/* <ScrollView>
+      <ScrollView>
         {renderMainView()}
         <TestModal onPress={() => setOpenModal(true)} />
-      </ScrollView> */}
+      </ScrollView>
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}

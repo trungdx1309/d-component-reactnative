@@ -10,7 +10,8 @@ import {
   ViewStyle,
   FlatListProps,
   SectionListProps,
-//   View,
+  StyleSheet,
+  // View,
 } from "react-native";
 import View from "../../view/View";
 import AwesomeListMode from "./AwesomeListMode";
@@ -352,7 +353,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
 
   render() {
     const {
-      containerStyle,
+      containerStyle = {},
       listStyle,
       emptyViewStyle,
       keyExtractor,
@@ -375,7 +376,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
     } = this.props;
 
     return (
-      <View style={containerStyle}>
+      <View className={className}>
         {this.isSectionsList() ? (
           <SectionList
             style={listStyle}
@@ -390,12 +391,11 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
             onRefresh={() => this.onRefresh()}
             ListHeaderComponent={listHeaderComponent}
             refreshing={this.state.refreshing}
-            // {...rest}
+            {...rest}
             sections={this.state.sections}
           />
         ) : (
           <FlatList
-            style={listStyle}
             data={this.state.data}
             renderItem={renderItem as any}
             keyExtractor={(item, index) =>
