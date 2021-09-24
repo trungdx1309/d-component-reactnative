@@ -89,6 +89,9 @@ export type {
 } from "./component/avatar/AvatarName";
 export { default as AvatarName } from "./component/avatar/AvatarName";
 
+export type { IImageViewerModalProps } from "./component/image/ImageViewerModal";
+export { default as ImageViewerModal } from "./component/image/ImageViewerModal";
+
 /* ----------------------------------------
 // Icon
 // ---------------------------------------- */
@@ -138,8 +141,11 @@ export { default as ImageUtils } from "./utils/ImageUtils";
 // Utils
 // ---------------------------------------- */
 
+export type { IUseKeyboard } from "./hooks/useKeyboard";
+
 export { default as useDidUpdate } from "./hooks/useDidUpdate";
 export { default as useFirstTime } from "./hooks/useFirstTime";
 export { default as useForceUpdate } from "./hooks/useForceUpdate";
 export { useForceUpdateConstraint } from "./hooks/useForceUpdate";
 export { default as usePrevious } from "./hooks/usePrevious";
+export { default as useKeyboard } from "./hooks/useKeyboard";
