@@ -56,9 +56,9 @@ const App = () => {
   const renderMainView = () => {
     return (
       <View style={{ flex: 1, width: "100%", height: "100%" }}>
-        {/* <TestImages /> */}
+        <TestImages />
         {/* <TestAvatar /> */}
-        <TestCalendar />
+        {/* <TestCalendar /> */}
         <TestHeader />
         <InputText label="Input" className="my-3" />
         <TestInput />
@@ -70,7 +70,7 @@ const App = () => {
   return (
     <SafeAreaView className="bg-white flex-1">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-      <AwesomeList<ITestData>
+      {/* <AwesomeList<ITestData>
         renderItem={({ item }) => (
           <View>
             <Text>{item.id}</Text>
@@ -78,7 +78,7 @@ const App = () => {
         )}
         source={() => Promise.resolve()}
         transformer={(res) => DATA}
-      />
+      /> */}
       <ScrollView>
         {renderMainView()}
         <TestModal onPress={() => setOpenModal(true)} />

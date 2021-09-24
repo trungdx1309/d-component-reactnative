@@ -63,6 +63,7 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "1.10.3",
+    "react-native-image-zoom-viewer": "^3.0.1",
     "react-native-modal": "^13.0.0",
     "react-native-reanimated": "2.3.0-alpha.2",
     "react-native-router-flux": "^4.2.0",
