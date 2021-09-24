@@ -14,7 +14,13 @@ const TestAvatar: React.FC<ITestAvatarProps> = ({ id }) => {
   return (
     <View>
       <View>
-        <Avatar text="T" size="xx-small" className="my-2" />
+        <Avatar
+          text="T"
+          size="xx-small"
+          className="my-2"
+          showBorder
+          borderColor="blue"
+        />
         <Avatar text="T" size="x-small" className="my-2" />
         <Avatar text="T" size="small" className="my-2" />
         <Avatar text="T" size="medium" className="my-2" />

@@ -1,5 +1,6 @@
 import ClassNames from "classnames";
 import React from "react";
+import { IButtonProps } from "../button/Button";
 import Image, { IImageProps } from "../image/Image";
 import Text from "../text/Text";
 import View from "../view/View";
@@ -20,6 +21,8 @@ export interface IAvatarProps extends Omit<IImageProps, "source"> {
   classNameLetter?: string;
   avatar?: IImageProps["source"];
   styleImage?: IImageProps["style"];
+  showBorder?: boolean;
+  borderColor?: IButtonProps["color"];
 }
 
 const Avatar: React.FC<IAvatarProps> = ({
@@ -31,10 +34,12 @@ const Avatar: React.FC<IAvatarProps> = ({
   classNameLetter,
   text,
   color = "#D8D8D8",
+  borderColor = "gray",
   resizeMode = "cover",
   resizeMethod = "auto",
   style,
   styleImage,
+  showBorder,
   ...rest
 }) => {
   const letterClass = ClassNames(
@@ -55,6 +60,7 @@ const Avatar: React.FC<IAvatarProps> = ({
     {
       "justify-content-center align-items-center": !!text,
       "rounded-pill": variant === "rounded",
+      [`border-2 border-${borderColor}`]: showBorder,
     },
     className
   );
