@@ -61,7 +61,7 @@ const ImageViewerModal: React.FC<IImageViewerModalProps> = ({
         imageUrls={value}
         enableSwipeDown
         onCancel={onClose}
-        renderFooter={renderFooter}
+        renderFooter={renderFooter as any}
         index={previewIndex === -1 ? 0 : previewIndex}
       />
     </Modal>
