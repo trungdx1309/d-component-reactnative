@@ -3,11 +3,8 @@ import Modal, { IModalProps } from "../modal/Modal";
 import Calendar, { ICalendarProps } from "./Calendar";
 
 export interface IModalCalendarProps
-  extends ICalendarProps,
-    Pick<
-      IModalProps,
-      "open" | "onClose" | "size" | "position" | "title" | "onSave" | "leftIcon"
-    > {}
+  extends Omit<ICalendarProps, "customHeader" | "style" | "theme">,
+    IModalProps {}
 
 const ModalCalendar: React.FC<IModalCalendarProps> = ({
   open,
@@ -17,6 +14,9 @@ const ModalCalendar: React.FC<IModalCalendarProps> = ({
   title = "Calendar",
   leftIcon = "close",
   onSave,
+  saveText,
+  customHeader,
+  customFooter,
   ...rest
 }) => {
   return (
@@ -33,8 +33,11 @@ const ModalCalendar: React.FC<IModalCalendarProps> = ({
       onSave={onSave}
       swipeable={false}
       leftIcon={leftIcon}
+      saveText={saveText}
+      customHeader={customHeader}
+      customFooter={customFooter}
     >
-      <Calendar {...rest} />
+      <Calendar {...(rest as any)} />
     </Modal>
   );
 };
