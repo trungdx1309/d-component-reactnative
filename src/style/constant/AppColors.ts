@@ -15,6 +15,8 @@ const DefaultColors = {
   grey: "#d9d9d9",
   gray: "#d9d9d9",
   greyColor: "#d9d9d9",
+  greyLight: "#f2f2f2",
+  grayLight: "#f2f2f2",
   disabled: "#9E9EA1",
 
   red: "#E63B2E",
@@ -27,5 +29,7 @@ const DefaultColors = {
   light: "#FFFFFF",
   muted: "#F5F5F5",
 };
+
+export type ColorKeyType = keyof typeof DefaultColors;
 
 export default DefaultColors;

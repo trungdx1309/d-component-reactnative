@@ -124,6 +124,7 @@ export { default as Colors } from "./style/color/_color";
 export { default as Scheme } from "./style/color/_scheme";
 export { default as AppSizes } from "./style/constant/AppSizes";
 export { default as AppColors } from "./style/constant/AppColors";
+export type { ColorKeyType } from "./style/constant/AppColors";
 export { isDark } from "./style/color/_color";
 
 /* ----------------------------------------

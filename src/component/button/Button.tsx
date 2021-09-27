@@ -7,6 +7,7 @@ import { getColorValue } from "../../style/modifier";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
+import { ColorKeyType } from "../../style/constant/AppColors";
 
 export interface IButtonProps extends TouchableOpacityProps {
   className?: string;
@@ -15,21 +16,7 @@ export interface IButtonProps extends TouchableOpacityProps {
   size?: "large" | "medium" | "small" | "x-small" | "auto" | "fit-content";
   variant?: "standard" | "outline" | "trans";
   shape?: "square" | "pill" | "rounded";
-  color?:
-    | "primary"
-    | "secondary"
-    | "green"
-    | "red"
-    | "yellow"
-    | "blue"
-    | "gray"
-    | "grey"
-    | "dark"
-    | "light"
-    | "error"
-    | "success"
-    | "warning"
-    | "muted";
+  color?: ColorKeyType;
   textColor?: string;
   iconName?: string;
   iconSize?: number;

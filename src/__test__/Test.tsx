@@ -62,7 +62,9 @@ const App = () => {
         <TestHeader />
         <InputText label="Input" className="my-3" />
         <TestInput />
-        <Button className="rounded-left-pilled">Button</Button>
+        <Button className="rounded-left-pilled" color="gray" disabled>
+          Button
+        </Button>
       </View>
     );
   };
