@@ -19,8 +19,16 @@ const flexValueClass = generateStyleValue({ flex: "flex" }, FLEX_VALUE);
 const flexStyle = StyleSheet.create({
   //flex
 
-  "flex-1": {
-    flex: 1,
+  "flex-wrap": {
+    flexWrap: "wrap",
+  },
+
+  "flex-nowrap": {
+    flexWrap: "nowrap",
+  },
+
+  "flex-wrap-reverse": {
+    flexWrap: "wrap-reverse",
   },
 
   "flex-row": {
