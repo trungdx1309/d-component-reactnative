@@ -29,6 +29,7 @@ export interface ICalendarProps
   markedDates?: any;
   style?: ViewStyle;
   className?: string;
+  lightDarkMode?: boolean;
 }
 
 const darkTheme = {
@@ -88,8 +89,7 @@ const Calendar: React.FC<ICalendarProps> = ({
   const tranStyle = getStyleProps(rest);
   return (
     <RNCalendar
-      {...rest}
-      style={[styles.defaultStyle, tranStyle, style]}
+      theme={isDarkMode ? { ...darkTheme } : { ...lightTheme }}
       renderArrow={(direction) => {
         if (direction === "left") {
           return <Icon name="keyboard-arrow-left" color={Colors.primary} />;
@@ -98,7 +98,8 @@ const Calendar: React.FC<ICalendarProps> = ({
           return <Icon name="keyboard-arrow-right" color={Colors.primary} />;
         }
       }}
-      theme={isDarkMode ? { ...darkTheme } : { ...lightTheme }}
+      {...rest}
+      style={[styles.defaultStyle, tranStyle, style]}
       enableSwipeMonths={enableSwipeMonths}
     />
   );

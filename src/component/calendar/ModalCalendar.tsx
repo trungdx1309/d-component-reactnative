@@ -3,8 +3,8 @@ import Modal, { IModalProps } from "../modal/Modal";
 import Calendar, { ICalendarProps } from "./Calendar";
 
 export interface IModalCalendarProps
-  extends Omit<ICalendarProps, "customHeader" | "style" | "theme">,
-    IModalProps {}
+  extends IModalProps,
+    Omit<ICalendarProps, "customHeader" | "style" | "theme"> {}
 
 const ModalCalendar: React.FC<IModalCalendarProps> = ({
   open,
