@@ -33,6 +33,7 @@ import Modal from "../component/modal/Modal";
 import TestHeader from "./testHeader/TestHeader";
 import TestCalendar from "./testCalendar/TestCalendar";
 import AwesomeList from "../component/list/awesomeList/AwesomeList";
+import TestSelect from "./testSelect/TestSelect";
 
 interface ITestData {
   id: string;
@@ -56,11 +57,17 @@ const App = () => {
   const renderMainView = () => {
     return (
       <View style={{ flex: 1, width: "100%", height: "100%" }}>
-        <TestImages />
-        <TestAvatar />
+        {/* <TestImages /> */}
+        {/* <TestAvatar /> */}
         {/* <TestCalendar /> */}
-        <TestHeader />
-        <InputText label="Input" className="my-3" />
+        {/* <TestHeader /> */}
+        <TestSelect />
+        <InputText
+          label="Input"
+          className="my-3"
+          editable={false}
+          value="123"
+        />
         <TestInput />
         <Button className="rounded-left-pilled" color="gray" disabled>
           Button

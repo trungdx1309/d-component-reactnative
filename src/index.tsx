@@ -74,6 +74,13 @@ export type { IButtonProps } from "./component/button/Button";
 export { default as Button } from "./component/button/Button";
 
 /* ----------------------------------------
+// Select
+// ---------------------------------------- */
+
+export type { ISelectProps } from "./component/select/Select";
+export { default as Select } from "./component/select/Select";
+
+/* ----------------------------------------
 // Image
 // ---------------------------------------- */
 
@@ -98,6 +105,13 @@ export { default as ImageViewerModal } from "./component/image/ImageViewerModal"
 
 export type { IIconProps } from "./component/icon/Icon";
 export { default as Icon } from "./component/icon/Icon";
+
+/* ----------------------------------------
+// Chip
+// ---------------------------------------- */
+
+export type { IChipProps } from "./component/chip/Chip";
+export { default as Chip } from "./component/chip/Chip";
 
 /* ----------------------------------------
 // Checkbox
