@@ -63,6 +63,8 @@ const Modal: React.FC<IModalProps> = ({
   onRightPress,
   customHeader,
   customFooter,
+  customRight,
+  customLeft,
   leftIcon,
   leftText,
   rightIcon,
@@ -120,6 +122,8 @@ const Modal: React.FC<IModalProps> = ({
         leftText={leftText}
         rightText={rightText}
         theme={theme}
+        customRight={customRight}
+        customLeft={customLeft}
       />
     );
   };

@@ -92,7 +92,7 @@ const Button: React.FC<IButtonProps> = ({
 
   if (typeof content === "string") {
     mainView = (
-      <Text className={labelClass} color={textColor}>
+      <Text className={labelClass} color={textColor} numberOfLines={1}>
         {content}
       </Text>
     );

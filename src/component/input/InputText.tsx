@@ -26,6 +26,7 @@ export interface IInputTextProps extends TextInputProps {
   classNameLabel?: string;
   classNameWrapper?: string;
   classNameInput?: string;
+  classNameError?: string;
   iconName?: string;
   styleInput?: StyleProp<TextStyle>;
   onPressIcon?: (props?: any) => any;
@@ -46,12 +47,12 @@ const InputText: React.ForwardRefRenderFunction<
     classNameInput,
     classNameWrapper,
     classNameLabel,
+    classNameError,
     styleInput,
     onBlur,
     onFocus,
     iconName,
     onPressIcon,
-    multiline,
     ...rest
   },
   ref
@@ -89,7 +90,7 @@ const InputText: React.ForwardRefRenderFunction<
     {
       "px-2": variant === "pill",
     },
-    classNameInput
+    classNameError
   );
 
   return (
