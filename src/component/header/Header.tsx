@@ -142,9 +142,9 @@ const Header: React.FC<IHeaderProps> = ({
 
   return (
     <View className={wrapperClass}>
-      {onLeftPress && renderLeft()}
+      {(onLeftPress || customLeft) && renderLeft()}
       {renderCenter()}
-      {onRightPress && renderRight()}
+      {(onRightPress || customRight) && renderRight()}
     </View>
   );
 };
