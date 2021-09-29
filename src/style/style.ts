@@ -8,6 +8,7 @@ import widthHeightStyle from "./layout/_width-height";
 import textStyle from "./font/_text";
 import positionStyle from "./layout/_position";
 import imageStyle from "./image/_image";
+import shadowStyle from "./theme/_shadow";
 
 export const getStyleProps = (props: any) => {
   const classStr = props?.className ?? "";
@@ -30,6 +31,7 @@ const style = StyleSheet.create({
   ...textStyle,
   ...positionStyle,
   ...imageStyle,
+  ...shadowStyle,
 });
 
 export default style;
