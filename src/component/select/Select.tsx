@@ -194,7 +194,7 @@ const Select: React.FC<ISelectProps> = ({
     const selectItemClass = ClassNames("flex-center-y py-3", {
       "border-top": index !== 0,
     });
-    let content: Element = (
+    let content: any = (
       <View>
         <Text>{getLabel(item)}</Text>
       </View>
@@ -270,7 +270,7 @@ const Select: React.FC<ISelectProps> = ({
         title={label}
         leftIcon="close"
         theme="light"
-        customRight={renderSelectButton()}
+        customRight={renderSelectButton() as any}
         classNameHeader="border-bottom"
       >
         {multiple && !_.isEmpty(selectingValue) && renderClearAll()}
