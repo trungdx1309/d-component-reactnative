@@ -355,6 +355,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
     const {
       containerStyle = {},
       listStyle,
+      style,
       emptyViewStyle,
       keyExtractor,
       renderItem,
@@ -376,7 +377,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
     } = this.props;
 
     return (
-      <View className={className}>
+      <View className={className} style={style}>
         {this.isSectionsList() ? (
           <SectionList
             style={listStyle}

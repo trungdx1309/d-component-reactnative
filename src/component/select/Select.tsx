@@ -13,6 +13,7 @@ import Icon from "../icon/Icon";
 import Chip from "../chip/Chip";
 import CheckBox from "../checkbox/CheckBox";
 import Button from "../button/Button";
+import AppSizes from "../../style/constant/AppSizes";
 
 export interface ISelectProps
   extends Partial<
@@ -69,7 +70,7 @@ const Select: React.FC<ISelectProps> = ({
   styleList,
   value,
   onChange,
-  getLabel = (item) => item?.name ?? "N/A",
+  getLabel = (item) => item?.name,
   getValue = (item) => item?.id,
   source = (paging) => Promise.resolve(),
   transformer = (res) => res,
@@ -214,36 +215,24 @@ const Select: React.FC<ISelectProps> = ({
     );
   };
 
-  const renderSelectButton = () => {
-    if (quickSelect && !multiple) {
-      return undefined;
+  const renderClearButton = () => {
+    if (multiple && !_.isEmpty(selectingValue)) {
+      return (
+        <View>
+          <Button
+            variant="trans"
+            classNameLabel="h5"
+            className="px-0 align-self-end"
+            iconName="refresh"
+            height={20}
+            onPress={() => setSelectingValue([])}
+          >
+            Clear
+          </Button>
+        </View>
+      );
     }
-    return (
-      <Button
-        variant="trans"
-        onPress={() => handlePressSelect()}
-        className="px-0"
-      >
-        {selectText}
-      </Button>
-    );
-  };
-
-  const renderClearAll = () => {
-    return (
-      <View>
-        <Button
-          variant="trans"
-          classNameLabel="h5"
-          className="px-0 align-self-end"
-          iconName="refresh"
-          height={20}
-          onPress={() => setSelectingValue([])}
-        >
-          Clear
-        </Button>
-      </View>
-    );
+    return <View className="width-30" />;
   };
 
   return (
@@ -270,19 +259,32 @@ const Select: React.FC<ISelectProps> = ({
         title={label}
         leftIcon="close"
         theme="light"
-        customRight={renderSelectButton() as any}
+        customRight={renderClearButton() as any}
         classNameHeader="border-bottom"
+        className="px-0"
+        swipeable={false}
       >
-        {multiple && !_.isEmpty(selectingValue) && renderClearAll()}
-        <AwesomeList
-          isPaging={isPaging}
-          source={source}
-          transformer={transformer}
-          renderItem={renderSelectItem}
-          keyExtractor={keyExtractor}
-          listStyle={styleList}
-          ListFooterComponent={<View style={{ height: 200 }} />}
-        />
+        <View className="h-100 position-relative">
+          {!(quickSelect && !multiple) && (
+            <Button
+              className="position-absolute bottom-30 w-100 left-0 right-0"
+              style={{ zIndex: 10 }}
+              height={50}
+              onPress={() => handlePressSelect()}
+            >
+              {selectText}
+            </Button>
+          )}
+          <AwesomeList
+            isPaging={isPaging}
+            source={source}
+            transformer={transformer}
+            renderItem={renderSelectItem}
+            keyExtractor={keyExtractor}
+            className="px-3"
+            ListFooterComponent={<View style={{ height: 200 }} />}
+          />
+        </View>
       </Modal>
     </View>
   );
