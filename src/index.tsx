@@ -99,6 +99,12 @@ export { default as AvatarName } from "./component/avatar/AvatarName";
 export type { IImageViewerModalProps } from "./component/image/ImageViewerModal";
 export { default as ImageViewerModal } from "./component/image/ImageViewerModal";
 
+export type { IImagePreviewProps } from "./component/image/ImagePreview";
+export { default as ImagePreview } from "./component/image/ImagePreview";
+
+export type { IImageListProps } from "./component/image/ImageList";
+export { default as ImageList } from "./component/image/ImageList";
+
 /* ----------------------------------------
 // Icon
 // ---------------------------------------- */

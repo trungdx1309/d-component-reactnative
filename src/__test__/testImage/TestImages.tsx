@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Image from "../../component/image/Image";
+import ImageList from "../../component/image/ImageList";
 import ImageViewerModal from "../../component/image/ImageViewerModal";
 import TouchableOpacity from "../../component/view/TouchableOpacity";
 import View from "../../component/view/View";
@@ -53,6 +54,18 @@ const TestImages: React.FC<ITestImagesProps> = ({ id }) => {
           },
         ]}
         onClose={() => setOpenModal(false)}
+      />
+      <ImageList
+        dataSource={[
+          {
+            url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
+          },
+          {
+            url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
+          },
+        ]}
+        getSource={({ item }) => item?.url}
+        size="xx-large"
       />
     </View>
   );

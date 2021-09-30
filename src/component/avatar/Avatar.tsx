@@ -13,13 +13,14 @@ export interface IAvatarProps extends Omit<IImageProps, "source"> {
     | "medium"
     | "small"
     | "x-small"
-    | "xx-small";
+    | "xx-small"
+    | "tiny";
   variant?: "rounded" | "square";
   text?: string;
   color?: string;
   classNameImage?: string;
   classNameLetter?: string;
-  avatar?: IImageProps["source"];
+  avatar?: IImageProps["source"] | string;
   styleImage?: IImageProps["style"];
   showBorder?: boolean;
   borderColor?: IButtonProps["color"];
@@ -52,6 +53,7 @@ const Avatar: React.FC<IAvatarProps> = ({
       "size-30": size === "small",
       "size-20": size === "x-small",
       h3: size === "xx-small",
+      h4: size === "tiny",
     },
     classNameLetter
   );
@@ -69,6 +71,13 @@ const Avatar: React.FC<IAvatarProps> = ({
   });
   let content;
 
+  const getSource = () => {
+    if (typeof avatar === "string") {
+      return { uri: avatar };
+    }
+    return avatar;
+  };
+
   if (text) {
     const firstLetter = text.charAt(0);
     content = <Text className={letterClass}>{firstLetter}</Text>;
@@ -76,7 +85,7 @@ const Avatar: React.FC<IAvatarProps> = ({
   if (avatar) {
     content = (
       <Image
-        source={avatar}
+        source={getSource() as any}
         className={imageClass}
         resizeMode={resizeMode}
         resizeMethod={resizeMethod}

@@ -24,7 +24,7 @@ const ScrollView: React.ForwardRefRenderFunction<
   const isDarkMode = useColorScheme() === "dark";
   const defaultStyle = { backgroundColor: isDarkMode ? dark : light };
   return (
-    <ScrollViewRN style={[defaultStyle, tranStyle, style]}>
+    <ScrollViewRN style={[defaultStyle, tranStyle, style]} {...rest}>
       {children}
     </ScrollViewRN>
   );
