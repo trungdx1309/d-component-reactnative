@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from "react";
-import { Keyboard } from "react-native";
+import { Keyboard, KeyboardEvent } from "react-native";
 
 export interface IUseKeyboard {
   isKeyboardShow: boolean;
@@ -26,7 +26,7 @@ const useKeyBoard = (initialValue = false): IUseKeyboard => {
     };
   }, []);
 
-  const keyboardDidShow = (e: any) => {
+  const keyboardDidShow = (e: KeyboardEvent) => {
     const { isKeyboardShow, heightKeyboard } = keyboardInfo;
     if (!isKeyboardShow || heightKeyboard === 0) {
       setKeyboardInfo({
