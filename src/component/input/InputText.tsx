@@ -34,6 +34,32 @@ export interface IInputTextProps extends TextInputProps {
 
 export interface IInputTextMethod {}
 
+export interface IInputErrorViewProps {
+  error: any;
+  className?: string;
+  iconName?: string;
+  iconSize?: number;
+  classNameText?: string;
+}
+
+export const InputErrorView: React.FC<IInputErrorViewProps> = ({
+  error,
+  className,
+  classNameText,
+  iconName = "info",
+  iconSize = 12,
+}) => {
+  const errorClass = ClassNames("flex-center-y", className);
+  const textClass = ClassNames("text-error h5 ml-1", classNameText);
+
+  return (
+    <View className={errorClass}>
+      <Icon name={iconName} size={iconSize} color="error" />
+      <Text className={textClass}>{error}</Text>
+    </View>
+  );
+};
+
 const InputText: React.ForwardRefRenderFunction<
   IInputTextMethod,
   IInputTextProps
@@ -86,7 +112,7 @@ const InputText: React.ForwardRefRenderFunction<
   );
   const inputClass = ClassNames("px-1", {}, classNameInput);
   const errorClass = ClassNames(
-    "mt-1 flex-center-y",
+    "mt-1",
     {
       "px-2": variant === "pill",
     },
@@ -133,12 +159,7 @@ const InputText: React.ForwardRefRenderFunction<
           />
         )}
       </View>
-      {error && (
-        <View className={errorClass}>
-          <Icon name="info" size={12} color="error" />
-          <Text className="text-error h5 ml-1">{error}</Text>
-        </View>
-      )}
+      {error && <InputErrorView error={error} className={errorClass} />}
     </View>
   );
 };

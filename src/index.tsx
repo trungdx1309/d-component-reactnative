@@ -5,8 +5,12 @@
 export type {
   IInputTextProps,
   IInputTextMethod,
+  IInputErrorViewProps,
 } from "./component/input/InputText";
-export { default as InputText } from "./component/input/InputText";
+export {
+  default as InputText,
+  InputErrorView,
+} from "./component/input/InputText";
 
 export type {
   IInputDateProps,

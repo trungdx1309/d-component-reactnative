@@ -14,6 +14,7 @@ import Chip from "../chip/Chip";
 import CheckBox from "../checkbox/CheckBox";
 import Button from "../button/Button";
 import AppSizes from "../../style/constant/AppSizes";
+import { InputErrorView } from "../input/InputText";
 
 export interface ISelectProps
   extends Partial<
@@ -98,7 +99,7 @@ const Select: React.FC<ISelectProps> = ({
     border: variant === "outline",
   });
   const errorClass = ClassNames(
-    "mt-1 flex-center-y",
+    "mt-1",
     {
       "px-2": variant === "pill",
     },
@@ -246,12 +247,7 @@ const Select: React.FC<ISelectProps> = ({
         {renderContent()}
         <Icon name={iconName} />
       </TouchableOpacity>
-      {error && (
-        <View className={errorClass}>
-          <Icon name="info" size={12} color="error" />
-          <Text className="text-error h5 ml-1">{error}</Text>
-        </View>
-      )}
+      {error && <InputErrorView error={error} className={errorClass} />}
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
