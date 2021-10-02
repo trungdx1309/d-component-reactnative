@@ -8,7 +8,7 @@ import {
 import { getStyleProps } from "../../style/style";
 
 export interface ITouchableOpacityProps extends TouchableOpacityProps {
-  className?: String;
+  className?: string;
   children?: any;
 }
 

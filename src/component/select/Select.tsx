@@ -54,12 +54,14 @@ export interface ISelectProps
   multiple?: boolean;
   quickSelect?: boolean;
   quickRemove?: boolean;
+  disabled?: boolean;
 }
 
 const Select: React.FC<ISelectProps> = ({
   variant = "standard",
-  height = 40,
+  height = AppSizes.inputHeight,
   label,
+  disabled,
   selectText = "Select",
   placeholder,
   iconName = "keyboard-arrow-right",
@@ -163,7 +165,7 @@ const Select: React.FC<ISelectProps> = ({
   const renderContent = () => {
     if (_.isEmpty(value)) {
       if (placeholder) {
-        return <Text className="text-grey flex-1">{placeholder}</Text>;
+        return <Text className="text-grey flex-1 h4">{placeholder}</Text>;
       }
     }
     if (multiple && _.isArray(value)) {
@@ -188,7 +190,7 @@ const Select: React.FC<ISelectProps> = ({
         </View>
       );
     }
-    return <Text className="flex-1">{getLabel(value)}</Text>;
+    return <Text className="flex-1 h4">{getLabel(value)}</Text>;
   };
 
   const renderSelectItem = ({ item, index }: any) => {
@@ -243,6 +245,7 @@ const Select: React.FC<ISelectProps> = ({
         style={[{ height: inputHeight }, styleContent]}
         className={contentClass}
         onPress={() => setOpenModal(true)}
+        disabled={disabled}
       >
         {renderContent()}
         <Icon name={iconName} />
