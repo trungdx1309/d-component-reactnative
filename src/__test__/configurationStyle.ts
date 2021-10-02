@@ -1,5 +1,6 @@
 import Colors from "../style/color/_color";
-import AppSizes from "../style/constant/AppSizes";
+import Sizes from "../style/size/_size";
 
 Colors.loadColors({ primary: "green" });
-// AppSizes.loadSizes({ : 40 });
+//@ts-ignore
+// Sizes.loadSizes({ buttonHeight: 20 });

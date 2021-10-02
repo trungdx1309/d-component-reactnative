@@ -8,7 +8,7 @@ import _ from "lodash";
 
 const { width, height } = Dimensions.get("window");
 
-export const DefaultSize = {
+const DefaultSize = {
   screenHeight: DeviceInfo.isTablet() && height > width ? width : height,
   screenWidth: DeviceInfo.isTablet() && height > width ? height : width,
 
@@ -57,26 +57,4 @@ export const DefaultSize = {
 
 export type AppSizeKeyType = keyof typeof DefaultSize;
 
-export class AppSizeClass {
-  [key: string]: any;
-
-  constructor() {
-    Object.assign(this, DefaultSize);
-  }
-
-  /**
-   * Load custom set of sizes
-   * arguments:
-   * sizes - map of keys and size values e.g {inputHeight: 50, buttonHeight: 30}
-   */
-  loadSizes(sizes: { [key in AppSizeKeyType]: string | number }) {
-    _.forEach(sizes, (value, key) => {
-      this[key] = value;
-    });
-  }
-}
-
-const AppSizes = new AppSizeClass();
-AppSizes.loadSizes(DefaultSize);
-
-export default AppSizes;
+export default DefaultSize;

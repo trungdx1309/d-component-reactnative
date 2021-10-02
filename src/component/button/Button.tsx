@@ -2,14 +2,14 @@ import ClassNames from "classnames";
 import React, { useMemo } from "react";
 import { TouchableOpacityProps } from "react-native";
 import { isDark } from "../../style/color/_color";
-import AppSizes from "../../style/constant/AppSizes";
+import Sizes from "../../style/size/_size";
 import { getColorValue } from "../../style/modifier";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import { ColorKeyType } from "../../style/constant/AppColors";
 
-const defaultButtonHeight = AppSizes?.buttonHeight ?? 30;
+const defaultButtonHeight = Sizes?.buttonHeight ?? 30;
 
 export interface IButtonProps extends TouchableOpacityProps {
   className?: string;

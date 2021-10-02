@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import { StyleSheet } from "react-native";
-import AppSizes from "../constant/AppSizes";
+import Sizes from "../size/_size";
 import { generateStyleValue } from "../modifier";
 
 const widthClass: any = {};
@@ -34,10 +34,10 @@ const heightPercentageClass = generateStyleValue(
 
 const widthHeightStyle = StyleSheet.create({
   "h-full": {
-    height: AppSizes.screenHeight,
+    height: Sizes.screenHeight,
   },
   "height-full": {
-    height: AppSizes.screenHeight,
+    height: Sizes.screenHeight,
   },
   "h-auto": {
     height: "auto",
@@ -46,10 +46,10 @@ const widthHeightStyle = StyleSheet.create({
     height: "auto",
   },
   "w-full": {
-    width: AppSizes.screenWidth,
+    width: Sizes.screenWidth,
   },
   "width-full": {
-    width: AppSizes.screenWidth,
+    width: Sizes.screenWidth,
   },
   "w-auto": {
     width: "auto",

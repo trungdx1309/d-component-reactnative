@@ -14,8 +14,8 @@ import Text from "../text/Text";
 import View from "../view/View";
 import { getStyleProps } from "../../style/style";
 import Icon from "../icon/Icon";
-import AppSizes from "../../style/constant/AppSizes";
 import Colors from "../../style/constant/AppColors";
+import Sizes from "../../style/size/_size";
 
 const { light } = Colors;
 export interface IInputTextProps extends TextInputProps {
@@ -69,7 +69,7 @@ const InputText: React.ForwardRefRenderFunction<
     variant = "standard",
     error,
     label,
-    height = AppSizes.inputHeight,
+    height = Sizes.inputHeight,
     className,
     classNameInput,
     classNameWrapper,

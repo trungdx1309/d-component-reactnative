@@ -159,6 +159,7 @@ export { default as TabView } from "./component/tab/TabView";
 // Style
 // ---------------------------------------- */
 
+export { default as Sizes } from "./style/size/_size";
 export { default as Colors } from "./style/color/_color";
 export { default as Scheme } from "./style/color/_scheme";
 export { default as AppSizes } from "./style/constant/AppSizes";

@@ -13,8 +13,8 @@ import Icon from "../icon/Icon";
 import Chip from "../chip/Chip";
 import CheckBox from "../checkbox/CheckBox";
 import Button from "../button/Button";
-import AppSizes from "../../style/constant/AppSizes";
 import { InputErrorView } from "../input/InputText";
+import Sizes from "../../style/size/_size";
 
 export interface ISelectProps
   extends Partial<
@@ -59,7 +59,7 @@ export interface ISelectProps
 
 const Select: React.FC<ISelectProps> = ({
   variant = "standard",
-  height = AppSizes.inputHeight,
+  height = Sizes.inputHeight,
   label,
   disabled,
   selectText = "Select",

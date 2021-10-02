@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { StyleSheet } from "react-native";
 import Colors from "../color/_color";
-import AppSizes from "../constant/AppSizes";
+import Sizes from "../size/_size";
 import { generateStyleValue } from "../modifier";
 
 const {
@@ -15,7 +15,7 @@ const {
   borderRadiusMedium,
   borderRadiusLarge,
   borderRadiusXLarge,
-} = AppSizes;
+} = Sizes;
 
 const { greyColor } = Colors;
 

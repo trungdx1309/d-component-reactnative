@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import AppSizes from "../constant/AppSizes";
+import Sizes from "../size/_size";
 import { generateStyleValue } from "../modifier";
 
 const {
@@ -8,7 +8,7 @@ const {
   paddingMedium,
   paddingXXLarge,
   paddingXXXLarge,
-} = AppSizes;
+} = Sizes;
 
 export const PADDING_KEY_PATTERN = new RegExp(`p[ltrbxy]?-([0-9]*)`);
 
