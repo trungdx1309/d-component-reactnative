@@ -15,7 +15,7 @@ export interface ITestInputProps {
 const TestInput: React.FC<ITestInputProps> = ({ id }) => {
   const dateRef = useRef<ElementRef<typeof DatePicker>>(null);
   const [openDateModal, setOpenDateModal] = useState(false);
-  const [date, setdate] = useState();
+  const [date, setDate] = useState<any>();
   return (
     <View className="my-4 w-100">
       {/* <CheckBox /> */}
@@ -25,6 +25,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         label="Input Standard"
         onPressIcon={() => {}}
         placeholder="Input Standard"
+        error="Error Test Input"
       />
       <InputText
         variant="outline"
@@ -32,6 +33,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         label="Input Outline"
         placeholder="Input Outline"
         onPressIcon={() => {}}
+        error="Error Test Input"
       />
       <InputText
         variant="pill"
@@ -54,11 +56,59 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         label="Search Input"
       />
       <InputDate
-        label="Date Input"
+        label="Date Input Outline"
         variant="outline"
         className="my-2"
         mode="date"
-        onChange={(v) => console.log({ v })}
+        placeholder="Date Input Outline"
+        onChange={(v) => {
+          setDate(v);
+        }}
+        value={date}
+      />
+      <InputDate
+        label="Date Input Standard"
+        variant="standard"
+        className="my-2"
+        mode="date"
+        onChange={(v) => {
+          setDate(v);
+        }}
+        value={date}
+        placeholder="Date Input Outline"
+      />
+      <InputDate
+        label="Date Input Rounded"
+        variant="rounded"
+        className="my-2"
+        mode="date"
+        placeholder="Date Input Rounded"
+        onChange={(v) => {
+          setDate(v);
+        }}
+        value={date}
+      />
+      <InputDate
+        label="Date Input Pill"
+        variant="pill"
+        className="my-2"
+        mode="date"
+        placeholder="Date Input Pill"
+        onChange={(v) => {
+          setDate(v);
+        }}
+        value={date}
+      />
+      <InputDate
+        variant="icon"
+        label="Date Input Icon"
+        className="my-2 align-self-start"
+        mode="date"
+        placeholder="Date Input Pill"
+        onChange={(v) => {
+          setDate(v);
+        }}
+        value={date}
       />
       <View className="flex-center-y">
         <TouchableOpacity
