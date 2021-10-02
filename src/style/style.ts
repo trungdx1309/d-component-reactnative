@@ -1,5 +1,11 @@
-import { forEach, split } from "lodash";
-import { StyleSheet, ViewStyle, TextStyle } from "react-native";
+import { forEach, split, isEmpty } from "lodash";
+import {
+  StyleSheet,
+  ViewStyle,
+  TextStyle,
+  FlexStyle,
+  ImageStyle,
+} from "react-native";
 import flexStyle from "./layout/_flex";
 import marginPadding from "./layout/_padding-margin";
 import backgroundStyle from "./theme/_background";
@@ -10,15 +16,22 @@ import positionStyle from "./layout/_position";
 import imageStyle from "./image/_image";
 import shadowStyle from "./theme/_shadow";
 
-export const getStyleProps = (props: any) => {
-  const classStr = props?.className ?? "";
+export const getStyleProps = (props: any, key?: string) => {
+  const keyProps = key || "className";
+  const classStr = props?.[keyProps] ?? "";
   const classArr = split(classStr, " ");
-  const styleProps: ViewStyle[] | TextStyle[] = [];
-  forEach(classArr, (name: any) => {
-    if (style[name as keyof typeof style]) {
-      styleProps.push(style[name as keyof typeof style]);
+  const styleProps: ViewStyle[] | TextStyle[] | ImageStyle[] | FlexStyle[] = [];
+  if (!isEmpty(classArr)) {
+    try {
+      forEach(classArr, (name: any) => {
+        if (style[name as keyof typeof style]) {
+          styleProps.push(style[name as keyof typeof style]);
+        }
+      });
+    } catch (error) {
+      console.error("GET STYLE PROPS ERROR", { error });
     }
-  });
+  }
   return styleProps;
 };
 
