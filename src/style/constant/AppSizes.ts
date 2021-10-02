@@ -4,14 +4,16 @@
 
 import { Dimensions } from "react-native";
 import DeviceInfo from "react-native-device-info";
+import _ from "lodash";
 
 const { width, height } = Dimensions.get("window");
 
-export default {
+export const DefaultSize = {
   screenHeight: DeviceInfo.isTablet() && height > width ? width : height,
   screenWidth: DeviceInfo.isTablet() && height > width ? height : width,
 
   inputHeight: 40,
+  buttonHeight: 30,
 
   paddingXXXLarge: 26,
   paddingXXLarge: 24,
@@ -52,3 +54,29 @@ export default {
   borderRadiusLarge: 10,
   borderRadiusXLarge: 12,
 };
+
+export type AppSizeKeyType = keyof typeof DefaultSize;
+
+export class AppSizeClass {
+  [key: string]: any;
+
+  constructor() {
+    Object.assign(this, DefaultSize);
+  }
+
+  /**
+   * Load custom set of sizes
+   * arguments:
+   * sizes - map of keys and size values e.g {inputHeight: 50, buttonHeight: 30}
+   */
+  loadSizes(sizes: { [key in AppSizeKeyType]: string | number }) {
+    _.forEach(sizes, (value, key) => {
+      this[key] = value;
+    });
+  }
+}
+
+const AppSizes = new AppSizeClass();
+AppSizes.loadSizes(DefaultSize);
+
+export default AppSizes;
