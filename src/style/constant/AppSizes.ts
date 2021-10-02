@@ -12,7 +12,7 @@ export const DefaultSize = {
   screenHeight: DeviceInfo.isTablet() && height > width ? width : height,
   screenWidth: DeviceInfo.isTablet() && height > width ? height : width,
 
-  inputHeight: 40,
+  inputHeight: 30,
   buttonHeight: 30,
 
   paddingXXXLarge: 26,

@@ -98,7 +98,7 @@ const InputText: React.ForwardRefRenderFunction<
     `${classNameLabel}`
   );
   const wrapperClass = ClassNames(
-    "flex-center-y",
+    "flex-center-y justify-content-center",
     {
       border: hasBorder,
       "border-bottom-1": variant === "standard",
@@ -110,7 +110,11 @@ const InputText: React.ForwardRefRenderFunction<
     },
     classNameWrapper
   );
-  const inputClass = ClassNames("px-1", {}, classNameInput);
+  const inputClass = ClassNames(
+    "flex-1 px-2 h4 align-center",
+    {},
+    classNameInput
+  );
   const errorClass = ClassNames(
     "mt-1",
     {
@@ -135,7 +139,7 @@ const InputText: React.ForwardRefRenderFunction<
           }}
           {...rest}
           style={[
-            { height, flex: 1, color: isDarkMode ? light : undefined },
+            { height, color: isDarkMode ? light : undefined },
             styleInput,
           ]}
         />
