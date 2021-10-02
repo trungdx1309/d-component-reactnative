@@ -96,8 +96,9 @@ const Select: React.FC<ISelectProps> = ({
     },
     `${classNameLabel}`
   );
-  const contentClass = ClassNames("flex-center-y px-1 py-2", {
+  const contentClass = ClassNames("flex-center-y pl-2 pr-1", {
     "border-bottom": variant === "standard",
+    "pl-1 py-1": multiple,
     border: variant === "outline",
   });
   const errorClass = ClassNames(
@@ -248,7 +249,11 @@ const Select: React.FC<ISelectProps> = ({
         disabled={disabled}
       >
         {renderContent()}
-        <Icon name={iconName} />
+        <Icon
+          name={iconName}
+          size={16}
+          color={!_.isEmpty(value) ? undefined : "gray"}
+        />
       </TouchableOpacity>
       {error && <InputErrorView error={error} className={errorClass} />}
       <Modal
