@@ -8,13 +8,14 @@ import {
   ViewStyle,
   TextStyle,
   useColorScheme,
+  Platform,
 } from "react-native";
 import Text from "../text/Text";
 import View from "../view/View";
 import { getStyleProps } from "../../style/style";
 import Icon from "../icon/Icon";
 import AppSizes from "../../style/constant/AppSizes";
-import Colors from "../../style/color/_color";
+import Colors from "../../style/constant/AppColors";
 
 const { light } = Colors;
 export interface IInputTextProps extends TextInputProps {
@@ -111,8 +112,8 @@ const InputText: React.ForwardRefRenderFunction<
     classNameWrapper
   );
   const inputClass = ClassNames(
-    "flex-1 px-2 h4 align-center",
-    {},
+    "flex-1 px-2 h4",
+    { "py-2": Platform.OS === "android" },
     classNameInput
   );
   const errorClass = ClassNames(
