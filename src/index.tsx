@@ -141,6 +141,21 @@ export type { IModalCalendarProps } from "./component/calendar/ModalCalendar";
 export { default as ModalCalendar } from "./component/calendar/ModalCalendar";
 
 /* ----------------------------------------
+// Tab View
+// ---------------------------------------- */
+
+export type { ITabBarProps } from "./component/tab/TabBar";
+export { default as TabBar } from "./component/tab/TabBar";
+
+export type {
+  IRenderTabViewProps,
+  ITabViewMethod,
+  ITabViewProps,
+  ITabViewRoute,
+} from "./component/tab/TabView";
+export { default as TabView } from "./component/tab/TabView";
+
+/* ----------------------------------------
 // Style
 // ---------------------------------------- */
 
