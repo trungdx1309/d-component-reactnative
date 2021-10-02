@@ -3,8 +3,6 @@ import { StyleSheet, Platform } from "react-native";
 import Colors from "../color/_color";
 import { generateStyleValue } from "../modifier";
 
-const textColorClass = generateStyleValue({ text: "color" }, Colors);
-
 export const base = {
   fontSize: 10,
   lineHeight: 12,
@@ -27,6 +25,13 @@ const textSizeClass: any = {};
 for (let i = 0; i < 100; i++) {
   textSizeClass[`size-${i}`] = {
     fontSize: i,
+  };
+}
+
+const textLineHeightClass: any = {};
+for (let i = 0; i <= 50; i += 1) {
+  textLineHeightClass[`text-height-${i}`] = {
+    lineHeight: i,
   };
 }
 
@@ -66,6 +71,8 @@ export const TEXT_TRANSFORM_VALUE = {
   uppercase: "uppercase",
   lowercase: "lowercase",
 };
+
+const textColorClass = generateStyleValue({ text: "color" }, Colors);
 
 const textAlignClass = generateStyleValue(
   TEXT_ALIGN_VARIANTS,
@@ -121,6 +128,7 @@ const textStyle = StyleSheet.create({
   ...textTransformClass,
   ...textSizeClass,
   ...fontWeightClass,
+  ...textLineHeightClass,
 });
 
 export default textStyle;
