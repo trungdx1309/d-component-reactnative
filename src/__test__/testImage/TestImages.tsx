@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Image from "../../component/image/Image";
 import ImageList from "../../component/image/ImageList";
 import ImageViewerModal from "../../component/image/ImageViewerModal";
+import ScrollView from "../../component/view/ScrollView";
 import TouchableOpacity from "../../component/view/TouchableOpacity";
 import View from "../../component/view/View";
 import images from "./Images";
@@ -13,61 +14,63 @@ export interface ITestImagesProps {
 const TestImages: React.FC<ITestImagesProps> = ({ id }) => {
   const [openModal, setOpenModal] = useState(false);
   return (
-    <View>
-      <TouchableOpacity onPress={() => setOpenModal(true)}>
+    <ScrollView className="w-100">
+      <View className="flex-1">
+        <TouchableOpacity onPress={() => setOpenModal(true)}>
+          <Image
+            source={images.afternoon}
+            resizeMode="contain"
+            className="my-2 image-square-x-small"
+          />
+        </TouchableOpacity>
         <Image
           source={images.afternoon}
           resizeMode="contain"
-          className="my-2 image-square-x-small"
+          className="imy-2 image-square-small"
         />
-      </TouchableOpacity>
-      <Image
-        source={images.afternoon}
-        resizeMode="contain"
-        className="imy-2 image-square-small"
-      />
-      <Image
-        source={images.afternoon}
-        resizeMode="contain"
-        className="my-2 image-square-medium"
-      />
-      <Image
-        source={images.afternoon}
-        resizeMode="contain"
-        className="my-2 image-square-large"
-      />
-      <Image
-        source={images.afternoon}
-        resizeMode="contain"
-        className="my-2 image-square-x-large"
-      />
-      <Image
-        source={images.afternoon}
-        resizeMode="contain"
-        className="image-square-xx-large"
-      />
-      <ImageViewerModal
-        open={openModal}
-        value={[
-          {
-            url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
-          },
-        ]}
-        onClose={() => setOpenModal(false)}
-      />
-      <ImageList
-        dataSource={[
-          {
-            url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
-          },
-          {
-            url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
-          },
-        ]}
-        getSource={({ item }) => item?.url}
-        size="xx-large"
-      />
-    </View>
+        <Image
+          source={images.afternoon}
+          resizeMode="contain"
+          className="my-2 image-square-medium"
+        />
+        <Image
+          source={images.afternoon}
+          resizeMode="contain"
+          className="my-2 image-square-large"
+        />
+        <Image
+          source={images.afternoon}
+          resizeMode="contain"
+          className="my-2 image-square-x-large"
+        />
+        <Image
+          source={images.afternoon}
+          resizeMode="contain"
+          className="image-square-xx-large"
+        />
+        <ImageViewerModal
+          open={openModal}
+          value={[
+            {
+              url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
+            },
+          ]}
+          onClose={() => setOpenModal(false)}
+        />
+        <ImageList
+          dataSource={[
+            {
+              url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
+            },
+            {
+              url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
+            },
+          ]}
+          getSource={({ item }) => item?.url}
+          size="xx-large"
+        />
+      </View>
+    </ScrollView>
   );
 };
 

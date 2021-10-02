@@ -3,6 +3,7 @@ import Avatar from "../../component/avatar/Avatar";
 import View from "../../component/view/View";
 import images from "../testImage/Images";
 import AvatarName from "../../component/avatar/AvatarName";
+import ScrollView from "../../component/view/ScrollView";
 
 export interface ITestAvatarProps {
   [key: string]: any;
@@ -12,7 +13,7 @@ const TestAvatar: React.FC<ITestAvatarProps> = ({ id }) => {
   const imageType = typeof images.birthdayCake;
   console.log({ imageType });
   return (
-    <View>
+    <ScrollView className="w-100">
       <View>
         <Avatar
           text="T"
@@ -78,7 +79,7 @@ const TestAvatar: React.FC<ITestAvatarProps> = ({ id }) => {
           className="my-2"
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

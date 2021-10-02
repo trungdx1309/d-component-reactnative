@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Select from "../../component/select/Select";
+import ScrollView from "../../component/view/ScrollView";
 import View from "../../component/view/View";
 import { SELECT_DATA } from "../data/TestConstant";
 
@@ -11,7 +12,7 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
   const [selectValue, setSelectValue] = useState();
   const [singleValue, setSingleValue] = useState();
   return (
-    <View className="py-3">
+    <ScrollView className="py-3 w-100">
       <Select
         label="Select"
         placeholder="Placeholder"
@@ -36,7 +37,7 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
         onChange={(v) => setSingleValue(v)}
         quickSelect
       />
-    </View>
+    </ScrollView>
   );
 };
 

@@ -9,42 +9,20 @@
  */
 
 import React, { useState } from "react";
-import { StatusBar, StyleSheet, useColorScheme } from "react-native";
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from "react-native/Libraries/NewAppScreen";
-import DatePicker from "react-native-datepicker";
-import Button from "../component/button/Button";
-import InputText from "../component/input/InputText";
-import Text from "../component/text/Text";
+import { StatusBar, useColorScheme } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import Modal from "../component/modal/Modal";
+import TabView, { ITabViewProps } from "../component/tab/TabView";
 import SafeAreaView from "../component/view/SafeAreaView";
-import ScrollView from "../component/view/ScrollView";
 import View from "../component/view/View";
 import "./configurationStyle";
-import TestAvatar from "./testAvatar/TestAvatar";
-import TestImages from "./testImage/TestImages";
-import TestInput from "./testInput/TestInput";
+import DATA_SOURCE from "./Source";
 import TestModal from "./testModal/TestModal";
-import Modal from "../component/modal/Modal";
-import TestHeader from "./testHeader/TestHeader";
-import TestCalendar from "./testCalendar/TestCalendar";
-import AwesomeList from "../component/list/awesomeList/AwesomeList";
-import TestSelect from "./testSelect/TestSelect";
 
 interface ITestData {
   id: string;
   info: any;
 }
-
-const DATA = [
-  { id: 1, info: "qeqe" },
-  { id: 2, info: "sdf" },
-  { id: 3, info: "fsff" },
-];
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
@@ -56,48 +34,38 @@ const App = () => {
 
   const renderMainView = () => {
     return (
-      <View style={{ flex: 1, width: "100%", height: "100%" }}>
-        <TestImages />
-        {/* <TestAvatar /> */}
-        {/* <TestCalendar /> */}
-        {/* <TestHeader /> */}
-        <TestSelect />
-        <InputText
-          label="Input"
-          className="my-3"
-          editable={false}
-          value="123"
-        />
-        <TestInput />
-        <Button className="rounded-left-pilled" color="gray" disabled>
-          Button
-        </Button>
-      </View>
+      <TabView
+        dataSource={DATA_SOURCE}
+        renderTabView={renderTabView}
+        className="px-3"
+        scrollEnabled
+      />
     );
+  };
+
+  const renderTabView: ITabViewProps["renderTabView"] = ({
+    route,
+    tabIndex,
+    jumpTo,
+  }) => {
+    if (Math.abs(tabIndex - DATA_SOURCE.indexOf(route)) > 2) {
+      return <View />;
+    }
+    const foundItem = DATA_SOURCE.find((i:any) => i?.key === route.key);
+    return (foundItem && foundItem?.component) || <View />;
   };
 
   return (
     <SafeAreaView className="bg-white flex-1">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-      {/* <AwesomeList<ITestData>
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item.id}</Text>
-          </View>
-        )}
-        source={() => Promise.resolve()}
-        transformer={(res) => DATA}
-      /> */}
-      <ScrollView>
-        {renderMainView()}
-        <TestModal onPress={() => setOpenModal(true)} />
-      </ScrollView>
+      {renderMainView()}
+      {/* <TestModal onPress={() => setOpenModal(true)} /> */}
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}
         size="fullscreen"
+        className="flex-1"
         showHeader
-        useScrollView
         showFooter
       >
         {renderMainView()}
@@ -105,24 +73,5 @@ const App = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: "600",
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: "400",
-  },
-  highlight: {
-    fontWeight: "700",
-  },
-});
 
 export default App;

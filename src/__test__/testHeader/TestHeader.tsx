@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../component/header/Header";
 import Icon from "../../component/icon/Icon";
+import ScrollView from "../../component/view/ScrollView";
 import View from "../../component/view/View";
 
 export interface ITestHeaderProps {
@@ -9,8 +10,15 @@ export interface ITestHeaderProps {
 
 const TestHeader: React.FC<ITestHeaderProps> = ({ id }) => {
   return (
-    <View className="my-4">
+    <ScrollView className="w-100">
       <Header
+        title="Default Header"
+        theme="primary"
+        onLeftPress={() => {}}
+        onRightPress={() => {}}
+      />
+      <Header
+        className="my-3"
         title="Header"
         theme="light"
         leftText="Left"
@@ -24,7 +32,7 @@ const TestHeader: React.FC<ITestHeaderProps> = ({ id }) => {
         }
         showSearch
       />
-    </View>
+    </ScrollView>
   );
 };
 
