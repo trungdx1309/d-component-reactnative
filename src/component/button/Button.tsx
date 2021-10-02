@@ -1,5 +1,5 @@
 import ClassNames from "classnames";
-import React from "react";
+import React, { useMemo } from "react";
 import { TouchableOpacityProps } from "react-native";
 import { isDark } from "../../style/color/_color";
 import AppSizes from "../../style/constant/AppSizes";
@@ -9,11 +9,13 @@ import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import { ColorKeyType } from "../../style/constant/AppColors";
 
+const defaultButtonHeight = AppSizes?.buttonHeight ?? 30;
+
 export interface IButtonProps extends TouchableOpacityProps {
   className?: string;
   classNameLabel?: string;
   children?: any;
-  size?: "large" | "medium" | "small" | "x-small" | "auto" | "fit-content";
+  size?: "large" | "medium" | "small" | "x-small" | "x-large" | "xx-large";
   variant?: "standard" | "outline" | "trans";
   shape?: "square" | "pill" | "rounded";
   color?: ColorKeyType;
@@ -32,12 +34,12 @@ const Button: React.FC<IButtonProps> = ({
   classNameLabel,
   color = "primary",
   variant = "standard",
-  size = "large",
+  size = "medium",
   shape = "square",
   children,
   iconName,
   iconSize = 14,
-  height = AppSizes.inputHeight,
+  height,
   suffixIcon,
   suffixElement,
   prefixElement,
@@ -47,7 +49,41 @@ const Button: React.FC<IButtonProps> = ({
   textColor,
   ...rest
 }) => {
-  const buttonColor = getColorValue(color);
+  const buttonColor = useMemo(() => {
+    return getColorValue(color);
+  }, [color]);
+
+  const buttonHeight = useMemo(() => {
+    let result: number | string = 10;
+    switch (size) {
+      case "xx-large":
+        result = defaultButtonHeight + 15;
+        break;
+      case "x-large":
+        result = defaultButtonHeight + 10;
+        break;
+      case "large":
+        result = defaultButtonHeight + 5;
+        break;
+      case "medium":
+        result = defaultButtonHeight;
+        break;
+      case "small":
+        result = defaultButtonHeight - 5;
+        break;
+      case "x-small":
+        result = defaultButtonHeight - 10;
+        break;
+
+      default:
+        break;
+    }
+    if (height) {
+      result = height;
+    }
+    return result;
+  }, [height, size]);
+
   const isIconButton =
     !!iconName || !!suffixIcon || suffixElement || prefixElement;
 
@@ -67,6 +103,9 @@ const Button: React.FC<IButtonProps> = ({
     {
       [`text-${color}`]: variant === "outline" || variant === "trans",
       "text-white": variant === "standard" && isDark(buttonColor),
+      h3: size === "x-large" || size === "xx-large",
+      h4: size === "medium" || size === "large",
+      "h5 text-height-14": size === "small" || size === "x-small",
     },
     classNameLabel
   );
@@ -116,7 +155,7 @@ const Button: React.FC<IButtonProps> = ({
   return (
     <TouchableOpacity
       className={wrapperClass}
-      style={[{ height }, style]}
+      style={[{ height: buttonHeight }, style]}
       disabled={disabled}
       {...rest}
     >
