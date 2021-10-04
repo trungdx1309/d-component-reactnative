@@ -15,8 +15,16 @@ export {
 export type {
   IInputDateProps,
   IInputDateMethod,
+  TDateFormat,
+  ICustomInputProps,
 } from "./component/input/InputDate";
 export { default as InputDate } from "./component/input/InputDate";
+
+export type {
+  IInputDateRangeMethod,
+  IInputDateRangeProps,
+} from "./component/input/InputDateRange";
+export { default as InputDateRange } from "./component/input/InputDateRange";
 
 /* ----------------------------------------
 // View

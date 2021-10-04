@@ -2,6 +2,7 @@ import React, { ElementRef, useRef, useState } from "react";
 import DatePicker from "react-native-date-picker";
 import CheckBox from "../../component/checkbox/CheckBox";
 import InputDate from "../../component/input/InputDate";
+import InputDateRange from "../../component/input/InputDateRange";
 import InputSearch from "../../component/input/InputSearch";
 import InputText from "../../component/input/InputText";
 import Text from "../../component/text/Text";
@@ -16,6 +17,8 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
   const dateRef = useRef<ElementRef<typeof DatePicker>>(null);
   const [openDateModal, setOpenDateModal] = useState(false);
   const [date, setDate] = useState<any>();
+  const [dateRange, setDateRange] = useState<any[]>([]);
+
   return (
     <View className="my-4 w-100">
       {/* <CheckBox /> */}
@@ -99,6 +102,11 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         }}
         value={date}
       />
+      <InputDateRange
+        value={dateRange}
+        onChange={(v = []) => setDateRange(v)}
+      />
+
       <InputDate
         variant="icon"
         label="Date Input Icon"
@@ -110,15 +118,6 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         }}
         value={date}
       />
-      <View className="flex-center-y">
-        <TouchableOpacity
-          onPress={() => {
-            setOpenDateModal(true);
-          }}
-        >
-          <Text>123</Text>
-        </TouchableOpacity>
-      </View>
       {/* <DatePicker
         modal
         date={new Date()}
