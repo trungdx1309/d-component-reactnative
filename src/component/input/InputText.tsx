@@ -1,5 +1,5 @@
 import ClassNames from "classnames";
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   StyleProp,
   TextInput as RNTextInput,
@@ -9,6 +9,7 @@ import {
   TextStyle,
   useColorScheme,
   Platform,
+  KeyboardAvoidingView,
 } from "react-native";
 import Text from "../text/Text";
 import View from "../view/View";
@@ -16,6 +17,7 @@ import { getStyleProps } from "../../style/style";
 import Icon from "../icon/Icon";
 import Colors from "../../style/constant/AppColors";
 import Sizes from "../../style/size/_size";
+import useKeyBoard from "../../hooks/useKeyboard";
 
 const { light } = Colors;
 export interface IInputTextProps extends TextInputProps {
@@ -29,8 +31,10 @@ export interface IInputTextProps extends TextInputProps {
   classNameInput?: string;
   classNameError?: string;
   iconName?: string;
+  style?: ViewStyle;
   styleInput?: StyleProp<TextStyle>;
   onPressIcon?: (props?: any) => any;
+  useKeyboardAvoidingView?: boolean;
 }
 
 export interface IInputTextMethod {}
@@ -75,11 +79,13 @@ const InputText: React.ForwardRefRenderFunction<
     classNameWrapper,
     classNameLabel,
     classNameError,
+    style,
     styleInput,
     onBlur,
     onFocus,
     iconName,
     onPressIcon,
+    useKeyboardAvoidingView,
     ...rest
   },
   ref
@@ -124,8 +130,28 @@ const InputText: React.ForwardRefRenderFunction<
     classNameError
   );
 
-  return (
-    <View className={containerClass}>
+  const { isKeyboardShow, heightKeyboard } = useKeyBoard(false);
+  const bottomPadding = useMemo(() => {
+    if (!useKeyboardAvoidingView || !focusing) {
+      return undefined;
+    }
+    if (!isKeyboardShow) {
+      return 0;
+    }
+    return Platform.OS === "ios" ? heightKeyboard - 50 : heightKeyboard;
+  }, [heightKeyboard, isKeyboardShow, focusing]);
+
+  const content = (
+    <View
+      className={containerClass}
+      key={label}
+      style={[
+        {
+          paddingBottom: bottomPadding,
+        },
+        style,
+      ]}
+    >
       {label && <Text className={labelClass}>{label}</Text>}
       <View className={wrapperClass}>
         <TextInput
@@ -167,6 +193,18 @@ const InputText: React.ForwardRefRenderFunction<
       {error && <InputErrorView error={error} className={errorClass} />}
     </View>
   );
+
+  // if (useKeyboardAvoidingView && focusing) {
+  //   return (
+  //     <KeyboardAvoidingView
+  //       behavior={Platform.OS === "ios" ? "padding" : "height"}
+  //     >
+  //       {content}
+  //     </KeyboardAvoidingView>
+  //   );
+  // }
+
+  return content;
 };
 
 export default React.forwardRef(InputText);

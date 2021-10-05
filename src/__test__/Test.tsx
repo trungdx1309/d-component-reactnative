@@ -51,12 +51,12 @@ const App = () => {
     if (Math.abs(tabIndex - DATA_SOURCE.indexOf(route)) > 2) {
       return <View />;
     }
-    const foundItem = DATA_SOURCE.find((i:any) => i?.key === route.key);
+    const foundItem = DATA_SOURCE.find((i: any) => i?.key === route.key);
     return (foundItem && foundItem?.component) || <View />;
   };
 
   return (
-    <SafeAreaView className="bg-white flex-1">
+    <SafeAreaView className="bg-white flex-1 h-full">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       {renderMainView()}
       {/* <TestModal onPress={() => setOpenModal(true)} /> */}

@@ -6,6 +6,7 @@ import InputDateRange from "../../component/input/InputDateRange";
 import InputSearch from "../../component/input/InputSearch";
 import InputText from "../../component/input/InputText";
 import Text from "../../component/text/Text";
+import ScrollView from "../../component/view/ScrollView";
 import TouchableOpacity from "../../component/view/TouchableOpacity";
 import View from "../../component/view/View";
 
@@ -20,7 +21,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
   const [dateRange, setDateRange] = useState<any[]>([]);
 
   return (
-    <View className="my-4 w-100">
+    <ScrollView className="my-4 w-100">
       {/* <CheckBox /> */}
       <InputText
         variant="standard"
@@ -112,6 +113,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         placeholder="Input Outline"
         onPressIcon={() => {}}
         error="Error Test Input"
+        useKeyboardAvoidingView
       />
       <InputText
         variant="pill"
@@ -119,6 +121,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         label="Input Pill"
         placeholder="Input Pill"
         onPressIcon={() => {}}
+        useKeyboardAvoidingView
       />
       {/* <DatePicker
         modal
@@ -131,7 +134,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         mode="datetime"
         androidVariant="nativeAndroid"
       /> */}
-    </View>
+    </ScrollView>
   );
 };
 
