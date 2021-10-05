@@ -39,8 +39,11 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
     displayName = fullName;
   }
 
-  const wrapperClass = ClassNames(`flex-row align-center`, className);
-  const nameClass = ClassNames("flex-column", {
+  const wrapperClass = ClassNames(
+    `flex-row align-center bg-transparent`,
+    className
+  );
+  const nameClass = ClassNames("flex-column bg-transparent", {
     "mr-1": position === "before",
     "ml-1": position === "after",
   });
@@ -53,7 +56,7 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
       "size-32": size === "medium",
       "h1 font-weight-500": size === "small",
       "h3 font-weight-500": size === "x-small",
-      "size-12": size === "xx-small",
+      h5: size === "xx-small",
     },
     classNameText
   );
