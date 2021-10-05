@@ -26,7 +26,10 @@ export interface ICalendarProps
     Omit<Partial<CustomMarkingProps>, "markingType"> {
   enableSwipeMonths?: boolean | undefined;
   markingType?: "period" | "dot" | "multi-period" | "custom";
-  markedDates?: any;
+  markedDates?: CustomMarkingProps["markedDates"] &
+    DotMarkingProps["markedDates"] &
+    MultiDotMarkingProps["markedDates"] &
+    MultiPeriodMarkingProps["markedDates"];
   style?: ViewStyle;
   className?: string;
   lightDarkMode?: boolean;
