@@ -38,6 +38,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
     onChange,
     startText = "Start",
     endText = "End",
+    ...rest
   },
   ref
 ) => {
@@ -93,6 +94,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
           onChange={(v) => handleChangeStartTime(v)}
           value={value?.[0]}
           placeholder={startText}
+          {...rest}
         />
         <Icon
           name="arrow-forward"
@@ -109,6 +111,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
           value={value?.[1]}
           placeholder={endText}
           ref={endRef}
+          {...rest}
         />
       </View>
       {error && <InputErrorView error={error} className={errorClass} />}

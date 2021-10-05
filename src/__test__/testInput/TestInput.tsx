@@ -30,21 +30,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         placeholder="Input Standard"
         error="Error Test Input"
       />
-      <InputText
-        variant="outline"
-        className="my-2"
-        label="Input Outline"
-        placeholder="Input Outline"
-        onPressIcon={() => {}}
-        error="Error Test Input"
-      />
-      <InputText
-        variant="pill"
-        className="my-2"
-        label="Input Pill"
-        placeholder="Input Pill"
-        onPressIcon={() => {}}
-      />
+
       <InputText
         variant="rounded"
         className="my-2"
@@ -84,7 +70,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         label="Date Input Rounded"
         variant="rounded"
         className="my-2"
-        mode="date"
+        mode="datetime"
         placeholder="Date Input Rounded"
         onChange={(v) => {
           setDate(v);
@@ -105,18 +91,34 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
       <InputDateRange
         value={dateRange}
         onChange={(v = []) => setDateRange(v)}
+        mode="datetime"
       />
 
       <InputDate
         variant="icon"
         label="Date Input Icon"
         className="my-2 align-self-start"
-        mode="date"
+        mode="datetime"
         placeholder="Date Input Pill"
         onChange={(v) => {
           setDate(v);
         }}
         value={date}
+      />
+      <InputText
+        variant="outline"
+        className="my-2"
+        label="Input Outline"
+        placeholder="Input Outline"
+        onPressIcon={() => {}}
+        error="Error Test Input"
+      />
+      <InputText
+        variant="pill"
+        className="my-2"
+        label="Input Pill"
+        placeholder="Input Pill"
+        onPressIcon={() => {}}
       />
       {/* <DatePicker
         modal

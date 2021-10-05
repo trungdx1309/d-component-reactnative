@@ -199,6 +199,7 @@ const InputDate: React.ForwardRefRenderFunction<
         focusable
         {...rest}
         mode={mode}
+        timeZoneOffsetInMinutes={420}
       />
     </View>
   );
