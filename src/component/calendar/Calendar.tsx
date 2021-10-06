@@ -10,10 +10,13 @@ import {
   PeriodMarkingProps,
   MultiPeriodMarkingProps,
   CustomMarkingProps,
+  DateObject as RNDateObject,
 } from "react-native-calendars";
 import Colors from "../../style/color/_color";
 import { getStyleProps } from "../../style/style";
 import Icon from "../icon/Icon";
+
+export interface IDateObject extends RNDateObject {}
 
 export interface ICalendarProps
   extends CalendarBaseProps,

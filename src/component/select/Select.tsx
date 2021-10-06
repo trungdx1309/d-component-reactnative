@@ -262,7 +262,6 @@ const Select: React.FC<ISelectProps> = ({
         showHeader
         title={label}
         leftIcon="close"
-        theme="light"
         customRight={renderClearButton() as any}
         classNameHeader="border-bottom"
         className="px-0"
@@ -271,7 +270,7 @@ const Select: React.FC<ISelectProps> = ({
         <View className="h-100 position-relative">
           {!(quickSelect && !multiple) && (
             <Button
-              className="position-absolute bottom-10 w-100 left-0 right-0"
+              className="position-absolute bottom-0 w-100 left-0 right-0"
               style={{ zIndex: 10 }}
               height={50}
               onPress={() => handlePressSelect()}

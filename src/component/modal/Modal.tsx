@@ -70,6 +70,7 @@ const Modal: React.FC<IModalProps> = ({
   rightIcon,
   rightText,
   theme,
+  swipeDirection = "down",
   ...rest
 }) => {
   const modalClass = ClassNames(
@@ -90,7 +91,7 @@ const Modal: React.FC<IModalProps> = ({
   );
   const contentClass = ClassNames("px-3 py-2", className);
 
-  const headerClass = ClassNames(classNameHeader);
+  const headerClass = ClassNames("", classNameHeader);
   const footerClass = ClassNames(
     "flex-center-y justify-content-between px-3 py-2",
     {
@@ -165,7 +166,7 @@ const Modal: React.FC<IModalProps> = ({
       onSwipeMove={onClose}
       swipeDirection={
         // eslint-disable-next-line no-nested-ternary
-        useScrollView ? undefined : swipeable ? "down" : undefined
+        useScrollView ? undefined : swipeable ? swipeDirection : undefined
       }
       {...(rest as any)}
       isVisible={open}

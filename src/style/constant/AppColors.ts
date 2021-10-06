@@ -30,6 +30,6 @@ const DefaultColors = {
   muted: "#F5F5F5",
 };
 
-export type ColorKeyType = keyof typeof DefaultColors;
+export type ColorKeyType = keyof typeof DefaultColors | "transparent";
 
 export default DefaultColors;

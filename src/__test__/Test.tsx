@@ -59,7 +59,7 @@ const App = () => {
     <SafeAreaView className="bg-white flex-1 h-full">
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       {renderMainView()}
-      {/* <TestModal onPress={() => setOpenModal(true)} /> */}
+      <TestModal onPress={() => setOpenModal(true)} />
       <Modal
         open={openModal}
         onClose={() => setOpenModal(false)}

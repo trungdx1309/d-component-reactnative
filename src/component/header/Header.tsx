@@ -1,13 +1,15 @@
 import React from "react";
 import ClassNames from "classnames";
+import { useColorScheme } from "react-native";
 import Text from "../text/Text";
 import View from "../view/View";
-import Button, { IButtonProps } from "../button/Button";
+import Button from "../button/Button";
 import TouchableOpacity from "../view/TouchableOpacity";
 import Icon from "../icon/Icon";
 import { getColorValue } from "../../style/modifier";
 import { isDark } from "../../style/color/_color";
 import InputSearch from "../input/InputSearch";
+import { ColorKeyType } from "../../style/constant/AppColors";
 
 export interface IHeaderProps {
   title?: string;
@@ -20,10 +22,11 @@ export interface IHeaderProps {
   leftText?: string;
   rightIcon?: string;
   rightText?: string;
-  theme?: IButtonProps["color"];
+  theme?: ColorKeyType;
   className?: string;
   classNameSearch?: string;
   showSearch?: boolean;
+  size?: "medium" | "large" | "small";
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -37,29 +40,40 @@ const Header: React.FC<IHeaderProps> = ({
   leftText,
   rightIcon = "more-horiz",
   rightText,
-  theme = "primary",
+  theme,
+  size = "medium",
   className,
   classNameSearch,
   showSearch,
 }) => {
-  const bgColor = getColorValue(theme);
+  const bgColor = getColorValue(theme as any);
   const wrapperClass = ClassNames(
-    `flex-center-y px-2 py-3 bg-${theme}`,
+    `flex-center-y px-2 bg-${theme}`,
     {
-      "py-2": showSearch,
+      "py-2": showSearch || size === "medium",
+      "py-3": size === "large",
+      "py-1": size === "small",
     },
     className
   );
-  const titleClass = ClassNames(
-    "flex-1 h3 font-weight-bold text-center text-white",
-    {
-      "text-dark": !isDark(bgColor),
-    }
-  );
+  const titleClass = ClassNames("flex-1 font-weight-bold text-center", {
+    "text-dark": theme && !isDark(bgColor),
+    "text-white": theme && isDark(bgColor),
+    h5: size === "small",
+    h4: size === "medium",
+    h3: size === "large",
+  });
+  const isDarkMode = useColorScheme() === "dark";
 
   const searchClass = ClassNames("flex-1 mx-3", classNameSearch);
 
   const getTextColor = () => {
+    if (!theme) {
+      if (isDarkMode) {
+        return "light";
+      }
+      return "dark";
+    }
     if (isDark(bgColor)) {
       return "light";
     }
