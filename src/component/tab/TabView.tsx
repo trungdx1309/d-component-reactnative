@@ -6,6 +6,7 @@ import {
   Platform,
   ViewStyle,
   TextStyle,
+  useColorScheme,
 } from "react-native";
 import {
   TabView as RNTabView,
@@ -111,6 +112,8 @@ function TabView(
   const [routes] = useState(dataSource);
   const listRef = useRef();
   const tranStyle = getStyleProps(rest);
+  const isDarkMode = useColorScheme() === "dark";
+  const containerBg = { backgroundColor: isDarkMode ? "black" : "white" };
 
   // useEffect(() => {
   //   setRef && setRef(listRef.current);
@@ -141,7 +144,10 @@ function TabView(
   };
 
   const renderTabBar: TabViewProps<ITabViewRoute>["renderTabBar"] = (props) => {
-    const tabBarClass = ClassNames("bg-white border-bottom-0", {});
+    const tabBarClass = ClassNames("border-bottom-0", {
+      "bg-white": !isDarkMode,
+      "bg-dark": isDarkMode,
+    });
     const tabClass = ClassNames({ "width-auto": scrollEnabled });
     return (
       <TabBar
@@ -166,6 +172,7 @@ function TabView(
   }) => {
     const labelClass = ClassNames("flex-1 justify-content-center text-center", {
       "bg-primary rounded-pilled": focused,
+      "bg-white rounded-pilled": isDarkMode && !focused,
     });
     return (
       <View
@@ -215,7 +222,12 @@ function TabView(
         setIndex(index);
         onChangeIndex && onChangeIndex(index);
       }}
-      sceneContainerStyle={[styles.sceneContainerStyle, tranStyle, style]}
+      sceneContainerStyle={[
+        styles.sceneContainerStyle,
+        containerBg,
+        tranStyle,
+        style,
+      ]}
       initialLayout={{ width: Dimensions.get("window").width }}
     />
   );
