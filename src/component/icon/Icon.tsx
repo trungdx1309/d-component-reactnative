@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Icon as IconElement, IconProps } from "react-native-elements";
 import { getColorValue } from "../../style/modifier";
+import Sizes from "../../style/size/_size";
 import { getStyleProps } from "../../style/style";
 
 export interface IIconProps extends IconProps {
@@ -10,14 +11,13 @@ export interface IIconProps extends IconProps {
 const Icon: React.FC<IIconProps> = ({
   name,
   type = "material",
-  children,
   style,
   color,
-  size = 20,
+  size = Sizes.iconSize,
   ...rest
 }) => {
   const transStyle = getStyleProps(rest);
-  const colorIcon = getColorValue(color as any);
+  const colorIcon = useMemo(() => getColorValue(color as any), [color]);
 
   return (
     <IconElement
