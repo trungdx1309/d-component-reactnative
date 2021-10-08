@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import ClassNames from "classnames";
 import _ from "lodash";
+import { ViewStyle } from "react-native";
 import Text from "../text/Text";
 import View from "../view/View";
 import InputDate, { IInputDateProps } from "./InputDate";
@@ -19,6 +20,8 @@ export interface IInputDateRangeProps
   onChange?: (props: IInputDateRangeProps["value"]) => any;
   startText?: string;
   endText?: string;
+  classNameContent?: string;
+  styleContent?: ViewStyle;
 }
 
 export interface IInputDateRangeMethod {}
@@ -31,6 +34,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
     className,
     classNameLabel,
     classNameError,
+    classNameContent,
     error,
     variant = "outline",
     label,
@@ -38,6 +42,8 @@ const InputDateRange: React.ForwardRefRenderFunction<
     onChange,
     startText = "Start",
     endText = "End",
+    style,
+    styleContent,
     ...rest
   },
   ref
@@ -83,9 +89,12 @@ const InputDateRange: React.ForwardRefRenderFunction<
   };
 
   return (
-    <View className={className}>
+    <View className={className} style={style}>
       {label && <Text className={labelClass}>{label}</Text>}
-      <View className="flex-center-y">
+      <View
+        className={`flex-center-y ${classNameContent}`}
+        style={styleContent}
+      >
         <InputDate
           variant={variant}
           className="flex-1"

@@ -24,6 +24,7 @@ const DefaultColors = {
   red: "#E63B2E",
   green: "#33963D",
   blue: "#17a2b8",
+  blueLight: "#DAE6FF",
   yellow: "#FF963C",
   muted: "#F5F5F5",
   grey: "#d9d9d9",

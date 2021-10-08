@@ -63,7 +63,7 @@ const TestImages: React.FC<ITestImagesProps> = ({ id }) => {
               url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
             },
             {
-              url: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
+              url: "https://vcdn-thethao.vnecdn.net/2021/10/08/244414385-390096059250424-6630-4489-6893-1633636795.jpg",
             },
           ]}
           getSource={({ item }) => item?.url}

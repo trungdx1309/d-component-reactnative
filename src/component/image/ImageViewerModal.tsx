@@ -16,7 +16,6 @@ export interface IImageViewerModalProps
   customFooter?: ((currentIndex: number) => Element) | Element;
   leftFooterView?: ((currentIndex: number) => Element) | Element;
   classNameFooter?: string;
-  previewIndex?: number;
 }
 
 const ImageViewerModal: React.FC<IImageViewerModalProps> = ({
@@ -25,7 +24,7 @@ const ImageViewerModal: React.FC<IImageViewerModalProps> = ({
   onClose,
   customFooter,
   leftFooterView,
-  previewIndex = 0,
+  index = 0,
   classNameFooter,
   ...rest
 }) => {
@@ -62,7 +61,7 @@ const ImageViewerModal: React.FC<IImageViewerModalProps> = ({
         enableSwipeDown
         onCancel={onClose}
         renderFooter={renderFooter as any}
-        index={previewIndex === -1 ? 0 : previewIndex}
+        index={index === -1 ? 0 : index}
       />
     </Modal>
   );
