@@ -13,6 +13,7 @@ import {
   StyleSheet,
   // View,
 } from "react-native";
+import Text from "../../text/Text";
 import View from "../../view/View";
 import AwesomeListMode from "./AwesomeListMode";
 import AwesomeListStyle from "./AwesomeListStyle";
@@ -351,6 +352,19 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
     );
   }
 
+  renderSectionHeader = (props: any = {}) => {
+    const { renderSectionHeader } = this.props;
+    if (renderSectionHeader) {
+      return renderSectionHeader(props);
+    }
+    const title = props?.section?.title ?? "N/A";
+    return (
+      <View className="bg-primary p-2">
+        <Text color="white">{title}</Text>
+      </View>
+    );
+  };
+
   render() {
     const {
       containerStyle = {},
@@ -392,6 +406,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
             onRefresh={() => this.onRefresh()}
             ListHeaderComponent={listHeaderComponent}
             refreshing={this.state.refreshing}
+            renderSectionHeader={(props) => this.renderSectionHeader(props)}
             {...rest}
             sections={this.state.sections}
           />
