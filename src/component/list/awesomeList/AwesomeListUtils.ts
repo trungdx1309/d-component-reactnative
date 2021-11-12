@@ -20,18 +20,18 @@ export const isString = (variable: any) => {
   return typeof variable === "string";
 };
 
-export const mapListToSectionData = ({
+export function mapListToSectionData<T extends Object>({
   dataArr = [],
-  keyData = "created",
+  getValue = (item) => item?.created,
   getTitle = ({ value }) =>
     value ? TimeUtils.convertMiliToDateTime(value) : "N/A",
   option = {},
 }: {
-  dataArr: Array<any>;
-  keyData: string;
+  dataArr: Array<T>;
+  getValue: (props: T) => any;
   getTitle: (props: { value: any; option: any; [key: string]: any }) => any;
   option: any;
-}): ISectionItem[] => {
+}): ISectionItem[] {
   if (_.isEmpty(dataArr)) {
     return [];
   }
@@ -39,9 +39,9 @@ export const mapListToSectionData = ({
   let currentTitle = "";
   const sections: ISectionItem[] = _.reduce(
     dataArr,
-    (result: Array<any>, day: any) => {
+    (result: Array<any>, day: T) => {
       newTitle = getTitle({
-        value: day[keyData],
+        value: getValue(day),
         option,
       });
       if (currentTitle !== newTitle) {
@@ -60,4 +60,4 @@ export const mapListToSectionData = ({
   );
 
   return sections;
-};
+}
