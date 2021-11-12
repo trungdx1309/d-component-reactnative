@@ -7,8 +7,10 @@ import TestHeader from "./testHeader/TestHeader";
 import TestImages from "./testImage/TestImages";
 import TestInput from "./testInput/TestInput";
 import TestSelect from "./testSelect/TestSelect";
+import TestStyle from "./testStyle/TestStyle";
 
 const DATA_SOURCE: ITabViewProps["dataSource"] = [
+  { key: "testStyle", label: "Style", component: <TestStyle /> },
   { key: "testInput", label: "Input", component: <TestInput /> },
   { key: "testSelect", label: "Select", component: <TestSelect /> },
   { key: "testButton", label: "Button", component: <TestButton /> },
