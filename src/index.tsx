@@ -56,6 +56,13 @@ export type { IAwesomeListProps } from "./component/list/awesomeList/AwesomeList
 export { default as AwesomeList } from "./component/list/awesomeList/AwesomeList";
 export { default as AwesomeListMode } from "./component/list/awesomeList/AwesomeListMode";
 export { default as EmptyView } from "./component/list/awesomeList/EmptyView";
+export type { ISectionItem } from "./component/list/awesomeList/AwesomeListUtils";
+export {
+  mapListToSectionData,
+  isArray,
+  isObject,
+  isString,
+} from "./component/list/awesomeList/AwesomeListUtils";
 
 /* ----------------------------------------
 // Header

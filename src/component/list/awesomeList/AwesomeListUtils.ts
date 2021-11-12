@@ -1,3 +1,13 @@
+import _ from "lodash";
+import StringUtils from "../../../../dist/utils/StringUtils";
+import TimeUtils from "../../../utils/TimeUtils";
+
+export interface ISectionItem {
+  id: any;
+  title: any;
+  data: Array<any>;
+}
+
 export const isObject = (object: any) => {
   return typeof object === "object";
 };
@@ -8,4 +18,46 @@ export const isArray = (array: any) => {
 
 export const isString = (variable: any) => {
   return typeof variable === "string";
+};
+
+export const mapListToSectionData = ({
+  dataArr = [],
+  keyData = "created",
+  getTitle = ({ value }) =>
+    value ? TimeUtils.convertMiliToDateTime(value) : "N/A",
+  option = {},
+}: {
+  dataArr: Array<any>;
+  keyData: string;
+  getTitle: (props: { value: any; option: any; [key: string]: any }) => any;
+  option: any;
+}): ISectionItem[] => {
+  if (_.isEmpty(dataArr)) {
+    return [];
+  }
+  let newTitle = "";
+  let currentTitle = "";
+  const sections: ISectionItem[] = _.reduce(
+    dataArr,
+    (result: Array<any>, day: any) => {
+      newTitle = getTitle({
+        value: day[keyData],
+        option,
+      });
+      if (currentTitle !== newTitle) {
+        currentTitle = newTitle;
+        result.push({
+          title: newTitle,
+          id: StringUtils.getUniqueID(),
+          data: [day],
+        });
+      } else {
+        result[result.length - 1].data.push(day);
+      }
+      return result;
+    },
+    []
+  );
+
+  return sections;
 };
