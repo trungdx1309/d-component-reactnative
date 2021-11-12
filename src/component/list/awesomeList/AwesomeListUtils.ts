@@ -1,5 +1,5 @@
 import _ from "lodash";
-import StringUtils from "../../../../dist/utils/StringUtils";
+import StringUtils from "../../../utils/StringUtils";
 import TimeUtils from "../../../utils/TimeUtils";
 
 export interface ISectionItem {
