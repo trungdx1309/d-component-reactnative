@@ -11,7 +11,7 @@ import Button, { IButtonProps } from "../button/Button";
 
 export interface IModalProps
   extends Partial<ModalProps>,
-    Omit<IHeaderProps, "children"> {
+    Omit<IHeaderProps, "children" | "size"> {
   open: boolean;
   size?: "fullscreen" | "large" | "medium" | "small";
   position?: "bottom" | "center" | "top";

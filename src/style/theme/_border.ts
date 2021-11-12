@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import Colors from "../color/_color";
 import Sizes from "../size/_size";
 import { generateStyleValue } from "../modifier";
@@ -81,6 +81,7 @@ const borderStyle = StyleSheet.create({
     borderWidth: borderSmall,
     borderColor: greyColor,
     borderStyle: "dashed",
+    borderRadius: Platform.OS === "android" ? 1 : undefined,
   },
   "rounded-pill": {
     borderRadius: 999,
