@@ -9,13 +9,13 @@ import Carousel, {
   AdditionalParallaxProps,
   CarouselProps,
 } from "react-native-snap-carousel";
-import { AppSizes } from "../..";
+import AppSizes from "../../style/constant/AppSizes";
 import Icon from "../icon/Icon";
 import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
 import Image from "./Image";
 
-export interface IImageCarouselProps extends CarouselProps<any> {
+export interface IImageCarouselProps extends Partial<CarouselProps<any>> {
   className?: string;
   classNameItem?: string;
   carouselHeight?: number;
@@ -118,18 +118,16 @@ const ImageCarousel: React.ForwardRefRenderFunction<
   };
   return (
     <View className={className}>
-      <View style={{}}>
-        <Carousel
-          ref={carouselRef}
-          loop={loop}
-          data={data}
-          {...(rest as any)}
-          sliderWidth={AppSizes.screenWidth - 20}
-          itemWidth={AppSizes.screenWidth - 20}
-          renderItem={renderImage}
-        />
-        {renderArrows()}
-      </View>
+      <Carousel
+        ref={carouselRef}
+        loop={loop}
+        data={data}
+        {...(rest as any)}
+        sliderWidth={AppSizes.screenWidth - 20}
+        itemWidth={AppSizes.screenWidth - 20}
+        renderItem={renderImage}
+      />
+      {renderArrows()}
     </View>
   );
 };
