@@ -125,6 +125,25 @@ const flexStyle = StyleSheet.create({
     justifyContent: "space-around",
   },
 
+  "justify-center": {
+    justifyContent: "center",
+  },
+  "justify-end": {
+    justifyContent: "flex-end",
+  },
+  "justify-start": {
+    justifyContent: "flex-start",
+  },
+  "justify-between": {
+    justifyContent: "space-between",
+  },
+  "justify-evenly": {
+    justifyContent: "space-evenly",
+  },
+  "justify-around": {
+    justifyContent: "space-around",
+  },
+
   ...flexValueClass,
 });
 

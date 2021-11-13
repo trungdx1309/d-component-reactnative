@@ -20,6 +20,7 @@ const DefaultColors = {
 
   black: "#0D0F12",
   blackTrans: "rgba(0, 0, 0, 0.8)",
+  blackOverlay: "rgba(0,0,0, 0.45)",
   white: "#FFFFFF",
   red: "#E63B2E",
   green: "#33963D",

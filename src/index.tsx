@@ -124,6 +124,12 @@ export { default as ImagePreview } from "./component/image/ImagePreview";
 export type { IImageListProps } from "./component/image/ImageList";
 export { default as ImageList } from "./component/image/ImageList";
 
+export type {
+  IImageCarouselProps,
+  IImageCarouselMethod,
+} from "./component/image/ImageCarousel";
+export { default as ImageCarousel } from "./component/image/ImageCarousel";
+
 /* ----------------------------------------
 // Icon
 // ---------------------------------------- */

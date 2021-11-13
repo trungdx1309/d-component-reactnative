@@ -22,6 +22,7 @@ export const isString = (variable: any) => {
 
 export function mapListToSectionData<T extends Object>({
   dataArr = [],
+  //@ts-ignore
   getValue = (item) => item?.created,
   getTitle = ({ value }) =>
     value ? TimeUtils.convertMiliToDateTime(value) : "N/A",
