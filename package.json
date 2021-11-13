@@ -1,6 +1,6 @@
 {
   "name": "d-component-react-native",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -27,6 +27,7 @@
     "lodash": "^4.0.0",
     "moment": "^2.24.0",
     "react-native-device-info": "^8.3.1",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-tab-view": "^3.1.1",
     "tinycolor2": "^1.4.2"
   },
@@ -74,7 +75,6 @@
     "react-native-router-flux": "^4.2.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.7.2",
-    "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^8.1.0",
     "react-navigation": "^3.13.0",
     "react-test-renderer": "17.0.2",
