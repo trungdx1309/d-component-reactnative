@@ -39,6 +39,8 @@ const ImageCarousel: React.ForwardRefRenderFunction<
     onPressItem,
     getImage = (item) => item?.url,
     carouselHeight = (AppSizes.screenWidth * 2) / 3,
+    sliderWidth = AppSizes.screenWidth,
+    itemWidth = AppSizes.screenWidth,
     ...rest
   },
   ref
@@ -123,8 +125,8 @@ const ImageCarousel: React.ForwardRefRenderFunction<
         loop={loop}
         data={data}
         {...(rest as any)}
-        sliderWidth={AppSizes.screenWidth - 20}
-        itemWidth={AppSizes.screenWidth - 20}
+        sliderWidth={sliderWidth}
+        itemWidth={itemWidth}
         renderItem={renderImage}
       />
       {renderArrows()}
