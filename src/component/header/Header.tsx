@@ -1,6 +1,6 @@
 import React from "react";
 import ClassNames from "classnames";
-import { useColorScheme } from "react-native";
+import { useColorScheme, StyleProp, ViewStyle } from "react-native";
 import Text from "../text/Text";
 import View from "../view/View";
 import Button from "../button/Button";
@@ -10,8 +10,9 @@ import { getColorValue } from "../../style/modifier";
 import { isDark } from "../../style/color/_color";
 import InputSearch from "../input/InputSearch";
 import { ColorKeyType } from "../../style/constant/AppColors";
+import { ThemeProps } from "../../interface/iTheme";
 
-export interface IHeaderProps {
+export interface IHeaderProps extends ThemeProps {
   title?: string;
   onLeftPress?: (props?: any) => any;
   onRightPress?: (props?: any) => any;
@@ -27,6 +28,7 @@ export interface IHeaderProps {
   classNameSearch?: string;
   showSearch?: boolean;
   size?: "medium" | "large" | "small";
+  style?: StyleProp<ViewStyle>;
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -45,6 +47,8 @@ const Header: React.FC<IHeaderProps> = ({
   className,
   classNameSearch,
   showSearch,
+  colorDarkMode,
+  style,
 }) => {
   const bgColor = getColorValue(theme as any);
   const wrapperClass = ClassNames(
@@ -64,6 +68,16 @@ const Header: React.FC<IHeaderProps> = ({
     h3: size === "large",
   });
   const isDarkMode = useColorScheme() === "dark";
+
+  const headerStyle: Array<any> = [];
+
+  if (style) {
+    headerStyle.push(style);
+  }
+
+  if (isDarkMode && colorDarkMode) {
+    headerStyle.push({ backgroundColor: colorDarkMode });
+  }
 
   const searchClass = ClassNames("flex-1 mx-3", classNameSearch);
 
@@ -155,7 +169,7 @@ const Header: React.FC<IHeaderProps> = ({
   };
 
   return (
-    <View className={wrapperClass}>
+    <View className={wrapperClass} style={headerStyle}>
       {(onLeftPress || customLeft) && renderLeft()}
       {renderCenter()}
       {(onRightPress || customRight) && renderRight()}

@@ -6,10 +6,10 @@ import {
 } from "react-native";
 import Colors from "../../style/color/_color";
 import { getStyleProps } from "../../style/style";
+import { ThemeProps } from "../../interface/iTheme";
 
-export interface ISafeAreaViewProps extends ViewProps {
+export interface ISafeAreaViewProps extends ViewProps, ThemeProps {
   className?: string;
-  children?: any;
 }
 
 const { dark, light } = Colors;
@@ -17,11 +17,17 @@ const { dark, light } = Colors;
 const SafeAreaView: React.FC<ISafeAreaViewProps> = ({
   children,
   style,
+  useLightColor,
+  colorDarkMode,
   ...rest
 }) => {
   const transStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
-  const defaultStyle = { backgroundColor: isDarkMode ? dark : light };
+  let backgroundColor = useLightColor ? light : undefined;
+  if (isDarkMode) {
+    backgroundColor = colorDarkMode || dark;
+  }
+  const defaultStyle = { backgroundColor };
   return (
     <SafeAreaViewRN style={[defaultStyle, transStyle, style]}>
       {children}

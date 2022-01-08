@@ -24,6 +24,7 @@ const TestHeader: React.FC<ITestHeaderProps> = ({ id }) => {
         onRightPress={() => {}}
         className="my-3"
         theme="dark"
+        colorDarkMode="blue"
       />
 
       <Header

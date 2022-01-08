@@ -9,7 +9,7 @@ export interface ITestButtonProps {
 const TestButton: React.FC<ITestButtonProps> = ({ id }) => {
   return (
     <ScrollView className="w-100">
-      <Button size="xx-large" className="my-2">
+      <Button size="xx-large" className="my-2" colorDarkMode="red">
         Button XX Large
       </Button>
       <Button size="x-large" className="my-2">
