@@ -10,6 +10,7 @@ import { ThemeProps } from "../../interface/iTheme";
 
 export interface IScrollViewProps extends ScrollViewProps, ThemeProps {
   className?: string;
+  children?: any;
 }
 
 export interface IScrollViewMethod {}
