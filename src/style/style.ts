@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { forEach, split, isEmpty } from "lodash";
 import {
   StyleSheet,
@@ -47,17 +48,13 @@ export const getListStyleProps = (
 ): ViewStyle[] => {
   const tranStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
-  const backgroundColor = useLightColor ? light : undefined;
+  const backgroundColor = useLightColor ? light : isDarkMode ? dark : undefined;
   const listStyle: ViewStyle[] = [{ backgroundColor }, tranStyle as any];
   if (styleProps) {
     listStyle.push(styleProps);
   }
-  if (isDarkMode) {
-    if (colorDarkMode) {
-      listStyle.push({ backgroundColor: colorDarkMode });
-    } else {
-      listStyle.unshift({ backgroundColor: dark });
-    }
+  if (isDarkMode && colorDarkMode) {
+    listStyle.push({ backgroundColor: colorDarkMode });
   }
   return listStyle;
 };
