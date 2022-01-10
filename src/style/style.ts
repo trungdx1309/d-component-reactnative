@@ -52,8 +52,12 @@ export const getListStyleProps = (
   if (styleProps) {
     listStyle.push(styleProps);
   }
-  if (isDarkMode && colorDarkMode) {
-    listStyle.push({ backgroundColor: colorDarkMode });
+  if (isDarkMode) {
+    let color = dark;
+    if (colorDarkMode) {
+      color = colorDarkMode;
+    }
+    listStyle.push({ backgroundColor: color });
   }
   return listStyle;
 };
