@@ -5,6 +5,7 @@ import {
   TextStyle,
   FlexStyle,
   ImageStyle,
+  useColorScheme,
 } from "react-native";
 import flexStyle from "./layout/_flex";
 import marginPadding from "./layout/_padding-margin";
@@ -15,6 +16,9 @@ import textStyle from "./font/_text";
 import positionStyle from "./layout/_position";
 import imageStyle from "./image/_image";
 import shadowStyle from "./theme/_shadow";
+import { Colors } from "..";
+
+const { dark, light } = Colors;
 
 export const getStyleProps = (props: any, key?: string) => {
   const keyProps = key || "className";
@@ -33,6 +37,25 @@ export const getStyleProps = (props: any, key?: string) => {
     }
   }
   return styleProps;
+};
+
+export const getListStyleProps = (
+  rest: any,
+  styleProps: any,
+  colorDarkMode?: string,
+  useLightColor?: boolean
+): ViewStyle[] => {
+  const tranStyle = getStyleProps(rest);
+  const isDarkMode = useColorScheme() === "dark";
+  const backgroundColor = useLightColor ? light : undefined;
+  const listStyle: ViewStyle[] = [{ backgroundColor }, tranStyle as any];
+  if (styleProps) {
+    listStyle.push(styleProps);
+  }
+  if (isDarkMode && colorDarkMode) {
+    listStyle.push({ backgroundColor: colorDarkMode });
+  }
+  return listStyle;
 };
 
 const style = StyleSheet.create({
