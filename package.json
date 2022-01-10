@@ -1,6 +1,6 @@
 {
   "name": "d-component-react-native",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -9,8 +9,8 @@
   "scripts": {
     "android": "react-native --port=8088 run-android",
     "android:clean": "cd android && ./gradlew clean && cd .. && react-native --port=8088 run-android",
-    "ios": "react-native --port=8088 run-ios --simulator='iPhone X'",
-    "ios:clean": "cd ios && pod install && cd .. && react-native --port=8088 run-ios --simulator='iPhone X'",
+    "ios": "react-native --port=8088 run-ios --simulator='iPhone 12'",
+    "ios:clean": "cd ios && pod install && cd .. && react-native --port=8088 run-ios --simulator='iPhone 12'",
     "ios:iPhone8": "react-native --port=8088 run-ios --simulator='iPhone 8'",
     "iPad": "react-native run-ios --simulator='iPad Pro (9.7 inch)'",
     "start": "react-native start",
