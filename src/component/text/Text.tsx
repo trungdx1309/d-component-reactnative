@@ -21,14 +21,14 @@ const Text: React.FC<ITextProps> = ({
   const { style } = rest;
   const transStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
-  const textColor = color || light;
+  const textColor = color || undefined;
   const defaultStyle = {
     // color: color || isDarkMode ? light : undefined,
     color: textColor,
   };
   const listStyle = [defaultStyle, transStyle, style];
-  if (isDarkMode && colorDarkMode) {
-    listStyle.push({ color: colorDarkMode });
+  if (isDarkMode) {
+    listStyle.push({ color: colorDarkMode || light });
   }
   return <RNText style={listStyle}>{children}</RNText>;
 };
