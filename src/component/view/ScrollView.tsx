@@ -6,10 +6,10 @@ import {
 } from "react-native";
 import Colors from "../../style/color/_color";
 import { getStyleProps } from "../../style/style";
+import { ThemeProps } from "../../interface/iTheme";
 
-export interface IScrollViewProps extends ScrollViewProps {
+export interface IScrollViewProps extends ScrollViewProps, ThemeProps {
   className?: string;
-  children?: any;
 }
 
 export interface IScrollViewMethod {}
@@ -19,10 +19,14 @@ const { dark, light } = Colors;
 const ScrollView: React.ForwardRefRenderFunction<
   IScrollViewMethod,
   IScrollViewProps
-> = ({ children, style, ...rest }, ref) => {
+> = ({ children, style, colorDarkMode, useLightColor, ...rest }, ref) => {
   const tranStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
-  const defaultStyle = { backgroundColor: isDarkMode ? dark : light };
+  let backgroundColor = useLightColor ? light : undefined;
+  if (isDarkMode) {
+    backgroundColor = colorDarkMode || dark;
+  }
+  const defaultStyle = { backgroundColor };
   return (
     <ScrollViewRN style={[defaultStyle, tranStyle, style]} {...rest}>
       {children}

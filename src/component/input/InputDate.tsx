@@ -10,6 +10,7 @@ import View from "../view/View";
 import { InputErrorView } from "./InputText";
 import Icon from "../icon/Icon";
 import TimeUtils from "../../utils/TimeUtils";
+import { useColorScheme } from "react-native";
 
 export type TDateFormat =
   | "DD/MM/YYYY HH:mm"
@@ -82,6 +83,7 @@ const InputDate: React.ForwardRefRenderFunction<
   },
   ref
 ) => {
+  const isDarkMode = useColorScheme() === "dark";
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
   const wrapperClass = ClassNames(
@@ -200,6 +202,7 @@ const InputDate: React.ForwardRefRenderFunction<
         {...rest}
         mode={mode}
         timeZoneOffsetInMinutes={420}
+        textColor={isDarkMode ? "white" : undefined}
       />
     </View>
   );

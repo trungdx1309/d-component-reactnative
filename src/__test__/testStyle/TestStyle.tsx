@@ -10,7 +10,10 @@ const TestStyle: React.FC<ITestStyleProps> = ({ id }) => {
   return (
     <ScrollView className="w-100">
       <View className="w-100 justify-content-center align-center">
-        <View className="width-50 height-50  border-dashed border-primary my-3" />
+        <View
+          className="width-50 height-50  border-dashed border-primary my-3"
+          colorDarkMode="red"
+        />
       </View>
     </ScrollView>
   );

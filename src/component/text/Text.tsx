@@ -26,8 +26,8 @@ const Text: React.FC<ITextProps> = ({
     textColor = colorDarkMode || color || light;
   }
   const defaultStyle = {
-    color: color || isDarkMode ? light : undefined,
-    // color: textColor,
+    // color: color || isDarkMode ? light : undefined,
+    color: textColor,
   };
   return <RNText style={[defaultStyle, transStyle, style]}>{children}</RNText>;
 };

@@ -1,6 +1,6 @@
 import ClassNames from "classnames";
 import React, { useMemo } from "react";
-import { TouchableOpacityProps } from "react-native";
+import { TouchableOpacityProps, useColorScheme } from "react-native";
 import { isDark } from "../../style/color/_color";
 import Sizes from "../../style/size/_size";
 import { getColorValue } from "../../style/modifier";
@@ -8,10 +8,13 @@ import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import { ColorKeyType } from "../../style/constant/AppColors";
+import { ThemeProps } from "../../interface/iTheme";
 
 const defaultButtonHeight = Sizes?.buttonHeight ?? 30;
 
-export interface IButtonProps extends TouchableOpacityProps {
+export interface IButtonProps
+  extends TouchableOpacityProps,
+    Omit<ThemeProps, "useLightColor"> {
   className?: string;
   classNameLabel?: string;
   children?: any;
@@ -46,9 +49,11 @@ const Button: React.FC<IButtonProps> = ({
   label,
   disabled,
   style,
+  colorDarkMode,
   textColor,
   ...rest
 }) => {
+  const isDarkMode = useColorScheme() === "dark";
   const buttonColor = useMemo(() => {
     return getColorValue(color);
   }, [color]);
@@ -83,6 +88,16 @@ const Button: React.FC<IButtonProps> = ({
     }
     return result;
   }, [height, size]);
+
+  const buttonStyle: Array<any> = [{ height: buttonHeight }];
+
+  if (style) {
+    buttonStyle.push(style);
+  }
+
+  if (colorDarkMode && isDarkMode) {
+    buttonStyle.push({ backgroundColor: colorDarkMode });
+  }
 
   const isIconButton =
     !!iconName || !!suffixIcon || suffixElement || prefixElement;
@@ -155,7 +170,7 @@ const Button: React.FC<IButtonProps> = ({
   return (
     <TouchableOpacity
       className={wrapperClass}
-      style={[{ height: buttonHeight }, style]}
+      style={buttonStyle}
       disabled={disabled}
       {...rest}
     >
