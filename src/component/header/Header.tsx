@@ -50,7 +50,10 @@ const Header: React.FC<IHeaderProps> = ({
   colorDarkMode,
   style,
 }) => {
-  const bgColor = getColorValue(theme as any);
+  const isDarkMode = useColorScheme() === "dark";
+  const bgColor = isDarkMode
+    ? colorDarkMode || getColorValue(theme as any)
+    : getColorValue(theme as any);
   const wrapperClass = ClassNames(
     `flex-center-y px-2 bg-${theme}`,
     {
@@ -67,16 +70,11 @@ const Header: React.FC<IHeaderProps> = ({
     h4: size === "medium",
     h3: size === "large",
   });
-  const isDarkMode = useColorScheme() === "dark";
 
   const headerStyle: Array<any> = [];
 
   if (style) {
     headerStyle.push(style);
-  }
-
-  if (isDarkMode && colorDarkMode) {
-    headerStyle.push({ backgroundColor: colorDarkMode });
   }
 
   const searchClass = ClassNames("flex-1 mx-3", classNameSearch);
@@ -169,7 +167,11 @@ const Header: React.FC<IHeaderProps> = ({
   };
 
   return (
-    <View className={wrapperClass} style={headerStyle}>
+    <View
+      className={wrapperClass}
+      style={headerStyle}
+      colorDarkMode={colorDarkMode}
+    >
       {(onLeftPress || customLeft) && renderLeft()}
       {renderCenter()}
       {(onRightPress || customRight) && renderRight()}
