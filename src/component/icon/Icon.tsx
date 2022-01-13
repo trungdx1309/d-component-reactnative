@@ -26,7 +26,7 @@ const Icon: React.FC<IIconProps> = ({
       type={type}
       color={colorIcon}
       size={size}
-      {...rest}
+      {...rest as any}
     />
   );
 };

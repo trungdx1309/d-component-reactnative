@@ -95,7 +95,7 @@ const Calendar: React.FC<ICalendarProps> = ({
   const tranStyle = getStyleProps(rest);
   return (
     <RNCalendar
-      theme={isDarkMode ? { ...darkTheme } : { ...lightTheme }}
+      theme={isDarkMode ? { ...darkTheme } : ({ ...lightTheme } as any)}
       renderArrow={(direction) => {
         if (direction === "left") {
           return <Icon name="keyboard-arrow-left" color={Colors.primary} />;
