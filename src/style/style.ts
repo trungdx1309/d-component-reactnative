@@ -48,7 +48,7 @@ export const getListStyleProps = (
 ): ViewStyle[] => {
   const tranStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
-  const backgroundColor = useLightColor ? light : isDarkMode ? dark : undefined;
+  const backgroundColor = isDarkMode ? dark : useLightColor ? light : undefined;
   const listStyle: ViewStyle[] = [{ backgroundColor }, tranStyle as any];
   if (styleProps) {
     listStyle.push(styleProps);
