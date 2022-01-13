@@ -1,9 +1,10 @@
 import ClassNames from "classnames";
 import React from "react";
+import { TextStyle, ViewStyle } from "react-native";
+import { IButtonProps } from "../button/Button";
 import Text from "../text/Text";
 import View from "../view/View";
 import Avatar, { IAvatarProps } from "./Avatar";
-import { IButtonProps } from "../button/Button";
 
 export interface IUserBasic {
   fullName?: string;
@@ -18,9 +19,14 @@ export interface IAvatarNameProps {
   size?: IAvatarProps["size"];
   subLabel?: string;
   className?: string;
+  classNameWrapperText?: string;
   classNameText?: string;
   classNameSubText?: string;
   color?: IButtonProps["color"];
+  style?: ViewStyle;
+  styleWrapperText?: ViewStyle;
+  styleNameText?: TextStyle;
+  styleSubText?: TextStyle;
 }
 
 const AvatarName: React.FC<IAvatarNameProps> = ({
@@ -28,8 +34,13 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
   position = "after",
   size = "x-small",
   subLabel,
+  style,
+  styleSubText,
+  styleNameText,
+  styleWrapperText,
   className,
   classNameText,
+  classNameWrapperText,
   classNameSubText,
   color,
 }) => {
@@ -43,10 +54,14 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
     `flex-row align-center bg-transparent`,
     className
   );
-  const nameClass = ClassNames("flex-column bg-transparent", {
-    "mr-1": position === "before",
-    "ml-1": position === "after",
-  });
+  const nameClass = ClassNames(
+    "flex-column bg-transparent",
+    {
+      "mr-1": position === "before",
+      "ml-1": position === "after",
+    },
+    classNameWrapperText
+  );
   const nameTextClass = ClassNames(
     `text-nowrap text-${color}`,
     {
@@ -77,14 +92,20 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
 
   const renderName = () => {
     return (
-      <View className={nameClass}>
-        <Text className={`${nameTextClass}`}>{displayName}</Text>
-        {subLabel && <Text className={subTextClass}>{subLabel}</Text>}
+      <View className={nameClass} style={styleWrapperText}>
+        <Text className={`${nameTextClass}`} style={styleNameText}>
+          {displayName}
+        </Text>
+        {subLabel && (
+          <Text className={subTextClass} style={styleSubText}>
+            {subLabel}
+          </Text>
+        )}
       </View>
     );
   };
   return (
-    <View className={wrapperClass}>
+    <View className={wrapperClass} style={style}>
       {position === "before" && renderName()}
       {avatar && <Avatar avatar={avatar as any} size={size} />}
       {!avatar && <Avatar text={displayName.charAt(0)} size={size} />}
