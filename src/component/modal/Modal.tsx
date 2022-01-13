@@ -8,10 +8,12 @@ import Header, { IHeaderProps } from "../header/Header";
 import View from "../view/View";
 import ScrollView from "../view/ScrollView";
 import Button, { IButtonProps } from "../button/Button";
+import { ThemeProps } from "../../interface/iTheme";
 
 export interface IModalProps
   extends Partial<ModalProps>,
-    Omit<IHeaderProps, "children" | "size"> {
+    Omit<IHeaderProps, "children" | "size">,
+    ThemeProps {
   open: boolean;
   size?: "fullscreen" | "large" | "medium" | "small";
   position?: "bottom" | "center" | "top";
@@ -71,6 +73,8 @@ const Modal: React.FC<IModalProps> = ({
   rightText,
   theme,
   swipeDirection = "down",
+  useLightColor = true,
+  colorDarkMode,
   ...rest
 }) => {
   const modalClass = ClassNames(
@@ -176,7 +180,11 @@ const Modal: React.FC<IModalProps> = ({
       hideModalContentWhileAnimating
       className={modalClass}
     >
-      <SafeAreaView className={containerClass}>
+      <SafeAreaView
+        className={containerClass}
+        useLightColor={useLightColor}
+        colorDarkMode={colorDarkMode}
+      >
         {showHeader && renderHeader()}
         {renderMainView()}
         {showFooter && renderFooter()}
