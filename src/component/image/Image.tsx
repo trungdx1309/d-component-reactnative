@@ -8,7 +8,9 @@ export interface IImageProps extends ImageProps {
 
 const Image: React.FC<IImageProps> = ({ style, children, source, ...rest }) => {
   const transStyle = getStyleProps(rest);
-  return <ImageRN style={[transStyle as any, style]} source={source} />;
+  return (
+    <ImageRN {...rest} style={[transStyle as any, style]} source={source} />
+  );
 };
 
 export default Image;
