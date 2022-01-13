@@ -1,14 +1,13 @@
-import React from "react";
-import { StyleSheet } from "react-native";
-import RNModal, { ModalProps } from "react-native-modal";
 import ClassNames from "classnames";
-import SafeAreaView from "../view/SafeAreaView";
-import { getStyleProps } from "../../style/style";
-import Header, { IHeaderProps } from "../header/Header";
-import View from "../view/View";
-import ScrollView from "../view/ScrollView";
-import Button, { IButtonProps } from "../button/Button";
+import React from "react";
+import RNModal, { ModalProps } from "react-native-modal";
 import { ThemeProps } from "../../interface/iTheme";
+import { getStyleProps } from "../../style/style";
+import Button, { IButtonProps } from "../button/Button";
+import Header, { IHeaderProps } from "../header/Header";
+import SafeAreaView from "../view/SafeAreaView";
+import ScrollView from "../view/ScrollView";
+import View from "../view/View";
 
 export interface IModalProps
   extends Partial<ModalProps>,
@@ -195,12 +194,6 @@ const Modal: React.FC<IModalProps> = ({
 
 export default Modal;
 
-const styles = StyleSheet.create({
-  fullscreen: {
-    margin: 0,
-  },
-});
-
 export interface IModalTransProps extends ModalProps {
   className?: string;
 }
@@ -212,7 +205,7 @@ export const ModalTrans: React.FC<IModalTransProps> = ({
 }) => {
   const transStyle = getStyleProps(rest);
   return (
-    <RNModal style={[transStyle, style]} {...rest}>
+    <RNModal style={[{ marginBottom: 0 }, transStyle, style]} {...rest}>
       {children}
     </RNModal>
   );

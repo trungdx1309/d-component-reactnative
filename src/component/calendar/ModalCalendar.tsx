@@ -21,6 +21,7 @@ const ModalCalendar: React.FC<IModalCalendarProps> = ({
 }) => {
   return (
     <Modal
+      {...rest}
       open={open}
       onClose={onClose}
       size={size}
