@@ -215,3 +215,4 @@ export { default as useForceUpdate } from "./hooks/useForceUpdate";
 export { useForceUpdateConstraint } from "./hooks/useForceUpdate";
 export { default as usePrevious } from "./hooks/usePrevious";
 export { default as useKeyboard } from "./hooks/useKeyboard";
+export { default as useDeepEffect } from "./hooks/useDeepEffect";
