@@ -10,7 +10,7 @@ import View from "../view/View";
 import Text from "../text/Text";
 import Modal from "../modal/Modal";
 import Icon from "../icon/Icon";
-import Chip from "../chip/Chip";
+import Chip from "../items/Chip";
 import CheckBox from "../checkbox/CheckBox";
 import Button from "../button/Button";
 import { InputErrorView } from "../input/InputText";

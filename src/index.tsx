@@ -131,20 +131,6 @@ export type {
 export { default as ImageCarousel } from "./component/image/ImageCarousel";
 
 /* ----------------------------------------
-// Icon
-// ---------------------------------------- */
-
-export type { IIconProps } from "./component/icon/Icon";
-export { default as Icon } from "./component/icon/Icon";
-
-/* ----------------------------------------
-// Chip
-// ---------------------------------------- */
-
-export type { IChipProps } from "./component/chip/Chip";
-export { default as Chip } from "./component/chip/Chip";
-
-/* ----------------------------------------
 // Checkbox
 // ---------------------------------------- */
 
@@ -216,3 +202,16 @@ export { useForceUpdateConstraint } from "./hooks/useForceUpdate";
 export { default as usePrevious } from "./hooks/usePrevious";
 export { default as useKeyboard } from "./hooks/useKeyboard";
 export { default as useDeepEffect } from "./hooks/useDeepEffect";
+
+/* ----------------------------------------
+// Items
+// ---------------------------------------- */
+
+export type { IIconProps } from "./component/icon/Icon";
+export { default as Icon } from "./component/icon/Icon";
+
+export type { IChipProps } from "./component/items/Chip";
+export { default as Chip } from "./component/items/Chip";
+
+export type { IBadgeProps } from "./component/items/Badge";
+export { default as Badge } from "./component/items/Badge";
