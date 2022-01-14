@@ -95,10 +95,6 @@ const Button: React.FC<IButtonProps> = ({
     buttonStyle.push(style);
   }
 
-  if (colorDarkMode && isDarkMode) {
-    buttonStyle.push({ backgroundColor: colorDarkMode });
-  }
-
   const isIconButton =
     !!iconName || !!suffixIcon || suffixElement || prefixElement;
 
@@ -172,6 +168,7 @@ const Button: React.FC<IButtonProps> = ({
       className={wrapperClass}
       style={buttonStyle}
       disabled={disabled}
+      colorDarkMode={variant === "trans" ? "transparent" : colorDarkMode}
       {...rest}
     >
       {prefixView}

@@ -18,9 +18,10 @@ import Icon from "../icon/Icon";
 import Colors from "../../style/constant/AppColors";
 import Sizes from "../../style/size/_size";
 import useKeyBoard from "../../hooks/useKeyboard";
+import { ThemeProps } from "../../interface/iTheme";
 
 const { light } = Colors;
-export interface IInputTextProps extends TextInputProps {
+export interface IInputTextProps extends TextInputProps, ThemeProps {
   variant?: "standard" | "outline" | "rounded" | "pill" | "trans";
   label?: any;
   error?: any;
@@ -86,6 +87,8 @@ const InputText: React.ForwardRefRenderFunction<
     iconName,
     onPressIcon,
     useKeyboardAvoidingView,
+    colorDarkMode,
+    useLightColor = true,
     ...rest
   },
   ref
@@ -151,6 +154,7 @@ const InputText: React.ForwardRefRenderFunction<
         },
         style,
       ]}
+      useLightColor={useLightColor}
     >
       {label && <Text className={labelClass}>{label}</Text>}
       <View className={wrapperClass}>

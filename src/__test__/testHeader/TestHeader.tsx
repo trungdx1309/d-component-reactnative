@@ -53,7 +53,7 @@ const TestHeader: React.FC<ITestHeaderProps> = ({ id }) => {
       <Header
         className="my-3"
         title="Header"
-        theme="light"
+        theme="primary"
         leftText="Left"
         onLeftPress={() => {}}
         onRightPress={() => {}}
