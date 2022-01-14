@@ -9,6 +9,7 @@ import Carousel, {
   AdditionalParallaxProps,
   CarouselProps,
 } from "react-native-snap-carousel";
+import { ColorKeyType } from "../../style/constant/AppColors";
 import AppSizes from "../../style/constant/AppSizes";
 import Icon from "../icon/Icon";
 import TouchableOpacity from "../view/TouchableOpacity";
@@ -19,7 +20,7 @@ export interface IImageCarouselProps extends Partial<CarouselProps<any>> {
   className?: string;
   classNameItem?: string;
   carouselHeight?: number;
-  iconColor?: string;
+  iconColor?: ColorKeyType;
   getImage?: (item: any) => any;
   onPressItem?: ({ item, index }: { item: any; index: any }) => any;
 }
