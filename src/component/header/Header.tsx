@@ -112,9 +112,12 @@ const Header: React.FC<IHeaderProps> = ({
       );
     }
     return (
-      <TouchableOpacity onPress={onLeftPress} className="px-3">
-        <Icon name={leftIcon} color={getTextColor()} className="px-0" />
-      </TouchableOpacity>
+      <Icon
+        name={leftIcon}
+        color={getTextColor()}
+        className="px-0"
+        onPress={onLeftPress}
+      />
     );
   };
 
@@ -154,9 +157,12 @@ const Header: React.FC<IHeaderProps> = ({
       );
     }
     return (
-      <TouchableOpacity onPress={onRightPress}>
-        <Icon name={rightIcon} color={getTextColor()} className="px-0" />
-      </TouchableOpacity>
+      <Icon
+        name={rightIcon}
+        color={getTextColor()}
+        className="px-0"
+        onPress={onRightPress}
+      />
     );
   };
 
