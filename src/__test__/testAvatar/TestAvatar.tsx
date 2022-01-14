@@ -44,6 +44,7 @@ const TestAvatar: React.FC<ITestAvatarProps> = ({ id }) => {
           size="xx-small"
           className="my-2"
           color="primary"
+          colorDarkMode="warnColor"
         />
         <AvatarName
           user={{ fullName: "Trung", avatar: images.birthdayCake }}

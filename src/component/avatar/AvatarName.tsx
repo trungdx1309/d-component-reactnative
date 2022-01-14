@@ -5,6 +5,7 @@ import { IButtonProps } from "../button/Button";
 import Text from "../text/Text";
 import View from "../view/View";
 import Avatar, { IAvatarProps } from "./Avatar";
+import { ThemeProps } from "../../interface/iTheme";
 
 export interface IUserBasic {
   fullName?: string;
@@ -13,7 +14,7 @@ export interface IUserBasic {
   [key: string]: any;
 }
 
-export interface IAvatarNameProps {
+export interface IAvatarNameProps extends ThemeProps {
   user: IUserBasic;
   position?: "before" | "after";
   size?: IAvatarProps["size"];
@@ -43,6 +44,7 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
   classNameWrapperText,
   classNameSubText,
   color,
+  colorDarkMode,
 }) => {
   const { avatar, fullName, name = "" } = user;
   let displayName = name;
@@ -93,7 +95,11 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
   const renderName = () => {
     return (
       <View className={nameClass} style={styleWrapperText}>
-        <Text className={`${nameTextClass}`} style={styleNameText}>
+        <Text
+          className={`${nameTextClass}`}
+          style={styleNameText}
+          colorDarkMode={colorDarkMode}
+        >
           {displayName}
         </Text>
         {subLabel && (

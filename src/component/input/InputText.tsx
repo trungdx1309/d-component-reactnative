@@ -154,6 +154,7 @@ const InputText: React.ForwardRefRenderFunction<
         },
         style,
       ]}
+      colorDarkMode={colorDarkMode}
       useLightColor={useLightColor}
     >
       {label && <Text className={labelClass}>{label}</Text>}

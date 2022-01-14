@@ -18,6 +18,7 @@ import positionStyle from "./layout/_position";
 import imageStyle from "./image/_image";
 import shadowStyle from "./theme/_shadow";
 import { Colors } from "..";
+import { getColorValue } from "./modifier";
 
 const { dark, light } = Colors;
 
@@ -54,7 +55,8 @@ export const getListStyleProps = (
     listStyle.push(styleProps);
   }
   if (isDarkMode && colorDarkMode) {
-    listStyle.push({ backgroundColor: colorDarkMode });
+    const backgroundColor = getColorValue(colorDarkMode);
+    listStyle.push({ backgroundColor });
   }
   return listStyle;
 };
