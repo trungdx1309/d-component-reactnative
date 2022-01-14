@@ -1,16 +1,15 @@
-import React from "react";
 import ClassNames from "classnames";
-import { useColorScheme, StyleProp, ViewStyle } from "react-native";
+import React from "react";
+import { StyleProp, useColorScheme, ViewStyle } from "react-native";
+import { ThemeProps } from "../../interface/iTheme";
+import { isDark } from "../../style/color/_color";
+import { ColorKeyType } from "../../style/constant/AppColors";
+import { getColorValue } from "../../style/modifier";
+import Button from "../button/Button";
+import Icon from "../icon/Icon";
+import InputSearch, { IInputSearchProps } from "../input/InputSearch";
 import Text from "../text/Text";
 import View from "../view/View";
-import Button from "../button/Button";
-import TouchableOpacity from "../view/TouchableOpacity";
-import Icon from "../icon/Icon";
-import { getColorValue } from "../../style/modifier";
-import { isDark } from "../../style/color/_color";
-import InputSearch from "../input/InputSearch";
-import { ColorKeyType } from "../../style/constant/AppColors";
-import { ThemeProps } from "../../interface/iTheme";
 
 export interface IHeaderProps extends ThemeProps {
   title?: string;
@@ -29,6 +28,10 @@ export interface IHeaderProps extends ThemeProps {
   showSearch?: boolean;
   size?: "medium" | "large" | "small";
   style?: StyleProp<ViewStyle>;
+  // input search props
+  textSearch?: IInputSearchProps["value"];
+  onChangeTextSearch?: IInputSearchProps["onChangeText"];
+  inputSearchProps?: IInputSearchProps;
 }
 
 const Header: React.FC<IHeaderProps> = ({
@@ -49,10 +52,13 @@ const Header: React.FC<IHeaderProps> = ({
   showSearch,
   colorDarkMode,
   style,
+  textSearch,
+  onChangeTextSearch,
+  inputSearchProps = {},
 }) => {
   const isDarkMode = useColorScheme() === "dark";
   const bgColor = isDarkMode
-    ? colorDarkMode || getColorValue(theme as any)
+    ? getColorValue(colorDarkMode) || getColorValue(theme as any)
     : getColorValue(theme as any);
   const wrapperClass = ClassNames(
     `flex-center-y px-2 bg-${theme}`,
@@ -129,7 +135,14 @@ const Header: React.FC<IHeaderProps> = ({
       return customTitle;
     }
     if (showSearch) {
-      return <InputSearch className={searchClass} />;
+      return (
+        <InputSearch
+          className={searchClass}
+          value={textSearch}
+          onChangeText={onChangeTextSearch}
+          {...inputSearchProps}
+        />
+      );
     }
     if (title) {
       return <Text className={titleClass}>{title}</Text>;
