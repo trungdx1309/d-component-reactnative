@@ -1,7 +1,15 @@
 /* eslint-disable import/prefer-default-export */
 
-import { isEmpty, isArray } from "lodash";
+import { isArray, isEmpty } from "lodash";
+import { ColorSchemeName } from "react-native";
 import Colors from "./color/_color";
+import { ColorKeyType } from "./constant/AppColors";
+
+export interface IGetThemeColorProps {
+  colorLightMode?: ColorKeyType;
+  colorDarkMode?: ColorKeyType;
+  colorScheme: ColorSchemeName;
+}
 
 export const generateStyleValue = (
   variants: any,
@@ -52,6 +60,18 @@ export const getColorValue = (color?: string) => {
   return value;
 };
 
+export const getThemeColor = ({
+  colorDarkMode = "white",
+  colorLightMode = "black",
+  colorScheme,
+}: IGetThemeColorProps) => {
+  if (colorScheme === "dark") {
+    return colorDarkMode;
+  }
+  return colorLightMode;
+};
+
 export default {
   generateStyleValue,
+  getColorValue,
 };

@@ -35,6 +35,7 @@ const DefaultColors = {
   greyColor: "#d9d9d9",
   greyLight: "#f2f2f2",
   grayLight: "#f2f2f2",
+
 };
 
 export type ColorKeyType = keyof typeof DefaultColors | "transparent";
