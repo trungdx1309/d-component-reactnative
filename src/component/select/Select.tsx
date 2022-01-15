@@ -306,7 +306,7 @@ const Select: React.FC<ISelectProps> = ({
           {showSearch && (
             <InputSearch
               useLightColor
-              className="w-100 mt-2"
+              className="w-100 mt-2 px-3"
               variant="outline"
               {...inputSearchProps}
               onChangeText={handleChangeTextSearch}

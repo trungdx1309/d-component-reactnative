@@ -27,15 +27,19 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         variant="standard"
         className="my-2"
         label="Input Standard"
+        color="red"
+        colorFocus="pink"
+        colorDark="yellow"
         onPressIcon={() => {}}
         placeholder="Input Standard"
-        error="Error Test Input"
+        // error="Error Test Input"
       />
 
       <InputText
         variant="rounded"
         className="my-2"
         label="Input Rounded"
+        color="red"
         placeholder="Input Rounded"
         onPressIcon={() => {}}
       />
@@ -44,6 +48,8 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         className="my-2"
         onPressIcon={() => {}}
         label="Search Input"
+        colorFocus="pink"
+        colorDark="yellow"
       />
       <InputDate
         label="Date Input Outline"

@@ -12,6 +12,7 @@ import {
 import useKeyBoard from "../../hooks/useKeyboard";
 import { ThemeProps } from "../../interface/iTheme";
 import Colors, { ColorKeyType } from "../../style/constant/AppColors";
+import { getThemeColor } from "../../style/modifier";
 import Sizes from "../../style/size/_size";
 import { getStyleProps } from "../../style/style";
 import Icon from "../icon/Icon";
@@ -24,7 +25,9 @@ export interface IInputTextProps extends TextInputProps, ThemeProps {
   label?: any;
   error?: any;
   height?: number;
-  borderColor?: ColorKeyType;
+  color?: ColorKeyType;
+  colorFocus?: ColorKeyType;
+  colorDark?: ColorKeyType;
   className?: string;
   classNameLabel?: string;
   classNameWrapper?: string;
@@ -74,6 +77,9 @@ const InputText: React.ForwardRefRenderFunction<
     error,
     label,
     height = Sizes.inputHeight,
+    color = "grey",
+    colorFocus = "primary",
+    colorDark,
     className,
     classNameInput,
     classNameWrapper,
@@ -81,18 +87,19 @@ const InputText: React.ForwardRefRenderFunction<
     classNameError,
     style,
     styleInput,
+    iconName,
     onBlur,
     onFocus,
-    iconName,
     onPressIcon,
-    useKeyboardAvoidingView,
     colorDarkMode,
     useLightColor = true,
+    useKeyboardAvoidingView,
     ...rest
   },
   ref
 ) => {
-  const isDarkMode = useColorScheme() === "dark";
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === "dark";
   const [focusing, setFocusing] = useState(false);
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
@@ -110,10 +117,12 @@ const InputText: React.ForwardRefRenderFunction<
     "flex-center-y justify-content-center",
     {
       border: hasBorder,
+      [`border-${color}`]: hasBorder,
       "border-bottom-1": variant === "standard",
       "rounded-pill": variant === "pill",
       "rounded-1": variant === "rounded",
-      "border-primary": focusing,
+      [`border-${colorFocus}`]: focusing,
+      [`border-${colorDark}`]: focusing && isDarkMode && !!colorDark,
       "border-error": !!error,
       "px-1": variant === "pill",
     },
@@ -182,10 +191,14 @@ const InputText: React.ForwardRefRenderFunction<
               focusing
                 ? error
                   ? "error"
-                  : "primary"
+                  : getThemeColor({
+                      colorScheme,
+                      colorLightMode: colorFocus,
+                      colorDarkMode: colorDark || colorFocus,
+                    })
                 : error
                 ? "error"
-                : "grey"
+                : color
             }
             type="material"
             size={20}
