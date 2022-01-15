@@ -9,6 +9,7 @@ import Button from "../button/Button";
 import Icon from "../icon/Icon";
 import InputSearch, { IInputSearchProps } from "../input/InputSearch";
 import Text from "../text/Text";
+import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
 
 export interface IHeaderProps extends ThemeProps {
@@ -118,12 +119,12 @@ const Header: React.FC<IHeaderProps> = ({
       );
     }
     return (
-      <Icon
-        name={leftIcon}
-        color={getTextColor()}
-        className="px-0"
+      <TouchableOpacity
         onPress={onLeftPress}
-      />
+        className="p-1 rounded-pill align-items-center justify-content-center"
+      >
+        <Icon name={leftIcon} color={getTextColor()} className="px-0" />
+      </TouchableOpacity>
     );
   };
 
@@ -170,12 +171,12 @@ const Header: React.FC<IHeaderProps> = ({
       );
     }
     return (
-      <Icon
-        name={rightIcon}
-        color={getTextColor()}
-        className="px-0"
+      <TouchableOpacity
         onPress={onRightPress}
-      />
+        className="p-1 rounded-pill align-items-center justify-content-center"
+      >
+        <Icon name={rightIcon} color={getTextColor()} className="px-0" />
+      </TouchableOpacity>
     );
   };
 
