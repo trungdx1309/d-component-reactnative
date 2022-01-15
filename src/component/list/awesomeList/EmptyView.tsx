@@ -1,7 +1,10 @@
 /* eslint-disable react/sort-comp */
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator } from "react-native";
+import Text from "../../text/Text";
+import TouchableOpacity from "../../view/TouchableOpacity";
+import View from "../../view/View";
 import AwesomeListMode from "./AwesomeListMode";
 import AwesomeListStyle from "./AwesomeListStyle";
 
