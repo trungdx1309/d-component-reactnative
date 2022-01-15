@@ -120,6 +120,7 @@ const Header: React.FC<IHeaderProps> = ({
     }
     return (
       <TouchableOpacity
+        colorDarkMode="transparent"
         onPress={onLeftPress}
         className="p-1 rounded-pill align-items-center justify-content-center"
       >
@@ -172,6 +173,7 @@ const Header: React.FC<IHeaderProps> = ({
     }
     return (
       <TouchableOpacity
+        colorDarkMode="transparent"
         onPress={onRightPress}
         className="p-1 rounded-pill align-items-center justify-content-center"
       >
