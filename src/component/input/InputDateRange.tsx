@@ -1,18 +1,18 @@
+import ClassNames from "classnames";
 import React, {
   ElementRef,
   forwardRef,
   useImperativeHandle,
   useRef,
 } from "react";
-import ClassNames from "classnames";
-import _ from "lodash";
-import { ViewStyle } from "react-native";
+import { useColorScheme, ViewStyle } from "react-native";
+import { getThemeColor } from "../../style/modifier";
+import TimeUtils from "../../utils/TimeUtils";
+import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import View from "../view/View";
 import InputDate, { IInputDateProps } from "./InputDate";
 import { InputErrorView } from "./InputText";
-import Icon from "../icon/Icon";
-import TimeUtils from "../../utils/TimeUtils";
 
 export interface IInputDateRangeProps
   extends Omit<IInputDateProps, "value" | "onChange"> {
@@ -48,6 +48,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
   },
   ref
 ) => {
+  const colorScheme = useColorScheme();
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
   const labelClass = ClassNames(
@@ -108,7 +109,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
         <Icon
           name="arrow-forward"
           className="mx-2"
-          color={_.isEmpty(value) ? "gray" : undefined}
+          color={value?.length === 0 ? "gray" : getThemeColor({ colorScheme })}
         />
         <InputDate
           variant={variant}

@@ -13,6 +13,7 @@ import {
   StyleSheet,
   // View,
 } from "react-native";
+import { ThemeProps } from "../../../interface/iTheme";
 import Text from "../../text/Text";
 import View from "../../view/View";
 import AwesomeListMode from "./AwesomeListMode";
@@ -23,6 +24,11 @@ import PagingView from "./PagingView";
 
 const DEFAULT_PAGE_SIZE = 20;
 
+export interface IPaginationProps {
+  pageIndex: number;
+  pageSize: number;
+}
+
 //@ts-ignore
 export interface IAwesomeListProps<T>
   extends Omit<
@@ -32,11 +38,12 @@ export interface IAwesomeListProps<T>
     Omit<
       Partial<SectionListProps<T>>,
       "data" | "getItemLayout" | "viewabilityConfig"
-    > {
+    >,
+    ThemeProps {
   containerStyle?: ViewStyle;
   listStyle?: ViewStyle;
   emptyViewStyle?: ViewStyle;
-  source: (props: { pageIndex: number; pageSize: number }) => any;
+  source: (props: IPaginationProps) => any;
   keyExtractor?: (props: any, index: number) => any;
   type?: string;
   renderSeparator?: () => SectionListProps<T>["ItemSeparatorComponent"];
@@ -387,11 +394,18 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
       transformer,
       data,
       numColumns,
+      colorDarkMode,
+      useLightColor,
       ...rest
     } = this.props;
 
     return (
-      <View className={className} style={style}>
+      <View
+        className={className}
+        style={style}
+        colorDarkMode={colorDarkMode}
+        useLightColor={useLightColor}
+      >
         {this.isSectionsList() ? (
           <SectionList
             style={listStyle}

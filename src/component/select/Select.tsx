@@ -1,32 +1,36 @@
-import React, { useEffect, useMemo, useState } from "react";
 import ClassNames from "classnames";
 import _ from "lodash";
+import React, { ElementRef, useEffect, useMemo, useRef, useState } from "react";
 import { ViewStyle } from "react-native";
+import Sizes from "../../style/size/_size";
+import Button from "../button/Button";
+import CheckBox from "../checkbox/CheckBox";
+import Icon from "../icon/Icon";
+import InputSearch, { IInputSearchProps } from "../input/InputSearch";
+import { InputErrorView } from "../input/InputText";
+import Chip from "../items/Chip";
 import AwesomeList, {
   IAwesomeListProps,
+  IPaginationProps,
 } from "../list/awesomeList/AwesomeList";
+import Modal from "../modal/Modal";
+import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
-import Text from "../text/Text";
-import Modal from "../modal/Modal";
-import Icon from "../icon/Icon";
-import Chip from "../items/Chip";
-import CheckBox from "../checkbox/CheckBox";
-import Button from "../button/Button";
-import { InputErrorView } from "../input/InputText";
-import Sizes from "../../style/size/_size";
+
+export interface ISelectSourceProps extends IPaginationProps {
+  search?: string;
+}
 
 export interface ISelectProps
   extends Partial<
-    Pick<
-      IAwesomeListProps<any>,
-      "source" | "transformer" | "keyExtractor" | "isPaging"
-    >
+    Pick<IAwesomeListProps<any>, "transformer" | "keyExtractor" | "isPaging">
   > {
   variant?: "standard" | "outline" | "rounded" | "pill" | "trans";
   label?: any;
   placeholder?: string;
   selectText?: string;
+  clearText?: string;
   error?: any;
   height?: number;
   className?: string;
@@ -38,6 +42,7 @@ export interface ISelectProps
   styleContent?: ViewStyle;
   styleList?: ViewStyle;
   value?: any; // is Object if multiple = false and Array if multiple = true
+  source?: (props: ISelectSourceProps) => any;
   onChange?: (props: any) => any;
   getLabel?: (props: any) => any;
   getValue?: (props: any) => any;
@@ -55,6 +60,9 @@ export interface ISelectProps
   quickSelect?: boolean;
   quickRemove?: boolean;
   disabled?: boolean;
+  // input search this.props.
+  showSearch?: boolean;
+  inputSearchProps?: IInputSearchProps;
 }
 
 const Select: React.FC<ISelectProps> = ({
@@ -63,6 +71,7 @@ const Select: React.FC<ISelectProps> = ({
   label,
   disabled,
   selectText = "Select",
+  clearText = "Clear",
   placeholder,
   iconName = "keyboard-arrow-right",
   className,
@@ -84,7 +93,11 @@ const Select: React.FC<ISelectProps> = ({
   quickSelect,
   quickRemove,
   isPaging,
+  showSearch,
+  inputSearchProps = {},
 }) => {
+  const listRef = useRef<ElementRef<typeof AwesomeList>>(null);
+
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
   const containerClass = ClassNames(`w-100`, className);
@@ -108,18 +121,30 @@ const Select: React.FC<ISelectProps> = ({
     },
     classNameError
   );
+
   const inputHeight = useMemo(() => {
     if (multiple && !_.isEmpty(value)) {
       return undefined;
     }
     return height;
   }, [value, multiple, height]);
+
   const [openModal, setOpenModal] = useState(false);
   const [selectingValue, setSelectingValue] = useState<any>(value);
+  const [textSearch, setTextSearch] = useState<string>();
 
   useEffect(() => {
     setSelectingValue(value);
   }, [openModal]);
+
+  const refreshList = () => {
+    return listRef.current && listRef.current.refresh();
+  };
+
+  const handleChangeTextSearch = _.debounce((text) => {
+    setTextSearch(text);
+    refreshList();
+  }, 300);
 
   const checkSelectedItem = (item: any): boolean => {
     let isSelected = false;
@@ -231,7 +256,7 @@ const Select: React.FC<ISelectProps> = ({
             height={20}
             onPress={() => setSelectingValue([])}
           >
-            Clear
+            {clearText}
           </Button>
         </View>
       );
@@ -278,9 +303,25 @@ const Select: React.FC<ISelectProps> = ({
               {selectText}
             </Button>
           )}
+          {showSearch && (
+            <InputSearch
+              useLightColor
+              className="w-100 mt-2"
+              variant="outline"
+              {...inputSearchProps}
+              onChangeText={handleChangeTextSearch}
+            />
+          )}
           <AwesomeList
+            ref={listRef}
             isPaging={isPaging}
-            source={source}
+            source={(paging) => {
+              const payload: ISelectSourceProps = { ...paging };
+              if (textSearch) {
+                payload.search = textSearch;
+              }
+              return source && source(payload);
+            }}
             transformer={transformer}
             renderItem={renderSelectItem}
             keyExtractor={keyExtractor}

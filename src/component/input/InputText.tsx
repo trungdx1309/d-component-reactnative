@@ -1,24 +1,22 @@
 import ClassNames from "classnames";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import {
+  Platform,
   StyleProp,
   TextInput as RNTextInput,
   TextInputProps,
-  TouchableOpacity,
-  ViewStyle,
   TextStyle,
   useColorScheme,
-  Platform,
-  KeyboardAvoidingView,
+  ViewStyle,
 } from "react-native";
-import Text from "../text/Text";
-import View from "../view/View";
-import { getStyleProps } from "../../style/style";
-import Icon from "../icon/Icon";
-import Colors from "../../style/constant/AppColors";
-import Sizes from "../../style/size/_size";
 import useKeyBoard from "../../hooks/useKeyboard";
 import { ThemeProps } from "../../interface/iTheme";
+import Colors, { ColorKeyType } from "../../style/constant/AppColors";
+import Sizes from "../../style/size/_size";
+import { getStyleProps } from "../../style/style";
+import Icon from "../icon/Icon";
+import Text from "../text/Text";
+import View from "../view/View";
 
 const { light } = Colors;
 export interface IInputTextProps extends TextInputProps, ThemeProps {
@@ -26,6 +24,7 @@ export interface IInputTextProps extends TextInputProps, ThemeProps {
   label?: any;
   error?: any;
   height?: number;
+  borderColor?: ColorKeyType;
   className?: string;
   classNameLabel?: string;
   classNameWrapper?: string;

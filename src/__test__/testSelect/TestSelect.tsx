@@ -21,12 +21,12 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
         transformer={(res) => SELECT_DATA}
         getLabel={(item) => item?.label}
         quickSelect
-        multiple
         value={selectValue}
         onChange={(v) => setSelectValue(v)}
         quickRemove
       />
       <Select
+        showSearch
         label="Select"
         placeholder="Placeholder"
         variant="outline"
@@ -35,7 +35,8 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
         getLabel={(item) => item?.label}
         value={singleValue}
         onChange={(v) => setSingleValue(v)}
-        quickSelect
+        multiple
+        // quickSelect
       />
     </ScrollView>
   );

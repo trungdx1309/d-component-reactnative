@@ -1,16 +1,16 @@
 import ClassNames from "classnames";
-import React, { useMemo, useState, useImperativeHandle } from "react";
+import React, { useImperativeHandle, useMemo, useState } from "react";
+import { useColorScheme } from "react-native";
 import DatePicker, { DatePickerProps } from "react-native-date-picker";
 import _ from "lodash";
-import Colors from "../../style/color/_color";
+import { getThemeColor } from "../../style/modifier";
 import Sizes from "../../style/size/_size";
+import TimeUtils from "../../utils/TimeUtils";
+import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
 import { InputErrorView } from "./InputText";
-import Icon from "../icon/Icon";
-import TimeUtils from "../../utils/TimeUtils";
-import { useColorScheme } from "react-native";
 
 export type TDateFormat =
   | "DD/MM/YYYY HH:mm"
@@ -83,7 +83,8 @@ const InputDate: React.ForwardRefRenderFunction<
   },
   ref
 ) => {
-  const isDarkMode = useColorScheme() === "dark";
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === "dark";
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
   const wrapperClass = ClassNames(
@@ -108,6 +109,7 @@ const InputDate: React.ForwardRefRenderFunction<
     "rounded-pill": variant === "pill",
     "rounded-1": variant === "rounded",
     "border-error": !!error,
+    [`border-${getThemeColor({ colorScheme })}`]: !!value,
   });
 
   const errorClass = ClassNames(
