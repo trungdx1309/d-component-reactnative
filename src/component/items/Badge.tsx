@@ -1,12 +1,13 @@
 import ClassNames from "classnames";
 import React, { useMemo } from "react";
 import { ViewStyle } from "react-native";
+import { ThemeProps } from "../../interface/iTheme";
 import { ColorKeyType } from "../../style/constant/AppColors";
 import { IAvatarProps } from "../avatar/Avatar";
 import Icon from "../icon/Icon";
 import View from "../view/View";
 
-export interface IBadgeProps {
+export interface IBadgeProps extends ThemeProps {
   variant?: "dot" | "icon";
   iconName?: string;
   color?: ColorKeyType;
@@ -26,6 +27,8 @@ const Badge: React.FC<IBadgeProps> = ({
   variant = "dot",
   iconName = "backup",
   color = "primary",
+  colorDarkMode = "transparent",
+  useLightColor,
   size = "small",
   position = "top-right",
   iconSize = 10,
@@ -81,7 +84,12 @@ const Badge: React.FC<IBadgeProps> = ({
   };
 
   return (
-    <View className={wrapperClass} style={style}>
+    <View
+      className={wrapperClass}
+      style={style}
+      colorDarkMode={colorDarkMode}
+      useLightColor={useLightColor}
+    >
       {children}
       {renderBadge()}
     </View>
