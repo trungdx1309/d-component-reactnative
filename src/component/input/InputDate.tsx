@@ -156,7 +156,9 @@ const InputDate: React.ForwardRefRenderFunction<
       }
       return customIcon;
     }
-    return <Icon name={iconName} color={!value ? "gray" : undefined} />;
+    return (
+      <Icon name={iconName} color={!value ? "gray" : undefined} size={20} />
+    );
   };
 
   const renderContent = () => {

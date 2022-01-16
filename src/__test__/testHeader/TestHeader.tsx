@@ -59,7 +59,7 @@ const TestHeader: React.FC<ITestHeaderProps> = ({ id }) => {
         onRightPress={() => {}}
         customRight={
           <View className="flex-center-y bg-transparent">
-            <Icon name="filter-list" className="mr-2" onPress={() => {}} />
+            <Icon name="filter-list" classNameWrapper="mr-2" onPress={() => {}} />
             <Icon name="explore" />
           </View>
         }

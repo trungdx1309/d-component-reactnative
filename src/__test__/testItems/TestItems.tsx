@@ -14,7 +14,7 @@ export interface ITestItemsProps {
 const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
   const renderRow = (label: string, component: any) => {
     return (
-      <View className="flex-center-y">
+      <View className="flex-center-y my-2">
         <Text className="h5">{label} : </Text>
         {component}
       </View>
@@ -22,6 +22,7 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
   };
   return (
     <ScrollView className="my-4 w-100">
+      <Text className="label font-weight-bold">Badge</Text>
       {renderRow(
         "Size: xx-small Position: top-right",
         <Badge size="xx-large" variant="icon">
@@ -45,6 +46,11 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
         <Badge size="small" position="bottom-left">
           <Icon name="filter" className="my-2" />
         </Badge>
+      )}
+      <Text className="label font-weight-bold">Icon</Text>
+      {renderRow(
+        "Pressable Icon",
+        <Icon name="arrow-back" onPress={() => {}} size={25} />
       )}
     </ScrollView>
   );

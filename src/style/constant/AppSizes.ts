@@ -12,7 +12,7 @@ const DefaultSize = {
   screenHeight: DeviceInfo.isTablet() && height > width ? width : height,
   screenWidth: DeviceInfo.isTablet() && height > width ? height : width,
 
-  iconSize: 20,
+  iconSize: 25,
   inputHeight: 30,
   buttonHeight: 30,
 

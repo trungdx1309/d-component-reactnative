@@ -26,6 +26,8 @@ export interface IHeaderProps extends ThemeProps {
   theme?: ColorKeyType;
   className?: string;
   classNameSearch?: string;
+  classNameRight?: string;
+  classNameLeft?: string;
   showSearch?: boolean;
   size?: "medium" | "large" | "small";
   style?: StyleProp<ViewStyle>;
@@ -50,6 +52,8 @@ const Header: React.FC<IHeaderProps> = ({
   size = "medium",
   className,
   classNameSearch,
+  classNameLeft,
+  classNameRight,
   showSearch,
   colorDarkMode,
   style,
@@ -77,6 +81,9 @@ const Header: React.FC<IHeaderProps> = ({
     h4: size === "medium",
     h3: size === "large",
   });
+
+  const leftClass = ClassNames("px-0", classNameLeft);
+  const rightClass = ClassNames("px-0", classNameRight);
 
   const headerStyle: Array<any> = [];
 
@@ -109,7 +116,7 @@ const Header: React.FC<IHeaderProps> = ({
     if (leftText) {
       return (
         <Button
-          className="px-0"
+          className={leftClass}
           height="auto"
           variant="trans"
           color={getTextColor()}
@@ -119,13 +126,12 @@ const Header: React.FC<IHeaderProps> = ({
       );
     }
     return (
-      <TouchableOpacity
-        colorDarkMode="transparent"
+      <Icon
+        name={leftIcon}
+        color={getTextColor()}
+        className={leftClass}
         onPress={onLeftPress}
-        className="p-1 rounded-pill align-items-center justify-content-center"
-      >
-        <Icon name={leftIcon} color={getTextColor()} className="px-0" />
-      </TouchableOpacity>
+      />
     );
   };
 
@@ -162,7 +168,7 @@ const Header: React.FC<IHeaderProps> = ({
     if (rightText) {
       return (
         <Button
-          className="px-0"
+          className={rightClass}
           height="auto"
           variant="trans"
           color={getTextColor()}
@@ -172,13 +178,12 @@ const Header: React.FC<IHeaderProps> = ({
       );
     }
     return (
-      <TouchableOpacity
-        colorDarkMode="transparent"
+      <Icon
+        name={rightIcon}
+        color={getTextColor()}
+        className={rightClass}
         onPress={onRightPress}
-        className="p-1 rounded-pill align-items-center justify-content-center"
-      >
-        <Icon name={rightIcon} color={getTextColor()} className="px-0" />
-      </TouchableOpacity>
+      />
     );
   };
 
