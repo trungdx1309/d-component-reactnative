@@ -14,6 +14,7 @@ export interface IChipProps {
   size?: "small" | "medium" | "large";
   iconName?: string;
   onPressIcon?: any;
+  variant?: "default" | "rounded" | "pill";
 }
 
 const Chip: React.FC<IChipProps> = ({
@@ -21,14 +22,24 @@ const Chip: React.FC<IChipProps> = ({
   className,
   color = "primary",
   size = "small",
+  variant = "default",
   iconName,
   onPressIcon,
 }) => {
   const wrapperClass = ClassNames(
     `bg-${color} flex-center-y`,
-    { "px-2 py-1": size === "small" },
+    {
+      "px-2 py-1": size === "small" || size === "medium",
+      "px-4 py-2": size === "large",
+      "rounded-3": variant === "rounded",
+      "rounded-pill": variant === "pill",
+    },
     className
   );
+  const labelClass = ClassNames({
+    h5: size === "small",
+    h4: size === "medium" || size === "large",
+  });
   const chipColor = getColorValue(color);
   const textColor = isDark(chipColor) ? "white" : "dark";
   const iconSize = useMemo(() => {
@@ -45,7 +56,7 @@ const Chip: React.FC<IChipProps> = ({
   return (
     <View className={wrapperClass}>
       {label && (
-        <Text className="h5" style={{ color: textColor }}>
+        <Text className={labelClass} style={{ color: textColor }}>
           {label}
         </Text>
       )}
@@ -54,8 +65,8 @@ const Chip: React.FC<IChipProps> = ({
           name={iconName}
           color={textColor}
           size={iconSize}
-          className="ml-1"
           onPress={onPressIcon}
+          classNameWrapper="ml-1"
         />
       )}
     </View>

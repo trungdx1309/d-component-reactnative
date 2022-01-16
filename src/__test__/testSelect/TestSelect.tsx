@@ -23,7 +23,6 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
         quickSelect
         value={selectValue}
         onChange={(v) => setSelectValue(v)}
-        quickRemove
       />
       <Select
         showSearch
@@ -36,6 +35,7 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
         value={singleValue}
         onChange={(v) => setSingleValue(v)}
         multiple
+        quickRemove
         // quickSelect
       />
     </ScrollView>

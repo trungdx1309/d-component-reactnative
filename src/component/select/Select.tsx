@@ -17,6 +17,7 @@ import Modal from "../modal/Modal";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
+import { IChipProps } from "../../../dist/component/chip/Chip";
 
 export interface ISelectSourceProps extends IPaginationProps {
   search?: string;
@@ -33,6 +34,7 @@ export interface ISelectProps
   clearText?: string;
   error?: any;
   height?: number;
+  buttonSelectHeight?: number;
   className?: string;
   classNameLabel?: string;
   classNameContent?: string;
@@ -60,13 +62,17 @@ export interface ISelectProps
   quickSelect?: boolean;
   quickRemove?: boolean;
   disabled?: boolean;
-  // input search this.props.
+  // input search props.
   showSearch?: boolean;
   inputSearchProps?: IInputSearchProps;
+
+  listProps?: IAwesomeListProps<any>;
+  chipProps?: IChipProps;
 }
 
 const Select: React.FC<ISelectProps> = ({
   variant = "standard",
+  buttonSelectHeight = 75,
   height = Sizes.inputHeight,
   label,
   disabled,
@@ -95,6 +101,8 @@ const Select: React.FC<ISelectProps> = ({
   isPaging,
   showSearch,
   inputSearchProps = {},
+  listProps = {},
+  chipProps = {},
 }) => {
   const listRef = useRef<ElementRef<typeof AwesomeList>>(null);
 
@@ -210,6 +218,9 @@ const Select: React.FC<ISelectProps> = ({
                   );
                   onChange && onChange(clone);
                 }}
+                size="small"
+                variant="rounded"
+                {...chipProps}
               />
             );
           })}
@@ -297,7 +308,7 @@ const Select: React.FC<ISelectProps> = ({
             <Button
               className="position-absolute bottom-0 w-100 left-0 right-0"
               style={{ zIndex: 10 }}
-              height={50}
+              height={buttonSelectHeight}
               onPress={() => handlePressSelect()}
             >
               {selectText}
@@ -327,6 +338,8 @@ const Select: React.FC<ISelectProps> = ({
             keyExtractor={keyExtractor}
             className="px-3"
             ListFooterComponent={<View style={{ height: 200 }} />}
+            showsVerticalScrollIndicator={false}
+            {...listProps}
           />
         </View>
       </Modal>
