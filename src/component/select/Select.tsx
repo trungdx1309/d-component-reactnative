@@ -8,7 +8,7 @@ import CheckBox from "../checkbox/CheckBox";
 import Icon from "../icon/Icon";
 import InputSearch, { IInputSearchProps } from "../input/InputSearch";
 import { InputErrorView } from "../input/InputText";
-import Chip from "../items/Chip";
+import Chip, { IChipProps } from "../items/Chip";
 import AwesomeList, {
   IAwesomeListProps,
   IPaginationProps,
@@ -17,7 +17,6 @@ import Modal from "../modal/Modal";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
-import { IChipProps } from "../../../dist/component/chip/Chip";
 
 export interface ISelectSourceProps extends IPaginationProps {
   search?: string;
