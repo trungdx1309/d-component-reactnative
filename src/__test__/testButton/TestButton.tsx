@@ -27,6 +27,7 @@ const TestButton: React.FC<ITestButtonProps> = ({ id }) => {
       <Button
         size="medium"
         className="my-2 align-self-start"
+        colorText="red"
         // iconName="refresh"
       >
         Medium

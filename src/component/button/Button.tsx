@@ -23,7 +23,7 @@ export interface IButtonProps
   shape?: "square" | "pill" | "rounded";
   color?: ColorKeyType;
   disableColor?: ColorKeyType;
-  textColor?: string;
+  colorText?: ColorKeyType;
   iconName?: string;
   iconSize?: number;
   suffixIcon?: string;
@@ -52,7 +52,7 @@ const Button: React.FC<IButtonProps> = ({
   disabled,
   style,
   colorDarkMode,
-  textColor,
+  colorText,
   ...rest
 }) => {
   const buttonColor = useMemo(() => {
@@ -146,7 +146,7 @@ const Button: React.FC<IButtonProps> = ({
 
   if (typeof content === "string") {
     mainView = (
-      <Text className={labelClass} color={textColor} numberOfLines={1}>
+      <Text className={labelClass} color={colorText} numberOfLines={1}>
         {content}
       </Text>
     );

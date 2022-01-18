@@ -1,12 +1,13 @@
 import React from "react";
 import { Text as RNText, TextProps, useColorScheme } from "react-native";
 import Colors from "../../style/color/_color";
+import { ColorKeyType } from "../../style/constant/AppColors";
 import { getColorValue } from "../../style/modifier";
 import { getStyleProps } from "../../style/style";
 
 export interface ITextProps extends TextProps {
   className?: string;
-  color?: string;
+  color?: ColorKeyType;
   colorDarkMode?: string;
 }
 
@@ -22,9 +23,13 @@ const Text: React.FC<ITextProps> = ({
   const transStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
   const defaultStyle = {
-    color: color || isDarkMode ? light : undefined,
+    color: isDarkMode ? light : undefined,
   };
   const listStyle = [defaultStyle, transStyle, style];
+  if (color) {
+    const colorValue = getColorValue(color);
+    listStyle.push({ color: colorValue });
+  }
   if (isDarkMode && colorDarkMode) {
     const color = getColorValue(colorDarkMode);
     listStyle.push({ color });
