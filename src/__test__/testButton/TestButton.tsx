@@ -15,7 +15,13 @@ const TestButton: React.FC<ITestButtonProps> = ({ id }) => {
       <Button size="x-large" className="my-2">
         Button X Large
       </Button>
-      <Button size="large" className="my-2 align-self-start" iconName="refresh">
+      <Button
+        size="large"
+        className="my-2 align-self-start"
+        iconName="refresh"
+        disabled
+        disableColor="blueLight"
+      >
         Button Large
       </Button>
       <Button

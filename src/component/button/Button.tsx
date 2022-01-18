@@ -1,14 +1,14 @@
 import ClassNames from "classnames";
 import React, { useMemo } from "react";
-import { TouchableOpacityProps, useColorScheme } from "react-native";
+import { TouchableOpacityProps } from "react-native";
+import { ThemeProps } from "../../interface/iTheme";
 import { isDark } from "../../style/color/_color";
-import Sizes from "../../style/size/_size";
+import { ColorKeyType } from "../../style/constant/AppColors";
 import { getColorValue } from "../../style/modifier";
+import Sizes from "../../style/size/_size";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
-import { ColorKeyType } from "../../style/constant/AppColors";
-import { ThemeProps } from "../../interface/iTheme";
 
 const defaultButtonHeight = Sizes?.buttonHeight ?? 30;
 
@@ -22,6 +22,7 @@ export interface IButtonProps
   variant?: "standard" | "outline" | "trans";
   shape?: "square" | "pill" | "rounded";
   color?: ColorKeyType;
+  disableColor?: ColorKeyType;
   textColor?: string;
   iconName?: string;
   iconSize?: number;
@@ -35,6 +36,7 @@ export interface IButtonProps
 const Button: React.FC<IButtonProps> = ({
   className,
   classNameLabel,
+  disableColor = "disabled",
   color = "primary",
   variant = "standard",
   size = "medium",
@@ -53,10 +55,13 @@ const Button: React.FC<IButtonProps> = ({
   textColor,
   ...rest
 }) => {
-  const isDarkMode = useColorScheme() === "dark";
   const buttonColor = useMemo(() => {
     return getColorValue(color);
   }, [color]);
+
+  const buttonDisableBg = useMemo(() => {
+    return getColorValue(disableColor);
+  }, [disableColor]);
 
   const buttonHeight = useMemo(() => {
     let result: number | string = 10;
@@ -94,9 +99,9 @@ const Button: React.FC<IButtonProps> = ({
   if (style) {
     buttonStyle.push(style);
   }
-
-  const isIconButton =
-    !!iconName || !!suffixIcon || suffixElement || prefixElement;
+  if (buttonDisableBg && disabled) {
+    buttonStyle.push({ backgroundColor: buttonDisableBg });
+  }
 
   const wrapperClass = ClassNames(
     "flex-center-y justify-content-center px-3",
@@ -105,7 +110,6 @@ const Button: React.FC<IButtonProps> = ({
       [`border border-${color}`]: variant === "outline",
       "rounded-pill": shape === "pill",
       "rounded-2": shape === "rounded",
-      "bg-disabled": disabled,
     },
     className
   );
