@@ -23,18 +23,15 @@ export default StyleSheet.create({
   textError: {
     fontSize: 16,
     color: "black",
-    backgroundColor: "white",
   },
   textButtonRetry: {
     fontSize: 16,
     color: "red",
-    backgroundColor: "white",
   },
   buttonRetry: {
     padding: 16,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
   },
   containerListStyle: {
     flex: 1,
