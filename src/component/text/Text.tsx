@@ -8,7 +8,7 @@ import { getStyleProps } from "../../style/style";
 export interface ITextProps extends TextProps {
   className?: string;
   color?: ColorKeyType;
-  colorDarkMode?: string;
+  colorDarkMode?: ColorKeyType;
 }
 
 const { dark, light } = Colors;

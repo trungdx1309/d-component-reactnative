@@ -32,6 +32,7 @@ export interface IInputTextProps extends TextInputProps, ThemeProps {
   classNameLabel?: string;
   classNameWrapper?: string;
   classNameInput?: string;
+  classNameIcon?: string;
   classNameError?: string;
   iconName?: string;
   iconSize?: number;
@@ -83,6 +84,7 @@ const InputText: React.ForwardRefRenderFunction<
     colorDark,
     className,
     classNameInput,
+    classNameIcon,
     classNameWrapper,
     classNameLabel,
     classNameError,
@@ -204,7 +206,7 @@ const InputText: React.ForwardRefRenderFunction<
             }
             type="material"
             size={iconSize}
-            classNameWrapper="mr-1"
+            classNameWrapper={`mr-1 ${classNameIcon}`}
             onPress={onPressIcon}
           />
         )}

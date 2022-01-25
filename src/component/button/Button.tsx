@@ -1,6 +1,6 @@
 import ClassNames from "classnames";
 import React, { useMemo } from "react";
-import { TouchableOpacityProps } from "react-native";
+import { ActivityIndicator, TouchableOpacityProps } from "react-native";
 import { ThemeProps } from "../../interface/iTheme";
 import { isDark } from "../../style/color/_color";
 import { ColorKeyType } from "../../style/constant/AppColors";
@@ -24,6 +24,7 @@ export interface IButtonProps
   color?: ColorKeyType;
   disableColor?: ColorKeyType;
   colorText?: ColorKeyType;
+  colorTexDarkMode?: ColorKeyType;
   iconName?: string;
   iconSize?: number;
   suffixIcon?: string;
@@ -31,6 +32,7 @@ export interface IButtonProps
   prefixElement?: any;
   label?: string;
   height?: number | string;
+  loading?: boolean;
 }
 
 const Button: React.FC<IButtonProps> = ({
@@ -53,6 +55,8 @@ const Button: React.FC<IButtonProps> = ({
   style,
   colorDarkMode,
   colorText,
+  colorTexDarkMode,
+  loading = false,
   ...rest
 }) => {
   const buttonColor = useMemo(() => {
@@ -110,6 +114,7 @@ const Button: React.FC<IButtonProps> = ({
       [`border border-${color}`]: variant === "outline",
       "rounded-pill": shape === "pill",
       "rounded-2": shape === "rounded",
+      "bg-transparent": loading,
     },
     className
   );
@@ -146,7 +151,12 @@ const Button: React.FC<IButtonProps> = ({
 
   if (typeof content === "string") {
     mainView = (
-      <Text className={labelClass} color={colorText} numberOfLines={1}>
+      <Text
+        className={labelClass}
+        color={colorText}
+        numberOfLines={1}
+        colorDarkMode={colorTexDarkMode}
+      >
         {content}
       </Text>
     );
@@ -156,6 +166,9 @@ const Button: React.FC<IButtonProps> = ({
     mainView = content;
   }
 
+  if (loading) {
+    mainView = <ActivityIndicator size="small" />;
+  }
   if (iconName) {
     prefixView = (
       <Icon
@@ -172,12 +185,14 @@ const Button: React.FC<IButtonProps> = ({
       className={wrapperClass}
       style={buttonStyle}
       disabled={disabled}
-      colorDarkMode={variant === "trans" ? "transparent" : colorDarkMode}
+      colorDarkMode={
+        variant === "trans" || loading ? "transparent" : colorDarkMode
+      }
       {...rest}
     >
-      {prefixView}
+      {!loading && prefixView}
       {mainView}
-      {suffixView}
+      {!loading && suffixView}
     </TouchableOpacity>
   );
 };

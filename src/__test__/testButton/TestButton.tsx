@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../component/button/Button";
 import ScrollView from "../../component/view/ScrollView";
 
@@ -7,6 +7,8 @@ export interface ITestButtonProps {
 }
 
 const TestButton: React.FC<ITestButtonProps> = ({ id }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   return (
     <ScrollView className="w-100">
       <Button size="xx-large" className="my-2" colorDarkMode="red">
@@ -19,8 +21,13 @@ const TestButton: React.FC<ITestButtonProps> = ({ id }) => {
         size="large"
         className="my-2 align-self-start"
         iconName="refresh"
-        disabled
-        disableColor="blueLight"
+        // disabled
+        // disableColor="blueLight"
+        loading={loading}
+        onPress={() => {
+          setLoading(true);
+          setInterval(() => setLoading(false), 1500);
+        }}
       >
         Button Large
       </Button>
