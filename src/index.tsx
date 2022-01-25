@@ -13,6 +13,12 @@ export {
 } from "./component/input/InputText";
 
 export type {
+  IInputSearchMethod,
+  IInputSearchProps,
+} from "./component/input/InputSearch";
+export { default as InputSearch } from "./component/input/InputSearch";
+
+export type {
   IInputDateProps,
   IInputDateMethod,
   TDateFormat,
