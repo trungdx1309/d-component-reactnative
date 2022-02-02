@@ -39,6 +39,9 @@ const App = () => {
         renderTabView={renderTabView}
         className="px-3"
         scrollEnabled
+        colorIndicator="pink"
+        colorActiveLabelText="pink"
+        // variant="box"
       />
     );
   };
