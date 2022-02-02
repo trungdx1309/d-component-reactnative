@@ -75,6 +75,7 @@ export interface ITabViewProps
   labelTextColor?: string;
   indicatorColor?: string;
   awesomeListProps?: IAwesomeListProps<any>;
+  getLabel?: (item?: ITabViewRoute) => string;
 }
 export interface ITabViewMethod {}
 
@@ -84,6 +85,7 @@ function TabView(
     source,
     transformer,
     renderItem,
+    getLabel,
     initialIndex = 0,
     dataSource = [],
     onChangeIndex,
@@ -174,6 +176,10 @@ function TabView(
       "bg-primary rounded-pilled": focused,
       "bg-white rounded-pilled": isDarkMode && !focused,
     });
+    let displayLabel = route?.label || route?.title;
+    if (getLabel) {
+      displayLabel = getLabel(route);
+    }
     return (
       <View
         style={[
@@ -193,7 +199,7 @@ function TabView(
           }}
           numberOfLines={1}
         >
-          {route.label || route.title}
+          {displayLabel}
         </Text>
       </View>
     );
