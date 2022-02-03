@@ -197,7 +197,7 @@ function TabView(
       "rounded-pilled": variant === "pilled",
       "rounded-1": variant === "rounded",
     });
-    const textClass = ClassNames("h5 text-center px-2", {
+    const textClass = ClassNames("h4 text-center px-2", {
       "font-weight-bold": !showLabelBgColor && focused,
     });
     let displayLabel = route?.label || route?.title;

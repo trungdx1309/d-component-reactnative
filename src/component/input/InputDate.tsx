@@ -185,6 +185,7 @@ const InputDate: React.ForwardRefRenderFunction<
       <TouchableOpacity
         onPress={() => setOpenDateModal(true)}
         disabled={disabled}
+        colorDarkMode="transparent"
       >
         {renderContent()}
       </TouchableOpacity>
