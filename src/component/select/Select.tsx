@@ -109,7 +109,7 @@ const Select: React.FC<ISelectProps> = ({
     variant === "outline" || variant === "pill" || variant === "rounded";
   const containerClass = ClassNames(`w-100`, className);
   const labelClass = ClassNames(
-    `h5`,
+    `h4`,
     {
       "mb-1": hasBorder,
       //   "font-weight-bold": focusing,

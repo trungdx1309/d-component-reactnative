@@ -6,6 +6,7 @@ import React, {
   useRef,
 } from "react";
 import { useColorScheme, ViewStyle } from "react-native";
+import { ColorKeyType } from "../../style/constant/AppColors";
 import { getThemeColor } from "../../style/modifier";
 import TimeUtils from "../../utils/TimeUtils";
 import Icon from "../icon/Icon";
@@ -22,6 +23,8 @@ export interface IInputDateRangeProps
   endText?: string;
   classNameContent?: string;
   styleContent?: ViewStyle;
+  colorDarkMode?: ColorKeyType;
+  colorDarkModeContent?: ColorKeyType;
 }
 
 export interface IInputDateRangeMethod {}
@@ -44,6 +47,8 @@ const InputDateRange: React.ForwardRefRenderFunction<
     endText = "End",
     style,
     styleContent,
+    colorDarkMode = "transparent",
+    colorDarkModeContent = "transparent",
     ...rest
   },
   ref
@@ -52,7 +57,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
   const labelClass = ClassNames(
-    `h5`,
+    `h4`,
     { "mb-1": hasBorder },
     `${classNameLabel}`
   );
@@ -90,11 +95,12 @@ const InputDateRange: React.ForwardRefRenderFunction<
   };
 
   return (
-    <View className={className} style={style}>
+    <View className={className} style={style} colorDarkMode={colorDarkMode}>
       {label && <Text className={labelClass}>{label}</Text>}
       <View
         className={`flex-center-y ${classNameContent}`}
         style={styleContent}
+        colorDarkMode={colorDarkModeContent}
       >
         <InputDate
           variant={variant}

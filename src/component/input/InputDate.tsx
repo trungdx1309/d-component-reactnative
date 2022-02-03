@@ -92,7 +92,7 @@ const InputDate: React.ForwardRefRenderFunction<
     `${className}`
   );
   const labelClass = ClassNames(
-    `h5`,
+    `h4`,
     { "mb-1": hasBorder },
     `${classNameLabel}`
   );

@@ -96,6 +96,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         value={date}
       />
       <InputDateRange
+        label="Date Input Range"
         value={dateRange}
         onChange={(v = []) => setDateRange(v)}
         mode="datetime"
