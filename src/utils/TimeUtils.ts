@@ -145,6 +145,39 @@ const checkTimeIsBetweenRangeDate = (
   );
 };
 
+function calculatePreciseDifferentTime({
+  from,
+  to,
+}: {
+  from: string | Moment;
+  to: string | Moment;
+}): {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+} {
+  const daysDiff = calculateTimeDifferent(from, to, "day");
+  const hoursDiff = calculateTimeDifferent(from, to, "hour");
+  const minutesDiff = calculateTimeDifferent(from, to, "minute");
+  const secondsDiff = calculateTimeDifferent(from, to, "seconds");
+  const days = daysDiff;
+  let hours = hoursDiff;
+  let minutes = minutesDiff;
+  let seconds = secondsDiff;
+
+  if (hoursDiff >= 24 && daysDiff >= 1) {
+    hours = hoursDiff - days * 24;
+  }
+  if (minutes >= 60) {
+    minutes = minutesDiff - 60 * hoursDiff;
+  }
+  if (seconds >= 60) {
+    seconds = secondsDiff - 60 * minutesDiff;
+  }
+  return { days, hours, minutes, seconds };
+}
+
 export default {
   convertToDefaultInputFormat,
   convertMiliToDateWithFormat,
@@ -159,6 +192,7 @@ export default {
   calculateDayDifferent,
   calculateTimeDifferent,
   convertRangeDateToArray,
+  calculatePreciseDifferentTime,
   MONTH_MILISECOND,
   WEEK_MILISECOND,
   DAY_MILISECOND,
