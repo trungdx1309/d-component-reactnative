@@ -116,12 +116,13 @@ const InputDateRange: React.ForwardRefRenderFunction<
           onChange={(v) => handleChangeStartTime(v)}
           value={value?.[0]}
           placeholder={startText}
-          customInput={(props) => {
-            if (typeof customInput === "function") {
-              return customInput({ ...props, side: "start" });
-            }
-            return customInput;
-          }}
+          customInput={
+            typeof customInput === "function"
+              ? (props) => {
+                  return customInput({ ...props, side: "start" });
+                }
+              : customInput
+          }
           {...rest}
         />
         <Icon
@@ -139,12 +140,13 @@ const InputDateRange: React.ForwardRefRenderFunction<
           value={value?.[1]}
           placeholder={endText}
           ref={endRef}
-          customInput={(props) => {
-            if (typeof customInput === "function") {
-              return customInput({ ...props, side: "end" });
-            }
-            return customInput;
-          }}
+          customInput={
+            typeof customInput === "function"
+              ? (props) => {
+                  return customInput({ ...props, side: "end" });
+                }
+              : customInput
+          }
           {...rest}
         />
       </View>
