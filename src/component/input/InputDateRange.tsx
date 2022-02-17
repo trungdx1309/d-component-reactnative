@@ -12,8 +12,12 @@ import TimeUtils from "../../utils/TimeUtils";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import View from "../view/View";
-import InputDate, { IInputDateProps } from "./InputDate";
+import InputDate, { ICustomInputProps, IInputDateProps } from "./InputDate";
 import { InputErrorView } from "./InputText";
+
+export interface IRangeDateCustomInputProps extends ICustomInputProps {
+  side?: "start" | "end";
+}
 
 export interface IInputDateRangeProps
   extends Omit<IInputDateProps, "value" | "onChange"> {
@@ -25,6 +29,7 @@ export interface IInputDateRangeProps
   styleContent?: ViewStyle;
   colorDarkMode?: ColorKeyType;
   colorDarkModeContent?: ColorKeyType;
+  customInput?: ((props: IRangeDateCustomInputProps) => Element) | Element;
 }
 
 export interface IInputDateRangeMethod {}
@@ -49,6 +54,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
     styleContent,
     colorDarkMode = "transparent",
     colorDarkModeContent = "transparent",
+    customInput,
     ...rest
   },
   ref
@@ -110,6 +116,12 @@ const InputDateRange: React.ForwardRefRenderFunction<
           onChange={(v) => handleChangeStartTime(v)}
           value={value?.[0]}
           placeholder={startText}
+          customInput={(props) => {
+            if (typeof customInput === "function") {
+              return customInput({ ...props, side: "start" });
+            }
+            return customInput;
+          }}
           {...rest}
         />
         <Icon
@@ -127,6 +139,12 @@ const InputDateRange: React.ForwardRefRenderFunction<
           value={value?.[1]}
           placeholder={endText}
           ref={endRef}
+          customInput={(props) => {
+            if (typeof customInput === "function") {
+              return customInput({ ...props, side: "end" });
+            }
+            return customInput;
+          }}
           {...rest}
         />
       </View>

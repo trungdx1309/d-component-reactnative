@@ -180,7 +180,7 @@ const InputDate: React.ForwardRefRenderFunction<
   };
 
   return (
-    <View className={wrapperClass}>
+    <View className={wrapperClass} colorDarkMode="transparent">
       {label && <Text className={labelClass}>{label}</Text>}
       <TouchableOpacity
         onPress={() => setOpenDateModal(true)}
