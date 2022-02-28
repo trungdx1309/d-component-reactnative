@@ -60,6 +60,7 @@ export interface IAwesomeListProps<T>
   pageSize?: number;
   className?: string;
   renderItem: SectionListProps<T>["renderItem"];
+  renderFooterComponent: ((props: { loading: boolean }) => Element) | Element;
   data?: any;
 }
 
@@ -396,6 +397,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
       numColumns,
       colorDarkMode,
       useLightColor,
+      renderFooterComponent,
       ...rest
     } = this.props;
 
@@ -437,12 +439,22 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
             refreshing={this.state.refreshing}
             onRefresh={() => this.onRefresh()}
             onEndReached={() => this.onEndReached()}
-            ListFooterComponent={() => (
-              <PagingView
-                mode={this.state.pagingMode}
-                retry={() => this.onRetry()}
-              />
-            )}
+            ListFooterComponent={() => {
+              if (renderFooterComponent) {
+                if (typeof renderFooterComponent === "function") {
+                  return renderFooterComponent({
+                    loading: this.state.refreshing,
+                  });
+                }
+                return renderFooterComponent;
+              }
+              return (
+                <PagingView
+                  mode={this.state.pagingMode}
+                  retry={() => this.onRetry()}
+                />
+              );
+            }}
             onEndReachedThreshold={0.5}
             ListHeaderComponent={listHeaderComponent}
             numColumns={numColumns}
