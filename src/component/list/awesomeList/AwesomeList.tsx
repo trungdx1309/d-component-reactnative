@@ -60,7 +60,7 @@ export interface IAwesomeListProps<T>
   pageSize?: number;
   className?: string;
   renderItem: SectionListProps<T>["renderItem"];
-  renderFooterComponent: ((props: { loading: boolean }) => Element) | Element;
+  renderFooterComponent?: ((props: { loading: boolean }) => Element) | Element;
   data?: any;
 }
 
@@ -444,9 +444,9 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
                 if (typeof renderFooterComponent === "function") {
                   return renderFooterComponent({
                     loading: this.state.refreshing,
-                  });
+                  }) as any;
                 }
-                return renderFooterComponent;
+                return renderFooterComponent as any;
               }
               return (
                 <PagingView
