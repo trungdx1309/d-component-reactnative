@@ -1,7 +1,7 @@
 import ClassNames from "classnames";
 import _ from "lodash";
 import React, { ElementRef, useEffect, useMemo, useRef, useState } from "react";
-import { ViewStyle } from "react-native";
+import { Platform, ViewStyle } from "react-native";
 import Sizes from "../../style/size/_size";
 import Button from "../button/Button";
 import CheckBox from "../checkbox/CheckBox";
@@ -71,7 +71,7 @@ export interface ISelectProps
 
 const Select: React.FC<ISelectProps> = ({
   variant = "standard",
-  buttonSelectHeight = 75,
+  buttonSelectHeight = Platform.OS === "android" ? 100 : 75,
   height = Sizes.inputHeight,
   label,
   disabled,
@@ -309,6 +309,14 @@ const Select: React.FC<ISelectProps> = ({
               style={{ zIndex: 10 }}
               height={buttonSelectHeight}
               onPress={() => handlePressSelect()}
+              styleLabel={
+                Platform.OS === "android"
+                  ? {
+                      height: 100,
+                      paddingVertical: 20,
+                    }
+                  : undefined
+              }
             >
               {selectText}
             </Button>

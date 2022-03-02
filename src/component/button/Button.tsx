@@ -1,6 +1,10 @@
 import ClassNames from "classnames";
 import React, { useMemo } from "react";
-import { ActivityIndicator, TouchableOpacityProps } from "react-native";
+import {
+  ActivityIndicator,
+  TextStyle,
+  TouchableOpacityProps,
+} from "react-native";
 import { ThemeProps } from "../../interface/iTheme";
 import { isDark } from "../../style/color/_color";
 import { ColorKeyType } from "../../style/constant/AppColors";
@@ -33,6 +37,7 @@ export interface IButtonProps
   label?: string;
   height?: number | string;
   loading?: boolean;
+  styleLabel?: TextStyle;
 }
 
 const Button: React.FC<IButtonProps> = ({
@@ -53,6 +58,7 @@ const Button: React.FC<IButtonProps> = ({
   label,
   disabled,
   style,
+  styleLabel,
   colorDarkMode,
   colorText,
   colorTexDarkMode,
@@ -156,6 +162,7 @@ const Button: React.FC<IButtonProps> = ({
         color={colorText}
         numberOfLines={1}
         colorDarkMode={colorTexDarkMode}
+        style={styleLabel}
       >
         {content}
       </Text>
