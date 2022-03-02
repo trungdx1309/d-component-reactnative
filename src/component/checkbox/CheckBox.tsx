@@ -1,7 +1,7 @@
 import ClassNames from "classnames";
 import React from "react";
 import { TextStyle, ViewStyle } from "react-native";
-import { ColorKeyType } from "../../../dist";
+import { ColorKeyType } from "../../style/constant/AppColors";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
