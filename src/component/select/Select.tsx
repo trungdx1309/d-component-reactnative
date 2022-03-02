@@ -249,7 +249,7 @@ const Select: React.FC<ISelectProps> = ({
         className={selectItemClass}
       >
         <View className="flex-1">{content}</View>
-        <CheckBox checked={selected} />
+        <CheckBox checked={selected} pressEnable={false} />
       </TouchableOpacity>
     );
   };
