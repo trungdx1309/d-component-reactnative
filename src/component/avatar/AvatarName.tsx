@@ -2,7 +2,7 @@ import ClassNames from "classnames";
 import React from "react";
 import { TextStyle, ViewStyle } from "react-native";
 import { IButtonProps } from "../button/Button";
-import Text from "../text/Text";
+import Text, { ITextProps } from "../text/Text";
 import View from "../view/View";
 import Avatar, { IAvatarProps } from "./Avatar";
 import { ThemeProps } from "../../interface/iTheme";
@@ -28,6 +28,7 @@ export interface IAvatarNameProps extends ThemeProps {
   styleWrapperText?: ViewStyle;
   styleNameText?: TextStyle;
   styleSubText?: TextStyle;
+  textNameProps?: ITextProps;
 }
 
 const AvatarName: React.FC<IAvatarNameProps> = ({
@@ -45,6 +46,7 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
   classNameSubText,
   color,
   colorDarkMode,
+  textNameProps = {},
 }) => {
   const { avatar, fullName, name = "" } = user;
   let displayName = name;
@@ -99,6 +101,7 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
           className={`${nameTextClass}`}
           style={styleNameText}
           colorDarkMode={colorDarkMode}
+          {...textNameProps}
         >
           {displayName}
         </Text>

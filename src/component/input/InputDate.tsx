@@ -1,6 +1,6 @@
 import ClassNames from "classnames";
 import React, { useImperativeHandle, useMemo, useState } from "react";
-import { useColorScheme } from "react-native";
+import { useColorScheme, ViewStyle } from "react-native";
 import DatePicker, { DatePickerProps } from "react-native-date-picker";
 import _ from "lodash";
 import { getThemeColor } from "../../style/modifier";
@@ -46,6 +46,7 @@ export interface IInputDateProps
   customIcon?: ((value: any) => Element) | Element;
   customInput?: ((props: ICustomInputProps) => Element) | Element;
   disabled?: boolean;
+  styleDatePicker?: ViewStyle;
 }
 
 export interface IInputDateMethod {
@@ -71,6 +72,7 @@ const InputDate: React.ForwardRefRenderFunction<
     variant = "standard˝",
     format,
     style,
+    styleDatePicker,
     placeholder,
     error,
     showIcon = true,
@@ -180,7 +182,7 @@ const InputDate: React.ForwardRefRenderFunction<
   };
 
   return (
-    <View className={wrapperClass} colorDarkMode="transparent">
+    <View className={wrapperClass} colorDarkMode="transparent" style={style}>
       {label && <Text className={labelClass}>{label}</Text>}
       <TouchableOpacity
         onPress={() => setOpenDateModal(true)}
@@ -202,7 +204,7 @@ const InputDate: React.ForwardRefRenderFunction<
         onDateChange={onChange as any}
         cancelText={cancelText}
         confirmText={confirmText}
-        style={style}
+        style={styleDatePicker}
         focusable
         {...rest}
         mode={mode}
