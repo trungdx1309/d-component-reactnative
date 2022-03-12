@@ -21,7 +21,7 @@ const { dark, light } = Colors;
 
 const Text: React.FC<ITextProps> = ({
   children,
-  color = "black",
+  color,
   colorDarkMode,
   style,
   ...rest
