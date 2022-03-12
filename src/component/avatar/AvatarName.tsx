@@ -29,12 +29,15 @@ export interface IAvatarNameProps extends ThemeProps {
   styleNameText?: TextStyle;
   styleSubText?: TextStyle;
   textNameProps?: ITextProps;
+  avatarProps?: IAvatarProps;
+  variant?: IAvatarProps["variant"];
 }
 
 const AvatarName: React.FC<IAvatarNameProps> = ({
   user,
   position = "after",
   size = "x-small",
+  variant,
   subLabel,
   style,
   styleSubText,
@@ -47,6 +50,7 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
   color,
   colorDarkMode,
   textNameProps = {},
+  avatarProps = {},
 }) => {
   const { avatar, fullName, name = "" } = user;
   let displayName = name;
@@ -116,8 +120,22 @@ const AvatarName: React.FC<IAvatarNameProps> = ({
   return (
     <View className={wrapperClass} style={style}>
       {position === "before" && renderName()}
-      {avatar && <Avatar avatar={avatar as any} size={size} />}
-      {!avatar && <Avatar text={displayName.charAt(0)} size={size} />}
+      {avatar && (
+        <Avatar
+          avatar={avatar as any}
+          size={size}
+          {...avatarProps}
+          variant={variant}
+        />
+      )}
+      {!avatar && (
+        <Avatar
+          text={displayName.charAt(0)}
+          size={size}
+          {...avatarProps}
+          variant={variant}
+        />
+      )}
       {position === "after" && renderName()}
     </View>
   );

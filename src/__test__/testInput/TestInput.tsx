@@ -60,6 +60,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         onChange={(v) => {
           setDate(v);
         }}
+        disabled
         value={date}
       />
       <InputDate
@@ -71,6 +72,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
           setDate(v);
         }}
         value={date}
+        disabled
         placeholder="Date Input Outline"
       />
       <InputDate

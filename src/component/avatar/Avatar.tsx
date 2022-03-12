@@ -1,5 +1,6 @@
 import ClassNames from "classnames";
 import React from "react";
+// import { Text } from "react-native";
 import { IButtonProps } from "../button/Button";
 import Image, { IImageProps } from "../image/Image";
 import Text from "../text/Text";
@@ -15,7 +16,7 @@ export interface IAvatarProps extends Omit<IImageProps, "source"> {
     | "x-small"
     | "xx-small"
     | "tiny";
-  variant?: "rounded" | "square";
+  variant?: "rounded" | "square" | "circle";
   text?: string;
   color?: string;
   classNameImage?: string;
@@ -29,7 +30,7 @@ export interface IAvatarProps extends Omit<IImageProps, "source"> {
 const Avatar: React.FC<IAvatarProps> = ({
   size = "medium",
   avatar,
-  variant = "rounded",
+  variant = "circle",
   className,
   classNameImage,
   classNameLetter,
@@ -58,16 +59,18 @@ const Avatar: React.FC<IAvatarProps> = ({
     classNameLetter
   );
   const wrapperClass = ClassNames(
-    `position-relative image-square-${size}`,
+    `position-relative image-square-${size} bg-red`,
     {
       "justify-content-center align-items-center": !!text,
-      "rounded-pill": variant === "rounded",
+      "rounded-pill": variant === "circle",
+      "rounded-1": variant === "rounded",
       [`border-2 border-${borderColor}`]: showBorder,
     },
     className
   );
   const imageClass = ClassNames("w-100 h-100", {
-    "rounded-pill": variant === "rounded",
+    "rounded-pill": variant === "circle",
+    "rounded-1": variant === "rounded",
   });
   let content;
 

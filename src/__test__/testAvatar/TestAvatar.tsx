@@ -30,13 +30,23 @@ const TestAvatar: React.FC<ITestAvatarProps> = ({ id }) => {
         <Avatar text="T" size="xx-large" className="my-2" />
       </View>
       <View>
-        <Avatar avatar={images.birthdayCake} size="xx-small" className="my-2" />
+        <Avatar
+          avatar={images.birthdayCake}
+          size="xx-small"
+          className="my-2"
+          variant="rounded"
+        />
         <Avatar avatar={images.birthdayCake} size="x-small" className="my-2" />
         <Avatar avatar={images.birthdayCake} size="small" className="my-2" />
         <Avatar avatar={images.birthdayCake} size="medium" className="my-2" />
         <Avatar avatar={images.birthdayCake} size="large" className="my-2" />
         <Avatar avatar={images.birthdayCake} size="x-large" className="my-2" />
-        <Avatar avatar={images.birthdayCake} size="xx-large" className="my-2" />
+        <Avatar
+          avatar={images.birthdayCake}
+          size="xx-large"
+          className="my-2"
+          variant="rounded"
+        />
       </View>
       <View>
         <AvatarName

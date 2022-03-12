@@ -11,6 +11,7 @@ import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
 import { InputErrorView } from "./InputText";
+import { ColorKeyType } from "../../style/constant/AppColors";
 
 export type TDateFormat =
   | "DD/MM/YYYY HH:mm"
@@ -46,6 +47,7 @@ export interface IInputDateProps
   customIcon?: ((value: any) => Element) | Element;
   customInput?: ((props: ICustomInputProps) => Element) | Element;
   disabled?: boolean;
+  disabledColor?: ColorKeyType | null;
   styleDatePicker?: ViewStyle;
 }
 
@@ -79,6 +81,7 @@ const InputDate: React.ForwardRefRenderFunction<
     iconName = "today",
     mode,
     disabled,
+    disabledColor = "muted",
     customInput,
     customIcon,
     ...rest
@@ -111,6 +114,7 @@ const InputDate: React.ForwardRefRenderFunction<
     "rounded-pill": variant === "pill",
     "rounded-1": variant === "rounded",
     "border-error": !!error,
+    [`bg-${disabledColor}`]: disabled && disabledColor,
     [`border-${getThemeColor({ colorScheme })}`]: !!value,
   });
 
@@ -126,6 +130,9 @@ const InputDate: React.ForwardRefRenderFunction<
 
   const displayValue = useMemo(() => {
     if (!value) {
+      if (placeholder) {
+        return placeholder;
+      }
       return undefined;
     }
     let res;
@@ -175,7 +182,7 @@ const InputDate: React.ForwardRefRenderFunction<
     }
     return (
       <View className={contentClass} style={{ height }}>
-        <Text className={textClass}>{displayValue || placeholder}</Text>
+        <Text className={textClass}>{displayValue}</Text>
         {(showIcon || customIcon) && renderIcon()}
       </View>
     );

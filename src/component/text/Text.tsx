@@ -1,5 +1,10 @@
 import React from "react";
-import { Text as RNText, TextProps, useColorScheme } from "react-native";
+import {
+  Text as RNText,
+  TextProps,
+  TextStyle,
+  useColorScheme,
+} from "react-native";
 import Colors from "../../style/color/_color";
 import { ColorKeyType } from "../../style/constant/AppColors";
 import textStyle from "../../style/font/_text";
@@ -16,15 +21,14 @@ const { dark, light } = Colors;
 
 const Text: React.FC<ITextProps> = ({
   children,
-  color,
+  color = "black",
   colorDarkMode,
   style,
   ...rest
 }) => {
   const transStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
-  const defaultStyle = {
-    ...textStyle.h4,
+  const defaultStyle: TextStyle = {
     color: isDarkMode ? light : undefined,
   };
   const listStyle = [defaultStyle, transStyle, style];
