@@ -42,11 +42,9 @@ const TestList: React.FC<ITestListProps> = ({ id }) => {
         source={() => Promise.reject()}
         transformer={(res) => []}
         renderFooterComponent={({ loading, emptyMode }) => {
-          if (emptyMode === AwesomeListMode.ERROR) {
-            return <View />;
-          }
           return <ListFooterComponent />;
         }}
+        hideFooterInEmptyErrorMode
       />
     );
   };

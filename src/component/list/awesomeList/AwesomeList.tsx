@@ -64,6 +64,8 @@ export interface IAwesomeListProps<T>
     | ((props: { loading: boolean; emptyMode?: AwesomeListMode }) => Element)
     | Element;
   data?: any;
+
+  hideFooterInEmptyErrorMode?: boolean;
 }
 
 class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
@@ -400,6 +402,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
       colorDarkMode,
       useLightColor,
       renderFooterComponent,
+      hideFooterInEmptyErrorMode,
       ...rest
     } = this.props;
 
@@ -444,6 +447,13 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
             onRefresh={() => this.onRefresh()}
             onEndReached={() => this.onEndReached()}
             ListFooterComponent={() => {
+              if (
+                hideFooterInEmptyErrorMode &&
+                (emptyMode === AwesomeListMode.ERROR ||
+                  emptyMode === AwesomeListMode.EMPTY)
+              ) {
+                return null;
+              }
               if (renderFooterComponent) {
                 if (typeof renderFooterComponent === "function") {
                   return renderFooterComponent({
