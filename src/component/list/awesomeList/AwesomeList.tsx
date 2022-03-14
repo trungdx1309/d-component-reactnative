@@ -60,7 +60,9 @@ export interface IAwesomeListProps<T>
   pageSize?: number;
   className?: string;
   renderItem: SectionListProps<T>["renderItem"];
-  renderFooterComponent?: ((props: { loading: boolean }) => Element) | Element;
+  renderFooterComponent?:
+    | ((props: { loading: boolean; emptyMode?: AwesomeListMode }) => Element)
+    | Element;
   data?: any;
 }
 
@@ -401,6 +403,8 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
       ...rest
     } = this.props;
 
+    const { emptyMode } = this.state;
+
     return (
       <View
         className={className}
@@ -444,6 +448,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
                 if (typeof renderFooterComponent === "function") {
                   return renderFooterComponent({
                     loading: this.state.refreshing,
+                    emptyMode,
                   }) as any;
                 }
                 return renderFooterComponent as any;
@@ -462,6 +467,7 @@ class AwesomeList<T> extends Component<IAwesomeListProps<T>, any> {
           />
         )}
         <EmptyView
+          style={emptyViewStyle}
           mode={this.state.emptyMode}
           retry={() => this.onRetry()}
           renderEmptyView={renderEmptyView}

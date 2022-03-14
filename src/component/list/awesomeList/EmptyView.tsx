@@ -1,15 +1,29 @@
 /* eslint-disable react/sort-comp */
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, ViewStyle } from "react-native";
 import Text from "../../text/Text";
 import TouchableOpacity from "../../view/TouchableOpacity";
 import View from "../../view/View";
 import AwesomeListMode from "./AwesomeListMode";
 import AwesomeListStyle from "./AwesomeListStyle";
 
+export interface IEmptyViewProps {
+  mode?: any;
+  renderEmptyView?: (props?: any) => Element;
+  renderProgress?: (props?: any) => Element;
+  renderErrorView?: (props?: any) => Element;
+  renderFilterEmptyView?: (props?: any) => Element;
+  retry?: (props?: any) => any;
+  emptyText?: string;
+  filterEmptyText?: string;
+  style?: ViewStyle;
+  styleErrorView?: ViewStyle;
+  styleEmptyView?: ViewStyle;
+}
+
 // create a component
-class EmptyView extends Component<any, any> {
+class EmptyView extends Component<IEmptyViewProps, any> {
   static propTypes = {
     mode: PropTypes.any,
     renderEmptyView: PropTypes.func,
@@ -87,8 +101,11 @@ class EmptyView extends Component<any, any> {
    * Incase change only few cases, we should use props.renderEmptyView
    */
   renderEmptyView() {
+    const { styleEmptyView } = this.props;
     return (
-      <Text style={AwesomeListStyle.textEmpty}>{this.props.emptyText}</Text>
+      <Text style={[AwesomeListStyle.textEmpty, styleEmptyView]}>
+        {this.props.emptyText}
+      </Text>
     );
   }
 
@@ -117,8 +134,9 @@ class EmptyView extends Component<any, any> {
    * Incase change only few cases, we should use props.renderErrorView
    */
   renderErrorView() {
+    const { styleErrorView } = this.props;
     return (
-      <View>
+      <View style={styleErrorView}>
         <Text style={AwesomeListStyle.textError}>No result</Text>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -132,13 +150,19 @@ class EmptyView extends Component<any, any> {
   }
 
   render() {
+    const { style } = this.props;
     // If mode not set or hidden do not render EmptyView
-    if (!this.props.mode || this.props.mode === AwesomeListMode.HIDDEN) return null;
+    if (!this.props.mode || this.props.mode === AwesomeListMode.HIDDEN) {
+      return null;
+    }
     // Render EmptyView coresponds with it's mode
     return (
       // pointerEvents to prevent touch to EmptyView and pass through to under component.
       // But still accept its children view receive touch.
-      <View style={AwesomeListStyle.emptyContainer} pointerEvents="box-none">
+      <View
+        style={[AwesomeListStyle.emptyContainer, style]}
+        pointerEvents="box-none"
+      >
         {this.renderEmptyViewInternal()}
         {this.renderErrorViewInternal()}
         {this.renderProgressInternal()}

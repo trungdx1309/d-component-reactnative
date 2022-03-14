@@ -1,7 +1,9 @@
-export default {
-  HIDDEN: 0,
-  EMPTY: 1,
-  PROGRESS: 2,
-  ERROR: 3,
-  FILTER_EMPTY: 4,
-};
+enum AwesomeListMode {
+  HIDDEN = "HIDDEN",
+  EMPTY = "EMPTY",
+  PROGRESS = "PROGRESS",
+  ERROR = "ERROR",
+  FILTER_EMPTY = "FILTER_EMPTY",
+}
+
+export default AwesomeListMode;
