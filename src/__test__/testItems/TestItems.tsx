@@ -25,7 +25,12 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
       <Text className="label font-weight-bold">Badge</Text>
       {renderRow(
         "Size: xx-small Position: top-right",
-        <Badge size="xx-large" variant="icon">
+        <Badge
+          size="xx-large"
+          variant="icon"
+          badgeSize={30}
+          styleBadge={{ right: -10 }}
+        >
           <Avatar avatar={images.birthdayCake} size="medium" className="my-2" />
         </Badge>
       )}
@@ -44,6 +49,18 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
       {renderRow(
         "Size x-small Position: bottom-left",
         <Badge size="small" position="bottom-left">
+          <Icon name="filter" className="my-2" />
+        </Badge>
+      )}
+      {renderRow(
+        "Size medium Position: top-right Variant: label",
+        <Badge
+          size="xx-large"
+          position="top-right"
+          variant="label"
+          label="+99"
+          color="secondary"
+        >
           <Icon name="filter" className="my-2" />
         </Badge>
       )}

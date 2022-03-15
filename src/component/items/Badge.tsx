@@ -1,23 +1,28 @@
 import ClassNames from "classnames";
 import React, { useMemo } from "react";
-import { ViewStyle } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 import { ThemeProps } from "../../interface/iTheme";
 import { ColorKeyType } from "../../style/constant/AppColors";
 import { IAvatarProps } from "../avatar/Avatar";
 import Icon from "../icon/Icon";
+import Text from "../text/Text";
 import View from "../view/View";
 
 export interface IBadgeProps extends ThemeProps {
-  variant?: "dot" | "icon";
+  variant?: "dot" | "icon" | "label";
   iconName?: string;
   color?: ColorKeyType;
   size?: IAvatarProps["size"];
   position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   className?: string;
+  classNameLabel?: string;
   classNameBadge?: string;
   style?: ViewStyle;
   styleBadge?: ViewStyle;
+  styleLabel?: TextStyle;
   iconSize?: number;
+  badgeSize?: number;
+  label?: string;
 }
 
 const BADGE_WIDTH_BASE = 10;
@@ -32,12 +37,19 @@ const Badge: React.FC<IBadgeProps> = ({
   size = "small",
   position = "top-right",
   iconSize = 10,
+  badgeSize,
   className,
+  classNameLabel,
   classNameBadge,
   style,
   styleBadge,
+  styleLabel,
+  label,
 }) => {
   const widthHeight = useMemo(() => {
+    if (badgeSize && typeof badgeSize === "number") {
+      return badgeSize;
+    }
     switch (size) {
       case "xx-large":
         return BADGE_WIDTH_BASE + 4;
@@ -56,7 +68,7 @@ const Badge: React.FC<IBadgeProps> = ({
       default:
         return BADGE_WIDTH_BASE;
     }
-  }, [size]);
+  }, [size, badgeSize]);
   const wrapperClass = ClassNames(
     "position-relative align-self-start",
     className
@@ -77,6 +89,18 @@ const Badge: React.FC<IBadgeProps> = ({
       return (
         <View className={badgeClass} style={[badgeStyle, styleBadge]}>
           <Icon name={iconName} size={iconSize} color="light" />
+        </View>
+      );
+    }
+    if (variant === "label" && typeof label === "string") {
+      return (
+        <View className={badgeClass} style={[badgeStyle, styleBadge]}>
+          <Text
+            className={`font-weight-bold ${classNameLabel}`}
+            style={[{ fontSize: 6, color: "white" }, styleLabel]}
+          >
+            {label}
+          </Text>
         </View>
       );
     }

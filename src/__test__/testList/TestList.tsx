@@ -44,7 +44,14 @@ const TestList: React.FC<ITestListProps> = ({ id }) => {
         renderFooterComponent={({ loading, emptyMode }) => {
           return <ListFooterComponent />;
         }}
+        style={{ flex: 1 }}
         hideFooterInEmptyErrorMode
+        emptyViewStyle={{
+          paddingVertical: 100,
+          backgroundColor: "green",
+          width: "100%",
+          height: "100%",
+        }}
       />
     );
   };
