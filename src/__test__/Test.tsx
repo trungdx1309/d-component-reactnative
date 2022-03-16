@@ -11,8 +11,10 @@
 import React, { useState } from "react";
 import { StatusBar, useColorScheme } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import Badge from "../component/items/Badge";
 import Modal from "../component/modal/Modal";
 import TabView, { ITabViewProps } from "../component/tab/TabView";
+import Text from "../component/text/Text";
 import SafeAreaView from "../component/view/SafeAreaView";
 import View from "../component/view/View";
 import "./configurationStyle";
@@ -35,13 +37,20 @@ const App = () => {
   const renderMainView = () => {
     return (
       <TabView
+        variant="standard"
         dataSource={DATA_SOURCE}
         renderTabView={renderTabView}
         className="px-3"
+        classNameLabel="flex-center-y"
         scrollEnabled
         colorIndicator="pink"
         colorActiveLabelText="pink"
-        // variant="box"
+        renderLabelSuffix={({ route }) => {
+          if (route.key === "testInput") {
+            return <Badge size="xx-large" badgeSize={20} className="m ml-5" />;
+          }
+          return null;
+        }}
       />
     );
   };

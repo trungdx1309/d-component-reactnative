@@ -1,6 +1,12 @@
 /* eslint-disable no-nested-ternary */
 import ClassNames from "classnames";
-import React, { forwardRef, useRef, useState } from "react";
+import React, {
+  ElementRef,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import {
   Dimensions,
   Platform,
@@ -44,11 +50,12 @@ export interface ITabViewProps
     "renderScene" | "onIndexChange" | "navigationState"
   > {
   key?: any;
-  className?: string;
+  variant?: "standard" | "pilled" | "rounded" | "box";
   initialIndex?: number;
   dataSource: Array<ITabViewRoute>;
   onChangeIndex?: (index: number) => any;
   labelWidth?: number | string;
+  labelPadding?: number;
   isSeparate?: boolean; // if true all the tab view will be render using AwesomeList component
   scrollEnabled?: boolean;
   renderTabView?: (props: IRenderTabViewProps<ITabViewRoute>) => Element;
@@ -66,8 +73,13 @@ export interface ITabViewProps
     index: number;
     tabIndex: number;
   }) => any;
+  // Class Name
+  className?: string;
+  classNameLabel?: string;
+  classNameTabBarWrapper?: string; //=> class name for view component wrap outside of tab-bar when renderTabBarSideView is active
   // Style
   tabBarStyle?: ViewStyle;
+  tabBarWrapperStyle?: ViewStyle; // => style for view component wrap outside of tab-bar when renderTabBarSideView is active
   listStyle?: ViewStyle;
   tabStyle?: ViewStyle;
   activeLabelStyle?: ViewStyle;
@@ -79,10 +91,19 @@ export interface ITabViewProps
   colorIndicator?: ColorKeyType;
 
   awesomeListProps?: IAwesomeListProps<any>;
-  getLabel?: (item?: ITabViewRoute) => string;
-  variant?: "standard" | "pilled" | "rounded" | "box";
+  getLabel?: (item?: ITabViewRoute) => string | Element;
+
+  renderTabBarSideView?:
+    | ((props: { index: any; routes: any }) => Element)
+    | Element;
+
+  renderCustomLabel?: TabBarProps<ITabViewRoute>["renderLabel"];
+  renderLabelPrefix?: TabBarProps<ITabViewRoute>["renderLabel"];
+  renderLabelSuffix?: TabBarProps<ITabViewRoute>["renderLabel"];
 }
-export interface ITabViewMethod {}
+export interface ITabViewMethod {
+  refreshList: (props?: any) => any;
+}
 
 const getTabViewColorProps = (defaultColor: any, color?: ColorKeyType) => {
   if (!color) {
@@ -97,18 +118,24 @@ function TabView(
     transformer,
     renderItem,
     getLabel,
+    onChangeIndex,
+    renderTabView,
+    renderTabBarSideView,
+    renderCustomLabel,
+    renderLabelPrefix,
+    renderLabelSuffix,
     initialIndex = 0,
     dataSource = [],
-    onChangeIndex,
     labelWidth = 90,
+    labelPadding = 10,
     isSeparate = true,
-    renderTabView,
     variant = "standard",
     scrollEnabled = false,
     style,
     tabBarStyle,
     tabStyle,
     listStyle,
+    tabBarWrapperStyle,
     colorActiveLabelText,
     colorLabelText,
     colorIndicator,
@@ -117,6 +144,8 @@ function TabView(
     labelStyle,
     key,
     awesomeListProps = {} as any,
+    classNameLabel,
+    classNameTabBarWrapper,
     ...rest
   }: ITabViewProps,
 
@@ -124,15 +153,17 @@ function TabView(
 ) {
   const [index, setIndex] = useState(initialIndex);
   const [routes] = useState(dataSource);
-  const listRef = useRef();
+  const listRef = useRef<ElementRef<typeof AwesomeList>>(null);
   const tranStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
   const showLabelBgColor = variant !== "standard";
   const containerBg = { backgroundColor: isDarkMode ? "black" : "white" };
 
-  // useEffect(() => {
-  //   setRef && setRef(listRef.current);
-  // });
+  useImperativeHandle(ref, () => ({
+    refreshList: () => {
+      listRef.current && listRef.current.refresh();
+    },
+  }));
 
   const renderScene = ({ route }: { route: ITabViewRoute }) => {
     if (Math.abs(index - routes.indexOf(route)) > 0) {
@@ -141,9 +172,7 @@ function TabView(
     return (
       <AwesomeList
         key={route.key}
-        // ref={(ref) => {
-        //   listRef.current = ref;
-        // }}
+        ref={listRef}
         isPaging
         pageSize={10}
         {...awesomeListProps}
@@ -170,7 +199,7 @@ function TabView(
       }
       return isDarkMode ? Colors.dark : Colors.light;
     };
-    return (
+    const tabBar = (
       <TabBar
         {...(props as any)}
         style={[styles.tabBar, tabBarStyle]}
@@ -184,23 +213,45 @@ function TabView(
         indicatorStyle={{ backgroundColor: getIndicatorColor() }}
       />
     );
+    if (renderTabBarSideView) {
+      return (
+        <View
+          className={`flex-center-y justify-content-between ${classNameTabBarWrapper}`}
+          style={tabBarWrapperStyle}
+        >
+          {tabBar}
+          {typeof renderTabBarSideView === "function"
+            ? renderTabBarSideView({ index, routes })
+            : renderTabBarSideView}
+        </View>
+      );
+    }
+    return tabBar;
   };
 
   const renderLabel: TabBarProps<ITabViewRoute>["renderLabel"] = ({
     route,
     focused,
     color,
+    ...rest
   }) => {
-    const labelClass = ClassNames("flex-1 justify-content-center text-center", {
-      "bg-primary": focused && showLabelBgColor,
-      "bg-white": isDarkMode && !focused && showLabelBgColor,
-      "rounded-pilled": variant === "pilled",
-      "rounded-1": variant === "rounded",
-    });
+    if (renderCustomLabel) {
+      return renderCustomLabel({ route, focused, color, ...rest });
+    }
+    const labelClass = ClassNames(
+      "flex-1 justify-content-center",
+      {
+        "bg-primary": focused && showLabelBgColor,
+        "bg-white": isDarkMode && !focused && showLabelBgColor,
+        "rounded-pilled": variant === "pilled",
+        "rounded-1": variant === "rounded",
+      },
+      classNameLabel
+    );
     const textClass = ClassNames("h4 text-center px-2", {
       "font-weight-bold": !showLabelBgColor && focused,
     });
-    let displayLabel = route?.label || route?.title;
+    let displayLabel: any = route?.label || route?.title;
     if (getLabel) {
       displayLabel = getLabel(route);
     }
@@ -214,14 +265,31 @@ function TabView(
         ? getTabViewColorProps(Colors.primary, colorActiveLabelText)
         : getTabViewColorProps(Colors.grayDark, colorLabelText);
     };
+
+    const prefix = () => {
+      if (renderLabelPrefix && typeof renderLabelPrefix === "function") {
+        return renderLabelPrefix({ focused, color, route, ...rest });
+      }
+    };
+
+    const suffix = () => {
+      if (renderLabelSuffix && typeof renderLabelSuffix === "function") {
+        return renderLabelSuffix({ focused, color, route, ...rest });
+      }
+    };
+
     return (
       <View
         style={[
-          { paddingVertical: focused ? undefined : 10, width: labelWidth },
+          {
+            paddingVertical: focused ? undefined : labelPadding,
+            width: labelWidth,
+          },
           focused ? activeLabelStyle : labelStyle,
         ]}
         className={labelClass}
       >
+        {prefix()}
         <Text
           className={textClass}
           style={{
@@ -233,6 +301,7 @@ function TabView(
         >
           {displayLabel}
         </Text>
+        {suffix()}
       </View>
     );
   };
