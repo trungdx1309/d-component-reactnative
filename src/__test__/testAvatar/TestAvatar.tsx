@@ -70,7 +70,14 @@ const TestAvatar: React.FC<ITestAvatarProps> = ({ id }) => {
           subLabel="Culi"
         />
         <AvatarName
-          user={{ fullName: "Trung", avatar: images.birthdayCake }}
+          user={{
+            fullName: "Trung",
+            avatar: {
+              uri: "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
+            },
+            // avatar:
+            //   "https://vcdn-vnexpress.vnecdn.net/2021/09/24/A-nh-chu-p-Ma-n-hi-nh-2021-09-1489-2655-1632443165.png",
+          }}
           size="medium"
           className="my-2"
         />

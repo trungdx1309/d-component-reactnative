@@ -21,7 +21,7 @@ export interface IAvatarProps extends Omit<IImageProps, "source"> {
   color?: string;
   classNameImage?: string;
   classNameLetter?: string;
-  avatar?: IImageProps["source"] | string;
+  avatar?: IImageProps["source"] | string | null;
   styleImage?: IImageProps["style"];
   showBorder?: boolean;
   borderColor?: IButtonProps["color"];
