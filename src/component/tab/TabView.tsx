@@ -89,6 +89,9 @@ export interface ITabViewProps
   colorActiveLabelText?: ColorKeyType;
   colorLabelText?: ColorKeyType;
   colorIndicator?: ColorKeyType;
+  colorActiveLabelTextDarkMode?: ColorKeyType;
+  colorLabelTextDarkMode?: ColorKeyType;
+  colorIndicatorDarkMode?: ColorKeyType;
 
   awesomeListProps?: IAwesomeListProps<any>;
   getLabel?: (item?: ITabViewRoute) => string | Element;
@@ -137,8 +140,11 @@ function TabView(
     listStyle,
     tabBarWrapperStyle,
     colorActiveLabelText,
+    colorActiveLabelTextDarkMode,
     colorLabelText,
+    colorLabelTextDarkMode,
     colorIndicator,
+    colorIndicatorDarkMode,
     textLabelStyle = {},
     activeLabelStyle,
     labelStyle,
@@ -258,12 +264,24 @@ function TabView(
     const textLabelColor = () => {
       if (showLabelBgColor) {
         return focused
-          ? getTabViewColorProps(Colors.white, colorActiveLabelText)
-          : getTabViewColorProps(Colors.black, colorLabelText);
+          ? getTabViewColorProps(
+              Colors.white,
+              isDarkMode ? colorActiveLabelTextDarkMode : colorActiveLabelText
+            )
+          : getTabViewColorProps(
+              Colors.black,
+              isDarkMode ? colorLabelTextDarkMode : colorLabelText
+            );
       }
       return focused
-        ? getTabViewColorProps(Colors.primary, colorActiveLabelText)
-        : getTabViewColorProps(Colors.grayDark, colorLabelText);
+        ? getTabViewColorProps(
+            Colors.primary,
+            isDarkMode ? colorActiveLabelTextDarkMode : colorActiveLabelText
+          )
+        : getTabViewColorProps(
+            Colors.grayDark,
+            isDarkMode ? colorActiveLabelTextDarkMode : colorLabelText
+          );
     };
 
     const prefix = () => {
