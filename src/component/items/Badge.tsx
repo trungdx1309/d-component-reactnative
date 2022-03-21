@@ -21,8 +21,12 @@ export interface IBadgeProps extends ThemeProps {
   styleBadge?: ViewStyle;
   styleLabel?: TextStyle;
   iconSize?: number;
-  badgeSize?: number;
   label?: string;
+  shape?: "square" | "pill" | "rounded" | "circle";
+  showBorder?: boolean;
+  labelFontSize?: number;
+  width?: number;
+  height?: number;
 }
 
 const BADGE_WIDTH_BASE = 10;
@@ -37,7 +41,8 @@ const Badge: React.FC<IBadgeProps> = ({
   size = "small",
   position = "top-right",
   iconSize = 10,
-  badgeSize,
+  showBorder = true,
+  shape = "circle",
   className,
   classNameLabel,
   classNameBadge,
@@ -45,11 +50,11 @@ const Badge: React.FC<IBadgeProps> = ({
   styleBadge,
   styleLabel,
   label,
+  labelFontSize = 6,
+  width,
+  height,
 }) => {
   const widthHeight = useMemo(() => {
-    if (badgeSize && typeof badgeSize === "number") {
-      return badgeSize;
-    }
     switch (size) {
       case "xx-large":
         return BADGE_WIDTH_BASE + 4;
@@ -68,22 +73,30 @@ const Badge: React.FC<IBadgeProps> = ({
       default:
         return BADGE_WIDTH_BASE;
     }
-  }, [size, badgeSize]);
+  }, [size]);
   const wrapperClass = ClassNames(
     "position-relative align-self-start",
     className
   );
   const badgeClass = ClassNames(
-    `flex-center-y justify-content-center bg-${color} position-absolute rounded-pilled border-1 border-light`,
+    `flex-center-y justify-content-center bg-${color} position-absolute `,
     {
       "top-6 right-0": position === "top-right",
       "top-6 left-0": position === "top-left",
       "bottom-6 left-0": position === "bottom-left",
       "bottom-6 right-0": position === "bottom-right",
+      "border-1 border-light": showBorder,
+      "rounded-pilled": shape === "circle" || shape === "pill",
+      "rounded-1": shape === "rounded",
     },
     classNameBadge
   );
-  const badgeStyle: ViewStyle[] = [{ width: widthHeight, height: widthHeight }];
+  const badgeStyle: ViewStyle[] = [
+    {
+      width: width || (shape === "pill" ? undefined : widthHeight),
+      height: height || (shape === "pill" ? undefined : widthHeight),
+    },
+  ];
   const renderBadge = () => {
     if (variant === "icon") {
       return (
@@ -96,8 +109,16 @@ const Badge: React.FC<IBadgeProps> = ({
       return (
         <View className={badgeClass} style={[badgeStyle, styleBadge]}>
           <Text
-            className={`font-weight-bold ${classNameLabel}`}
-            style={[{ fontSize: 6, color: "white" }, styleLabel]}
+            className={`
+             text-center ${classNameLabel}`}
+            style={[
+              {
+                fontSize: labelFontSize,
+                color: "white",
+                paddingVertical: 3,
+              },
+              styleLabel,
+            ]}
           >
             {label}
           </Text>

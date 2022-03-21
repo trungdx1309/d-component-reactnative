@@ -93,7 +93,7 @@ export interface ITabViewProps
   colorLabelTextDarkMode?: ColorKeyType;
   colorIndicatorDarkMode?: ColorKeyType;
 
-  awesomeListProps?: IAwesomeListProps<any>;
+  awesomeListProps?: Partial<IAwesomeListProps<any>>;
   getLabel?: (item?: ITabViewRoute) => string | Element;
 
   renderTabBarSideView?:

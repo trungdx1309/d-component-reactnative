@@ -28,7 +28,8 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
         <Badge
           size="xx-large"
           variant="icon"
-          badgeSize={30}
+          width={30}
+          height={30}
           styleBadge={{ right: -10 }}
         >
           <Avatar avatar={images.birthdayCake} size="medium" className="my-2" />
@@ -60,6 +61,23 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
           variant="label"
           label="+99"
           color="secondary"
+          shape="rounded"
+          width={20}
+          showBorder={false}
+        >
+          <Icon name="filter" className="my-2" />
+        </Badge>
+      )}
+      {renderRow(
+        "Size medium Position: top-right Variant: label",
+        <Badge
+          size="xx-large"
+          position="top-right"
+          variant="label"
+          shape="pill"
+          label="+9"
+          color="secondary"
+          width={25}
         >
           <Icon name="filter" className="my-2" />
         </Badge>
