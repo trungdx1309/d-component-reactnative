@@ -20,7 +20,12 @@ export interface ITabStepperItemData {
 export interface ITabStepperProps
   extends Pick<
     ITabStepperItemProps,
-    "activeColor" | "inActiveColor" | "colorDarkMode" | "indexColorDarkMode"
+    | "activeColor"
+    | "inActiveColor"
+    | "colorDarkMode"
+    | "indexColorDarkMode"
+    | "variant"
+    | "shape"
   > {
   dataSource: ITabStepperItemData[];
   value?: ITabStepperItemData;
@@ -184,6 +189,8 @@ const TabStepper: React.FC<ITabStepperProps> = ({
   scrollable,
   activeColor,
   inActiveColor,
+  variant,
+  shape,
 }) => {
   const content = (
     <View
@@ -212,6 +219,8 @@ const TabStepper: React.FC<ITabStepperProps> = ({
             inActiveColor={inActiveColor}
             getLabel={() => getLabel && getLabel(iTab, index)}
             onPress={() => onPressItem && onPressItem(iTab, index)}
+            variant={variant}
+            shape={shape}
             {...itemProps}
           />
         );

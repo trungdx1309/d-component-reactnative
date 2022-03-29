@@ -182,7 +182,7 @@ export function FormItem({
   if (type === "date" || type === "date-time" || type === "time") {
     let transValue: any = null;
     if (value) {
-      transValue = moment(value);
+      transValue = moment(value).toDate();
     }
     return (
       <InputDate
