@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Form, { IFormItemData } from "../../component/form/Form";
+import SafeAreaView from "../../component/view/SafeAreaView";
 import ScrollView from "../../component/view/ScrollView";
 import { SELECT_DATA } from "../data/TestConstant";
 
@@ -45,20 +46,36 @@ const FORM_DATA: IFormItemData<any>[] = [
     rowsId: "maritalStatus",
     label: "maritalStatus",
     key: "maritalStatus",
-    type: "select",
+    type: "inputText",
+    inputProps: { useKeyboardAvoidingView: true },
+  },
+  {
+    rowsId: "maritalStatusTest",
+    label: "maritalStatus",
+    key: "maritalStatus",
+    type: "inputText",
+    inputProps: { useKeyboardAvoidingView: true },
+  },
+  {
+    rowsId: "maritalStatusTest123",
+    label: "maritalStatus",
+    key: "maritalStatus",
+    type: "inputText",
+    inputProps: { useKeyboardAvoidingView: true },
   },
 ];
 
 const TestForm: React.FC<ITestFormProps> = ({ id }) => {
   const [formState, setFormState] = useState<any>({});
   return (
-    <ScrollView className="w-100">
+    <SafeAreaView className="w-100">
       <Form
+        scrollable
         dataSource={FORM_DATA}
         value={formState}
         onChange={(key, value) => setFormState({ ...formState, [key]: value })}
       />
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 

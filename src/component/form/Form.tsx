@@ -4,6 +4,7 @@ import ClassNames from "classnames";
 import _ from "lodash";
 import moment from "moment";
 import React, { useMemo } from "react";
+import { FlatList } from "react-native";
 import InputDate from "../input/InputDate";
 import { IInputDateProps } from "../input/InputDate copy";
 import InputDateRange from "../input/InputDateRange";
@@ -94,6 +95,7 @@ export interface IFormProps {
   getRowClass?: (index?: any) => string;
   className?: string;
   classNameRow?: string;
+  scrollable?: boolean;
 }
 
 export const getDefaultValue = (type?: IFormItemType) => {
@@ -233,7 +235,9 @@ export function FormItem({
         onChange={(value) => onChange(key, value)}
         className={className}
         label={itemLabel}
-        getLabel={(item) => (getLabel ? getLabel(item) : Messages?.[item?.label])}
+        getLabel={(item) =>
+          getLabel ? getLabel(item) : Messages?.[item?.label]
+        }
         getValue={(item) => (getValue ? getValue(item) : item?.id)}
         error={error}
         multiple={type === "multi-select"}
@@ -280,6 +284,7 @@ const Form: React.FC<IFormProps> = ({
   onChange,
   classNameRow,
   getRowClass,
+  scrollable,
 }) => {
   const transformData = useMemo(() => {
     const clone: Array<typeof dataSource> = [];
@@ -325,7 +330,7 @@ const Form: React.FC<IFormProps> = ({
     onChange && onChange(key, value);
   };
   const wrapperClass = ClassNames("w-100", className);
-  return (
+  const content = (
     <View className={wrapperClass}>
       {transformData &&
         transformData?.length > 0 &&
@@ -407,10 +412,7 @@ const Form: React.FC<IFormProps> = ({
                 });
               }
 
-              let itemWrapperClass = ClassNames(
-                "py-2 flex-1",
-                elementClass
-              );
+              let itemWrapperClass = ClassNames("py-2 flex-1", elementClass);
 
               if (getElementClass) {
                 itemWrapperClass = getElementClass({
@@ -445,6 +447,10 @@ const Form: React.FC<IFormProps> = ({
         })}
     </View>
   );
+  if (scrollable) {
+    return <FlatList data={[1]} renderItem={({ item }) => content} />;
+  }
+  return content;
 };
 
 export default Form;
