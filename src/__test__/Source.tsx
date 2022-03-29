@@ -3,6 +3,7 @@ import { ITabViewProps } from "../component/tab/TabView";
 import TestAvatar from "./testAvatar/TestAvatar";
 import TestButton from "./testButton/TestButton";
 import TestCalendar from "./testCalendar/TestCalendar";
+import TestForm from "./testForm/TestForm";
 import TestHeader from "./testHeader/TestHeader";
 import TestImages from "./testImage/TestImages";
 import TestInput from "./testInput/TestInput";
@@ -27,6 +28,11 @@ const DATA_SOURCE: ITabViewProps["dataSource"] = [
     key: "testTabStepper",
     label: "Tab Stepper",
     component: <TestTabStepper />,
+  },
+  {
+    key: "testForm",
+    label: "Form",
+    component: <TestForm />,
   },
 ];
 

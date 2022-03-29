@@ -234,3 +234,16 @@ export { default as Chip } from "./component/items/Chip";
 
 export type { IBadgeProps } from "./component/items/Badge";
 export { default as Badge } from "./component/items/Badge";
+
+/* ----------------------------------------
+// Form
+// ---------------------------------------- */
+
+export type {
+  IFormItemData,
+  IFormItemDataRender,
+  IFormItemProps,
+  IFormItemType,
+  IFormProps,
+} from "./component/form/Form";
+export { default as Form } from "./component/form/Form";

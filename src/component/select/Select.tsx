@@ -1,7 +1,7 @@
 import ClassNames from "classnames";
 import _ from "lodash";
 import React, { ElementRef, useEffect, useMemo, useRef, useState } from "react";
-import { Platform, ViewStyle } from "react-native";
+import { FlatList, Platform, ViewStyle } from "react-native";
 import Sizes from "../../style/size/_size";
 import Button from "../button/Button";
 import CheckBox from "../checkbox/CheckBox";
@@ -67,6 +67,8 @@ export interface ISelectProps
 
   listProps?: IAwesomeListProps<any>;
   chipProps?: IChipProps;
+
+  dataSource?: Array<any>;
 }
 
 const Select: React.FC<ISelectProps> = ({
@@ -102,8 +104,11 @@ const Select: React.FC<ISelectProps> = ({
   inputSearchProps = {},
   listProps = {},
   chipProps = {},
+  dataSource = [],
 }) => {
   const listRef = useRef<ElementRef<typeof AwesomeList>>(null);
+
+  console.log({ dataSource });
 
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
@@ -274,6 +279,40 @@ const Select: React.FC<ISelectProps> = ({
     return <View className="width-30" />;
   };
 
+  const renderList = () => {
+    if (dataSource && dataSource?.length > 0) {
+      return (
+        <FlatList
+          data={dataSource}
+          renderItem={renderSelectItem}
+          keyExtractor={keyExtractor}
+          ListFooterComponent={<View style={{ height: 200 }} />}
+          showsVerticalScrollIndicator={false}
+        />
+      );
+    }
+    return (
+      <AwesomeList
+        ref={listRef}
+        isPaging={isPaging}
+        source={(paging) => {
+          const payload: ISelectSourceProps = { ...paging };
+          if (textSearch) {
+            payload.search = textSearch;
+          }
+          return source && source(payload);
+        }}
+        transformer={transformer}
+        renderItem={renderSelectItem}
+        keyExtractor={keyExtractor}
+        className="px-3"
+        ListFooterComponent={<View style={{ height: 200 }} />}
+        showsVerticalScrollIndicator={false}
+        {...listProps}
+      />
+    );
+  };
+
   return (
     <View className={containerClass} style={style}>
       {label && <Text className={labelClass}>{label}</Text>}
@@ -330,24 +369,7 @@ const Select: React.FC<ISelectProps> = ({
               onChangeText={handleChangeTextSearch}
             />
           )}
-          <AwesomeList
-            ref={listRef}
-            isPaging={isPaging}
-            source={(paging) => {
-              const payload: ISelectSourceProps = { ...paging };
-              if (textSearch) {
-                payload.search = textSearch;
-              }
-              return source && source(payload);
-            }}
-            transformer={transformer}
-            renderItem={renderSelectItem}
-            keyExtractor={keyExtractor}
-            className="px-3"
-            ListFooterComponent={<View style={{ height: 200 }} />}
-            showsVerticalScrollIndicator={false}
-            {...listProps}
-          />
+          {renderList()}
         </View>
       </Modal>
     </View>
