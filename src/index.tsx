@@ -175,6 +175,16 @@ export type {
 } from "./component/tab/TabView";
 export { default as TabView } from "./component/tab/TabView";
 
+export type {
+  ITabStepperItemData,
+  ITabStepperItemProps,
+  ITabStepperProps,
+} from "./component/tab/TabStepper";
+export {
+  default as TabStepper,
+  TabStepperItem,
+} from "./component/tab/TabStepper";
+
 /* ----------------------------------------
 // Style
 // ---------------------------------------- */

@@ -47,7 +47,7 @@ const App = () => {
         colorActiveLabelText="pink"
         renderLabelSuffix={({ route }) => {
           if (route.key === "testInput") {
-            return <Badge size="xx-large" badgeSize={20} className="m ml-5" />;
+            return <Badge size="xx-large" className="m ml-5" />;
           }
           return null;
         }}
