@@ -4,7 +4,7 @@ import ClassNames from "classnames";
 import _ from "lodash";
 import moment from "moment";
 import React, { useMemo } from "react";
-import { FlatList } from "react-native";
+import { FlatList, ViewStyle } from "react-native";
 import InputDate from "../input/InputDate";
 import { IInputDateProps } from "../input/InputDate copy";
 import InputDateRange from "../input/InputDateRange";
@@ -96,6 +96,8 @@ export interface IFormProps {
   className?: string;
   classNameRow?: string;
   scrollable?: boolean;
+  style?: ViewStyle;
+  styleFlatList?: ViewStyle;
 }
 
 export const getDefaultValue = (type?: IFormItemType) => {
@@ -285,6 +287,8 @@ const Form: React.FC<IFormProps> = ({
   classNameRow,
   getRowClass,
   scrollable,
+  style,
+  styleFlatList,
 }) => {
   const transformData = useMemo(() => {
     const clone: Array<typeof dataSource> = [];
@@ -331,7 +335,7 @@ const Form: React.FC<IFormProps> = ({
   };
   const wrapperClass = ClassNames("w-100", className);
   const content = (
-    <View className={wrapperClass}>
+    <View className={wrapperClass} style={style}>
       {transformData &&
         transformData?.length > 0 &&
         transformData?.map((rows, i) => {
@@ -448,7 +452,14 @@ const Form: React.FC<IFormProps> = ({
     </View>
   );
   if (scrollable) {
-    return <FlatList data={[1]} renderItem={({ item }) => content} />;
+    return (
+      <FlatList
+        bounces={false}
+        data={[1]}
+        renderItem={({ item }) => content}
+        style={styleFlatList}
+      />
+    );
   }
   return content;
 };

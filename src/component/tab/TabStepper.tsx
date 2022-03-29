@@ -41,6 +41,8 @@ export interface ITabStepperProps
     isActive: boolean;
     isPassed: boolean;
   }) => Partial<ITabStepperItemProps>;
+  style?: ViewStyle;
+  styleScrollView?: ViewStyle;
 }
 
 export interface ITabStepperItemProps {
@@ -191,10 +193,12 @@ const TabStepper: React.FC<ITabStepperProps> = ({
   inActiveColor,
   variant,
   shape,
+  style,
+  styleScrollView,
 }) => {
   const content = (
     <View
-      style={styles.container}
+      style={[styles.container, style]}
       className={className}
       colorDarkMode="transparent"
     >
@@ -233,6 +237,7 @@ const TabStepper: React.FC<ITabStepperProps> = ({
         horizontal
         className={`w-full ${classNameScrollView}`}
         colorDarkMode="transparent"
+        style={styleScrollView}
       >
         {content}
       </ScrollView>
