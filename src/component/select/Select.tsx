@@ -42,7 +42,11 @@ export interface ISelectProps
   style?: ViewStyle;
   styleContent?: ViewStyle;
   styleList?: ViewStyle;
-  value?: any; // is Object if multiple = false and Array if multiple = true
+  // if valueType props === 'object' will be object for
+  // single select and array of obj for multiple select
+  // if valueType === string will be string for
+  // single select and array of string for multiple select
+  value?: any;
   source?: (props: ISelectSourceProps) => any;
   onChange?: (props: any) => any;
   getLabel?: (props: any) => any;
@@ -69,6 +73,8 @@ export interface ISelectProps
   chipProps?: IChipProps;
 
   dataSource?: Array<any>;
+
+  valueType?: "object" | "string";
 }
 
 const Select: React.FC<ISelectProps> = ({
@@ -105,10 +111,9 @@ const Select: React.FC<ISelectProps> = ({
   listProps = {},
   chipProps = {},
   dataSource = [],
+  valueType = "object",
 }) => {
   const listRef = useRef<ElementRef<typeof AwesomeList>>(null);
-
-  console.log({ dataSource });
 
   const hasBorder =
     variant === "outline" || variant === "pill" || variant === "rounded";
@@ -142,8 +147,8 @@ const Select: React.FC<ISelectProps> = ({
   }, [value, multiple, height]);
 
   const [openModal, setOpenModal] = useState(false);
-  const [selectingValue, setSelectingValue] = useState<any>(value);
   const [textSearch, setTextSearch] = useState<string>();
+  const [selectingValue, setSelectingValue] = useState<any>(value);
 
   useEffect(() => {
     setSelectingValue(value);
@@ -162,11 +167,15 @@ const Select: React.FC<ISelectProps> = ({
     let isSelected = false;
     if (!_.isEmpty(selectingValue)) {
       if (multiple && _.isArray(selectingValue)) {
-        isSelected = selectingValue
-          .map((i) => getValue(i))
-          .includes(getValue(item));
+        const arrIds =
+          valueType === "object"
+            ? selectingValue.map((i) => getValue(i))
+            : selectingValue;
+        isSelected = arrIds.includes(getValue(item));
       } else {
-        isSelected = getValue(selectingValue) === getValue(item);
+        const v =
+          valueType === "object" ? getValue(selectingValue) : selectingValue;
+        isSelected = v === getValue(item);
       }
     }
 
@@ -174,30 +183,44 @@ const Select: React.FC<ISelectProps> = ({
   };
 
   const handleSelectItem = (item: any, selected: boolean) => {
+    const updateValue = valueType === "object" ? item : getValue(item);
     if (quickSelect && !multiple) {
-      onChange && onChange(item);
+      onChange && onChange(updateValue);
       return setOpenModal(false);
     }
     if (multiple) {
       let arrayClone = [...(selectingValue || [])];
       if (selected) {
-        arrayClone = selectingValue.filter(
-          (i: any) => getValue(i) !== getValue(item)
+        arrayClone = selectingValue.filter((i: any) =>
+          valueType === "object"
+            ? getValue(i) !== getValue(item)
+            : i !== getValue(item)
         );
       } else {
-        arrayClone.push(item);
+        arrayClone.push(updateValue);
       }
       setSelectingValue(arrayClone);
     } else if (selected) {
-      setSelectingValue({});
+      setSelectingValue(valueType === "object" ? {} : undefined);
     } else {
-      setSelectingValue(item);
+      setSelectingValue(updateValue);
     }
   };
 
   const handlePressSelect = () => {
     onChange && onChange(selectingValue);
     setOpenModal(false);
+  };
+
+  const getLabelFromValue = (value: any) => {
+    let label = getLabel(value);
+    if (valueType === "string" && dataSource?.length > 0) {
+      const valueObj = dataSource.find((item) => getValue(item) === value);
+      if (valueObj) {
+        label = getLabel(valueObj);
+      }
+    }
+    return label;
   };
 
   const renderContent = () => {
@@ -210,7 +233,7 @@ const Select: React.FC<ISelectProps> = ({
       return (
         <View className="flex-wrap flex-row flex-1">
           {value.map((i) => {
-            const iLabel = getLabel(i);
+            const iLabel = getLabelFromValue(i);
             return (
               <Chip
                 label={iLabel}
@@ -231,7 +254,8 @@ const Select: React.FC<ISelectProps> = ({
         </View>
       );
     }
-    return <Text className="flex-1 h4">{getLabel(value)}</Text>;
+    const label = getLabelFromValue(value);
+    return <Text className="flex-1 h4">{label}</Text>;
   };
 
   const renderSelectItem = ({ item, index }: any) => {

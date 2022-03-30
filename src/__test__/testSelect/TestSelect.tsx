@@ -11,14 +11,16 @@ export interface ITestSelectProps {
 const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
   const [selectValue, setSelectValue] = useState();
   const [singleValue, setSingleValue] = useState();
+
   return (
     <ScrollView className="py-3 w-100">
       <Select
+        valueType="string"
         label="Select"
         placeholder="Placeholder"
         variant="standard"
         className="my-2"
-        transformer={(res) => SELECT_DATA}
+        dataSource={SELECT_DATA}
         getLabel={(item) => item?.label}
         quickSelect
         value={selectValue}
@@ -26,15 +28,16 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
       />
       <Select
         showSearch
+        valueType="string"
         label="Select"
         placeholder="Placeholder"
         variant="outline"
         className="my-2"
-        transformer={(res) => SELECT_DATA}
+        dataSource={SELECT_DATA}
         getLabel={(item) => item?.label}
         value={singleValue}
         onChange={(v) => setSingleValue(v)}
-        multiple
+        // multiple
         quickRemove
         // quickSelect
       />
