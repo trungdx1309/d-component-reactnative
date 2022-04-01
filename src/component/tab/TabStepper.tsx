@@ -1,14 +1,20 @@
-import React from "react";
-import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import ClassNames from "classnames";
+import React, { ElementRef, useEffect, useRef } from "react";
+import {
+  FlatList,
+  StyleSheet,
+  TextStyle,
+  useColorScheme,
+  ViewStyle,
+} from "react-native";
+import { AppSizes } from "../..";
 import { ColorKeyType } from "../../style/constant/AppColors";
 import { getColorValue } from "../../style/modifier";
 import Icon from "../icon/Icon";
+import { IBadgeProps } from "../items/Badge";
 import Text from "../text/Text";
-import ScrollView from "../view/ScrollView";
 import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
-import { IBadgeProps } from "../items/Badge";
 
 export interface ITabStepperItemData {
   id: any;
@@ -36,6 +42,21 @@ export interface ITabStepperProps extends Partial<ITabStepperItemProps> {
   styleScrollView?: ViewStyle;
 }
 
+export interface ITabStepperItemThemeColors {
+  activeColor?: ColorKeyType;
+  activeColorDarkMode?: ColorKeyType;
+  inActiveColor?: ColorKeyType;
+  inActiveColorDarkMode?: ColorKeyType;
+  indexActiveColorDarkMode?: ColorKeyType;
+  indexActiveColor?: ColorKeyType;
+  indexInActiveColorDarkMode?: ColorKeyType;
+  indexInActiveColor?: ColorKeyType;
+  labelActiveColorDarkMode?: ColorKeyType;
+  labelActiveColor?: ColorKeyType;
+  labelInActiveColorDarkMode?: ColorKeyType;
+  labelInActiveColor?: ColorKeyType;
+}
+
 export interface ITabStepperItemProps {
   valueItem: ITabStepperItemData;
   index: number;
@@ -45,8 +66,9 @@ export interface ITabStepperItemProps {
   onPress?: any;
   style?: ViewStyle;
   activeColor?: ColorKeyType;
+  activeColorDarkMode?: ColorKeyType;
   inActiveColor?: ColorKeyType;
-  colorDarkMode?: ColorKeyType;
+  inActiveColorDarkMode?: ColorKeyType;
   indexColorDarkMode?: ColorKeyType;
   indexColor?: ColorKeyType;
   getLabel?: (item: ITabStepperItemData) => any;
@@ -57,6 +79,9 @@ export interface ITabStepperItemProps {
   showBorderActive?: boolean;
   tabLineLength?: number;
   tabLineHeight?: number;
+  firstDistance?: number;
+  lastDistance?: number;
+  themeColors?: ITabStepperItemThemeColors;
 }
 
 export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
@@ -69,21 +94,51 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
   style,
   styleTextIndex,
   styleTextLabel,
-  activeColor = "primary",
-  inActiveColor = "gray",
-  colorDarkMode = "white",
-  indexColorDarkMode = "black",
-  indexColor = "white",
+
   getLabel = (item) => item?.label,
   variant = "index",
   shape = "circle",
   showBorderActive,
   tabLineLength = 20,
   tabLineHeight = 5,
+  firstDistance = 30,
+  lastDistance = 30,
+  themeColors = {},
 }) => {
-  const colorActive = getColorValue(activeColor);
-  const colorInActive = getColorValue(inActiveColor);
-  const backgroundDarkMode = getColorValue(colorDarkMode);
+  const {
+    activeColor = "primary",
+    activeColorDarkMode = "light",
+    inActiveColor = "gray",
+    inActiveColorDarkMode = "disabled",
+    indexActiveColor = "white",
+    indexActiveColorDarkMode = "black",
+    indexInActiveColor = "white",
+    indexInActiveColorDarkMode = "black",
+    labelActiveColor = "black",
+    labelActiveColorDarkMode = "white",
+    labelInActiveColor = "black",
+    labelInActiveColorDarkMode = "white",
+  } = themeColors || {};
+
+  const isDarkMode = useColorScheme() === "dark";
+  const colorActive = getColorValue(
+    isDarkMode ? activeColorDarkMode : activeColor
+  );
+  const colorInActive = getColorValue(
+    isDarkMode ? inActiveColorDarkMode : inActiveColor
+  );
+  const indexColorActive = getColorValue(
+    isDarkMode ? indexActiveColorDarkMode : indexActiveColor
+  );
+  const indexColorInActive = getColorValue(
+    isDarkMode ? indexInActiveColorDarkMode : indexInActiveColor
+  );
+  const labelColorActive = getColorValue(
+    isDarkMode ? labelActiveColorDarkMode : labelActiveColor
+  );
+  const labelColorInActive = getColorValue(
+    isDarkMode ? labelInActiveColorDarkMode : labelInActiveColor
+  );
   const displayLabel = getLabel(valueItem);
 
   const colorStyleActive: ViewStyle = {
@@ -110,16 +165,14 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
         <Icon
           name="check"
           size={16}
-          color={indexColor}
-          colorDarkMode={indexColorDarkMode}
+          color={active || isPassed ? indexColorActive : indexColorInActive}
         />
       );
     }
     return (
       <Text
         style={[styleTextIndex]}
-        colorDarkMode={indexColorDarkMode}
-        color={indexColor}
+        color={active || isPassed ? indexColorActive : indexColorInActive}
       >
         {index}
       </Text>
@@ -127,14 +180,21 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
   };
 
   return (
-    <View style={[styles.tabItem, style]} colorDarkMode="transparent">
+    <View
+      style={[
+        styles.tabItem,
+        { marginRight: isLastStep ? lastDistance : undefined },
+        { marginLeft: index === 0 ? firstDistance : undefined },
+        style,
+      ]}
+      colorDarkMode="transparent"
+    >
       {index !== 0 && (
         <View
           style={[
             tabLineStyle,
             active || isPassed ? colorStyleActive : colorStyleInActive,
           ]}
-          colorDarkMode={backgroundDarkMode}
         />
       )}
       <TouchableOpacity
@@ -153,13 +213,21 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
             },
             active || isPassed ? colorStyleActive : colorStyleInActive,
           ]}
-          colorDarkMode={backgroundDarkMode}
           className={indexWrapperClass}
         >
           {indexView()}
         </View>
         {displayLabel && (
-          <Text style={[styles.tabLabelText, styleTextLabel]}>
+          <Text
+            style={[
+              styles.tabLabelText,
+              {
+                color:
+                  active || isPassed ? labelColorActive : labelColorInActive,
+              },
+              styleTextLabel,
+            ]}
+          >
             {displayLabel}
           </Text>
         )}
@@ -170,7 +238,6 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
             tabLineStyle,
             isPassed ? colorStyleActive : colorStyleInActive,
           ]}
-          colorDarkMode={backgroundDarkMode}
         />
       )}
     </View>
@@ -196,6 +263,47 @@ const TabStepper: React.FC<ITabStepperProps> = ({
   styleScrollView,
   ...rest
 }) => {
+  const listRef = useRef<ElementRef<typeof FlatList>>(null);
+
+  useEffect(() => {
+    const findIndex = dataSource.findIndex(
+      (item) => getValue(value as any) === getValue(item)
+    );
+    if (findIndex !== -1) {
+      listRef.current && listRef.current.scrollToIndex({ index: findIndex });
+    }
+  }, [value]);
+
+  const renderItem = (iTab: ITabStepperItemData, index: number) => {
+    const activeIndex = dataSource.findIndex(
+      (item) => getValue(value as any, index) === getValue(item, index)
+    );
+    const isActive = activeIndex === index;
+    const isPassed = activeIndex > index;
+    let itemProps: any = {};
+    if (getItemProps) {
+      itemProps = getItemProps({ item: iTab, isActive, isPassed });
+    }
+    return (
+      <TabStepperItem
+        key={`${iTab?.id}_${iTab?.label}_${index}`}
+        isLastStep={index === dataSource?.length - 1}
+        active={isActive}
+        isPassed={isPassed}
+        activeColor={activeColor}
+        inActiveColor={inActiveColor}
+        getLabel={() => getLabel && getLabel(iTab, index)}
+        onPress={() => onPressItem && onPressItem(iTab, index)}
+        variant={variant}
+        shape={shape}
+        {...rest}
+        {...itemProps}
+        valueItem={iTab}
+        index={index}
+      />
+    );
+  };
+
   const content = (
     <View
       style={[styles.container, style]}
@@ -203,45 +311,23 @@ const TabStepper: React.FC<ITabStepperProps> = ({
       colorDarkMode="transparent"
     >
       {dataSource.map((iTab, index) => {
-        const activeIndex = dataSource.findIndex(
-          (item) => getValue(value as any, index) === getValue(item, index)
-        );
-        const isActive = activeIndex === index;
-        const isPassed = activeIndex > index;
-        let itemProps: any = {};
-        if (getItemProps) {
-          itemProps = getItemProps({ item: iTab, isActive, isPassed });
-        }
-        return (
-          <TabStepperItem
-            isLastStep={index === dataSource?.length - 1}
-            active={isActive}
-            isPassed={isPassed}
-            activeColor={activeColor}
-            inActiveColor={inActiveColor}
-            getLabel={() => getLabel && getLabel(iTab, index)}
-            onPress={() => onPressItem && onPressItem(iTab, index)}
-            variant={variant}
-            shape={shape}
-            {...rest}
-            {...itemProps}
-            valueItem={iTab}
-            index={index}
-          />
-        );
+        return renderItem(iTab, index);
       })}
     </View>
   );
   if (scrollable) {
     return (
-      <ScrollView
+      <FlatList
+        data={dataSource}
+        renderItem={({ item, index }) => renderItem(item as any, index)}
         horizontal
-        className={`w-full ${classNameScrollView}`}
-        colorDarkMode="transparent"
-        style={styleScrollView}
-      >
-        {content}
-      </ScrollView>
+        style={[{ width: AppSizes.screenWidth }, styleScrollView]}
+        showsHorizontalScrollIndicator={false}
+        ref={listRef}
+        onScrollToIndexFailed={({ index }) => {
+          listRef.current && listRef.current.scrollToIndex({ index: 0 });
+        }}
+      />
     );
   }
   return content;
