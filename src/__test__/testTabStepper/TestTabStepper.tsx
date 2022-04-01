@@ -15,9 +15,9 @@ const TAB_STEPPER_DATA = [
   { id: 3, label: "Step 3" },
   { id: 4, label: "Step 4" },
   { id: 5, label: "Step 5" },
-  { id: 5, label: "Step 5" },
-  { id: 5, label: "Step 5" },
-  { id: 5, label: "Step 5" },
+  { id: 6, label: "Step 6" },
+  { id: 7, label: "Step 7" },
+  { id: 8, label: "Step 8" },
 ];
 
 const TestTabStepper: React.FC<ITestTabStepperProps> = ({ id }) => {
@@ -34,6 +34,8 @@ const TestTabStepper: React.FC<ITestTabStepperProps> = ({ id }) => {
         onPressItem={(item, index) => setActiveIndex(index)}
         getItemProps={() => ({ tabLineLength: 50 })}
         className="px-5"
+        variant="icon"
+        firstDistance={30}
       />
       <View className="flex-center-y justify-content-between mt-5">
         <Button

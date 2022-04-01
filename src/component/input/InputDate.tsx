@@ -6,7 +6,9 @@ import { ColorKeyType } from "../../style/constant/AppColors";
 import { getThemeColor } from "../../style/modifier";
 import Sizes from "../../style/size/_size";
 import TimeUtils from "../../utils/TimeUtils";
-import MonthYearModal from "../date-time/MonthYearModal";
+import MonthYearModal, {
+  IMonthYearModalProps,
+} from "../date-time/MonthYearModal";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
@@ -55,8 +57,7 @@ export interface IInputDateProps
   styleDatePicker?: ViewStyle;
   mode?: InputDateModeType;
 
-  monthYearNextText?: string;
-  monthYearPrevText?: string;
+  monthYearModalProps?: Partial<IMonthYearModalProps>;
 }
 
 export const getDateModalTypeFromMode = (
@@ -105,8 +106,7 @@ const InputDate: React.ForwardRefRenderFunction<
     customIcon,
     minimumDate,
     maximumDate,
-    monthYearNextText,
-    monthYearPrevText,
+    monthYearModalProps = {},
     ...rest
   },
   ref
@@ -261,10 +261,9 @@ const InputDate: React.ForwardRefRenderFunction<
           open={openDateModal.open}
           key={`${openDateModal.open}_${openDateModal.type}_${openDateModal.timeStamp}`}
           onClose={() => setOpenDateModal({ open: false })}
+          {...monthYearModalProps}
           value={value}
           onChange={(v) => onChange && onChange(v)}
-          prevText={monthYearPrevText}
-          nextText={monthYearNextText}
           minimumDate={minimumDate}
           maximumDate={maximumDate}
         />
