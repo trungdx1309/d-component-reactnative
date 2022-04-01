@@ -1,7 +1,7 @@
 import ClassNames from "classnames";
 import _ from "lodash";
 import React, { ElementRef, useEffect, useMemo, useRef, useState } from "react";
-import { FlatList, Platform, ViewStyle } from "react-native";
+import { Platform, ViewStyle } from "react-native";
 import Sizes from "../../style/size/_size";
 import Button from "../button/Button";
 import CheckBox from "../checkbox/CheckBox";
@@ -306,12 +306,17 @@ const Select: React.FC<ISelectProps> = ({
   const renderList = () => {
     if (dataSource && dataSource?.length > 0) {
       return (
-        <FlatList
-          data={dataSource}
+        <AwesomeList
+          ref={listRef}
+          isPaging={isPaging}
+          source={() => Promise.resolve()}
+          transformer={(res) => dataSource}
           renderItem={renderSelectItem}
           keyExtractor={keyExtractor}
+          className="px-3"
           ListFooterComponent={<View style={{ height: 200 }} />}
           showsVerticalScrollIndicator={false}
+          {...listProps}
         />
       );
     }

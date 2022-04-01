@@ -33,7 +33,7 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
         placeholder="Placeholder"
         variant="outline"
         className="my-2"
-        dataSource={SELECT_DATA}
+        transformer={(res) => SELECT_DATA}
         getLabel={(item) => item?.label}
         value={singleValue}
         onChange={(v) => setSingleValue(v)}

@@ -86,9 +86,14 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
   const backgroundDarkMode = getColorValue(colorDarkMode);
   const displayLabel = getLabel(valueItem);
 
-  const colorStyle: ViewStyle = {
-    backgroundColor: active || isPassed ? colorActive : colorInActive,
+  const colorStyleActive: ViewStyle = {
+    backgroundColor: colorActive,
   };
+
+  const colorStyleInActive: ViewStyle = {
+    backgroundColor: colorInActive,
+  };
+
   const indexWrapperClass = ClassNames({
     "rounded-pill": shape === "circle",
     "rounded-2": shape === "rounded",
@@ -125,10 +130,10 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
     <View style={[styles.tabItem, style]} colorDarkMode="transparent">
       {index !== 0 && (
         <View
-          style={{
-            ...tabLineStyle,
-            ...colorStyle,
-          }}
+          style={[
+            tabLineStyle,
+            active || isPassed ? colorStyleActive : colorStyleInActive,
+          ]}
           colorDarkMode={backgroundDarkMode}
         />
       )}
@@ -138,13 +143,16 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
         colorDarkMode="transparent"
       >
         <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            width: 30,
-            height: 30,
-            ...colorStyle,
-          }}
+          style={[
+            {
+              justifyContent: "center",
+              alignItems: "center",
+              width: 30,
+              height: 30,
+              ...colorStyleActive,
+            },
+            active || isPassed ? colorStyleActive : colorStyleInActive,
+          ]}
           colorDarkMode={backgroundDarkMode}
           className={indexWrapperClass}
         >
@@ -158,10 +166,10 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
       </TouchableOpacity>
       {!isLastStep && (
         <View
-          style={{
-            ...tabLineStyle,
-            ...colorStyle,
-          }}
+          style={[
+            tabLineStyle,
+            isPassed ? colorStyleActive : colorStyleInActive,
+          ]}
           colorDarkMode={backgroundDarkMode}
         />
       )}
