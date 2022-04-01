@@ -2,16 +2,16 @@ import ClassNames from "classnames";
 import React, { useImperativeHandle, useMemo, useState } from "react";
 import { useColorScheme, ViewStyle } from "react-native";
 import DatePicker, { DatePickerProps } from "react-native-date-picker";
-import _ from "lodash";
+import { ColorKeyType } from "../../style/constant/AppColors";
 import { getThemeColor } from "../../style/modifier";
 import Sizes from "../../style/size/_size";
 import TimeUtils from "../../utils/TimeUtils";
+import MonthYearModal from "../date-time/MonthYearModal";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import TouchableOpacity from "../view/TouchableOpacity";
 import View from "../view/View";
 import { InputErrorView } from "./InputText";
-import { ColorKeyType } from "../../style/constant/AppColors";
 
 export type TDateFormat =
   | "DD/MM/YYYY HH:mm"
@@ -26,8 +26,12 @@ export interface ICustomInputProps {
   displayValue: any;
 }
 
+export type DateModalType = "dateTime" | "monthYear";
+
+export type InputDateModeType = "date" | "time" | "datetime" | "month";
+
 export interface IInputDateProps
-  extends Omit<DatePickerProps, "date" | "onDateChange"> {
+  extends Omit<DatePickerProps, "date" | "onDateChange" | "mode"> {
   value?: DatePickerProps["date"];
   format?: TDateFormat;
   onChange?: DatePickerProps["onDateChange"];
@@ -49,10 +53,25 @@ export interface IInputDateProps
   disabled?: boolean;
   disabledColor?: ColorKeyType | null;
   styleDatePicker?: ViewStyle;
+  mode?: InputDateModeType;
+
+  monthYearNextText?: string;
+  monthYearPrevText?: string;
 }
 
+export const getDateModalTypeFromMode = (
+  mode?: InputDateModeType
+): DateModalType => {
+  switch (mode) {
+    case "month":
+      return "monthYear";
+    default:
+      return "dateTime";
+  }
+};
+
 export interface IInputDateMethod {
-  open: () => any;
+  open: (type: DateModalType) => any;
   close: () => any;
 }
 
@@ -84,6 +103,10 @@ const InputDate: React.ForwardRefRenderFunction<
     disabledColor = "muted",
     customInput,
     customIcon,
+    minimumDate,
+    maximumDate,
+    monthYearNextText,
+    monthYearPrevText,
     ...rest
   },
   ref
@@ -126,7 +149,11 @@ const InputDate: React.ForwardRefRenderFunction<
     classNameError
   );
 
-  const [openDateModal, setOpenDateModal] = useState(false);
+  const [openDateModal, setOpenDateModal] = useState<{
+    open: boolean;
+    type?: DateModalType;
+    timeStamp?: any;
+  }>({ open: false });
 
   const displayValue = useMemo(() => {
     if (!value) {
@@ -154,8 +181,8 @@ const InputDate: React.ForwardRefRenderFunction<
   }, [value, onChange]);
 
   useImperativeHandle(ref, () => ({
-    open: () => setOpenDateModal(true),
-    close: () => setOpenDateModal(false),
+    open: (type: DateModalType) => setOpenDateModal({ open: true, type }),
+    close: () => setOpenDateModal({ open: false }),
   }));
 
   const renderIcon = () => {
@@ -192,32 +219,56 @@ const InputDate: React.ForwardRefRenderFunction<
     <View className={wrapperClass} colorDarkMode="transparent" style={style}>
       {label && <Text className={labelClass}>{label}</Text>}
       <TouchableOpacity
-        onPress={() => setOpenDateModal(true)}
+        onPress={() => {
+          const type = getDateModalTypeFromMode(mode);
+          setOpenDateModal({
+            open: true,
+            type,
+            timeStamp: new Date().valueOf(),
+          });
+        }}
         disabled={disabled}
         colorDarkMode="transparent"
       >
         {renderContent()}
       </TouchableOpacity>
       {error && <InputErrorView error={error} className={errorClass} />}
-      <DatePicker
-        modal
-        open={openDateModal}
-        onConfirm={(date) => {
-          setOpenDateModal(false);
-          onChange && onChange(date);
-        }}
-        onCancel={() => setOpenDateModal(false)}
-        date={value || new Date()}
-        onDateChange={onChange as any}
-        cancelText={cancelText}
-        confirmText={confirmText}
-        style={styleDatePicker}
-        focusable
-        {...rest}
-        mode={mode}
-        timeZoneOffsetInMinutes={420}
-        textColor={isDarkMode ? "white" : undefined}
-      />
+      {openDateModal.open && openDateModal?.type === "dateTime" && (
+        <DatePicker
+          modal
+          open={openDateModal.open}
+          onConfirm={(date) => {
+            setOpenDateModal({ open: false });
+            onChange && onChange(date);
+          }}
+          onCancel={() => setOpenDateModal({ open: false })}
+          date={value || new Date()}
+          onDateChange={onChange as any}
+          cancelText={cancelText}
+          confirmText={confirmText}
+          style={styleDatePicker}
+          focusable
+          {...rest}
+          minimumDate={minimumDate}
+          maximumDate={maximumDate}
+          mode={mode as any}
+          timeZoneOffsetInMinutes={420}
+          textColor={isDarkMode ? "white" : undefined}
+        />
+      )}
+      {openDateModal.open && openDateModal?.type === "monthYear" && (
+        <MonthYearModal
+          open={openDateModal.open}
+          key={`${openDateModal.open}_${openDateModal.type}_${openDateModal.timeStamp}`}
+          onClose={() => setOpenDateModal({ open: false })}
+          value={value}
+          onChange={(v) => onChange && onChange(v)}
+          prevText={monthYearPrevText}
+          nextText={monthYearNextText}
+          minimumDate={minimumDate}
+          maximumDate={maximumDate}
+        />
+      )}
     </View>
   );
 };

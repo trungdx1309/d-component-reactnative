@@ -52,6 +52,18 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         colorDark="yellow"
       />
       <InputDate
+        label="Date Input Select Month Year"
+        variant="outline"
+        className="my-2"
+        mode="month"
+        format="MM/YYYY"
+        placeholder="Date Input Select Month Year"
+        onChange={(v) => {
+          setDate(v);
+        }}
+        value={date}
+      />
+      <InputDate
         label="Date Input Outline"
         variant="outline"
         className="my-2"
@@ -98,10 +110,19 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         value={date}
       />
       <InputDateRange
-        label="Date Input Range"
+        label="Date Input Range Month Year"
+        className="my-2"
         value={dateRange}
         onChange={(v = []) => setDateRange(v)}
-        mode="datetime"
+        mode="month"
+        format="MM/YYYY"
+      />
+      <InputDateRange
+        label="Date Input Range"
+        className="my-2"
+        value={dateRange}
+        onChange={(v = []) => setDateRange(v)}
+        mode="date"
       />
 
       <InputDate

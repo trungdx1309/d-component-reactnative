@@ -12,7 +12,11 @@ import TimeUtils from "../../utils/TimeUtils";
 import Icon from "../icon/Icon";
 import Text from "../text/Text";
 import View from "../view/View";
-import InputDate, { ICustomInputProps, IInputDateProps } from "./InputDate";
+import InputDate, {
+  getDateModalTypeFromMode,
+  ICustomInputProps,
+  IInputDateProps,
+} from "./InputDate";
 import { InputErrorView } from "./InputText";
 
 export interface IRangeDateCustomInputProps extends ICustomInputProps {
@@ -55,6 +59,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
     colorDarkMode = "transparent",
     colorDarkModeContent = "transparent",
     customInput,
+    mode,
     ...rest
   },
   ref
@@ -91,7 +96,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
       clone[1] = undefined;
     }
     onChange && onChange(clone);
-    endRef.current && endRef.current.open();
+    endRef.current && endRef.current.open(getDateModalTypeFromMode(mode));
   };
 
   const handleChangeEndTime = (end: any) => {
@@ -114,6 +119,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
           classNameText="text-center"
           showIcon={false}
           onChange={(v) => handleChangeStartTime(v)}
+          maximumDate={value?.[1]}
           value={value?.[0]}
           placeholder={startText}
           customInput={
@@ -123,6 +129,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
                 }
               : customInput
           }
+          mode={mode}
           {...rest}
         />
         <Icon
@@ -147,6 +154,7 @@ const InputDateRange: React.ForwardRefRenderFunction<
                 }
               : customInput
           }
+          mode={mode}
           {...rest}
         />
       </View>
