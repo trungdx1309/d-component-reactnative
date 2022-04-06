@@ -12,6 +12,8 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
   const [selectValue, setSelectValue] = useState();
   const [singleValue, setSingleValue] = useState();
 
+  console.log({ singleValue });
+
   return (
     <ScrollView className="py-3 w-100">
       <Select
@@ -37,7 +39,7 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
         getLabel={(item) => item?.label}
         value={singleValue}
         onChange={(v) => setSingleValue(v)}
-        // multiple
+        multiple
         quickRemove
         // quickSelect
       />

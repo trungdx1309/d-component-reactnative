@@ -1,6 +1,7 @@
 import React from "react";
 import ScrollView from "../../component/view/ScrollView";
 import View from "../../component/view/View";
+import Text from "../../component/text/Text";
 
 export interface ITestStyleProps {
   [key: string]: any;
@@ -14,6 +15,11 @@ const TestStyle: React.FC<ITestStyleProps> = ({ id }) => {
           className="width-50 height-50  border-dashed border-primary my-3"
           colorDarkMode="red"
         />
+        <Text className="h2">
+          width-50 height-50 border-dashed border-primary my-3 width-50
+          height-50 border-dashed border-primary my-3 width-50 height-50
+          border-dashed border-primary my-3
+        </Text>
       </View>
     </ScrollView>
   );

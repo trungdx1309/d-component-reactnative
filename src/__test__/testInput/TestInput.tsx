@@ -84,7 +84,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
           setDate(v);
         }}
         value={date}
-        disabled
+        // disabled
         placeholder="Date Input Outline"
       />
       <InputDate

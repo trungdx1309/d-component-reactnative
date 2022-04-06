@@ -133,8 +133,11 @@ const InputText: React.ForwardRefRenderFunction<
     classNameWrapper
   );
   const inputClass = ClassNames(
-    "flex-1 px-2 h4",
-    { "py-2": Platform.OS === "android" },
+    "flex-1 h4",
+    {
+      "py-2": Platform.OS === "android",
+      "px-2": variant !== "standard" && variant !== "trans",
+    },
     classNameInput
   );
   const errorClass = ClassNames(

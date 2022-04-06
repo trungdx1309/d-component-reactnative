@@ -126,9 +126,10 @@ const Select: React.FC<ISelectProps> = ({
     },
     `${classNameLabel}`
   );
-  const contentClass = ClassNames("flex-center-y pl-2 pr-1", {
+  const contentClass = ClassNames("flex-center-y pr-1", {
     "border-bottom": variant === "standard",
     "pl-1 py-1": multiple,
+    "pl-2": variant !== "standard",
     border: variant === "outline",
   });
   const errorClass = ClassNames(
