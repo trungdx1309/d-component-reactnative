@@ -13,7 +13,7 @@ import marginPadding from "./layout/_padding-margin";
 import backgroundStyle from "./theme/_background";
 import borderStyle from "./theme/_border";
 import widthHeightStyle from "./layout/_width-height";
-import textStyle from "./font/_text";
+import textStyle from "./text/_text";
 import positionStyle from "./layout/_position";
 import imageStyle from "./image/_image";
 import shadowStyle from "./theme/_shadow";

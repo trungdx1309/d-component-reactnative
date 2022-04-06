@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 import { StyleSheet, Platform } from "react-native";
 import Colors from "../color/_color";
+import Fonts from "../font/_font";
 import { generateStyleValue } from "../modifier";
 
 export const base = {
@@ -8,10 +9,10 @@ export const base = {
   lineHeight: 12,
   ...Platform.select({
     ios: {
-      fontFamily: "Poppins-Regular",
+      fontFamily: Fonts.iosFont,
     },
     android: {
-      fontFamily: "Poppins-Reg",
+      fontFamily: Fonts.androidFont,
     },
   }),
 };
@@ -23,14 +24,14 @@ export const FONT_WEIGHT_VARIANT = { "font-weight": "fontWeight" };
 
 const textSizeClass: any = {};
 for (let i = 0; i < 100; i++) {
-  textSizeClass[`size-${i}`] = {
+  textSizeClass[`font-size-${i}`] = {
     fontSize: i,
   };
 }
 
 const textLineHeightClass: any = {};
 for (let i = 0; i <= 50; i += 1) {
-  textLineHeightClass[`text-height-${i}`] = {
+  textLineHeightClass[`line-height-${i}`] = {
     lineHeight: i,
   };
 }

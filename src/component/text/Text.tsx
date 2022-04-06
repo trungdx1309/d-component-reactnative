@@ -7,9 +7,9 @@ import {
 } from "react-native";
 import Colors from "../../style/color/_color";
 import { ColorKeyType } from "../../style/constant/AppColors";
-import textStyle from "../../style/font/_text";
 import { getColorValue } from "../../style/modifier";
 import { getStyleProps } from "../../style/style";
+import textStyle from "../../style/text/_text";
 
 export interface ITextProps extends TextProps {
   className?: string;
@@ -29,6 +29,7 @@ const Text: React.FC<ITextProps> = ({
   const transStyle = getStyleProps(rest);
   const isDarkMode = useColorScheme() === "dark";
   const defaultStyle: TextStyle = {
+    ...textStyle.h4,
     color: isDarkMode ? light : undefined,
   };
   const listStyle = [defaultStyle, transStyle, style];

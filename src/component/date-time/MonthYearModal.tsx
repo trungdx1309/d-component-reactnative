@@ -5,7 +5,7 @@ import { TextStyle, useColorScheme, ViewStyle } from "react-native";
 import MonthPicker from "react-native-month-picker";
 import { Icon } from "../..";
 import AppColors, { ColorKeyType } from "../../style/constant/AppColors";
-import textStyle from "../../style/font/_text";
+import textStyle from "../../style/text/_text";
 import { getColorValue } from "../../style/modifier";
 import Modal, { IModalProps } from "../modal/Modal";
 
