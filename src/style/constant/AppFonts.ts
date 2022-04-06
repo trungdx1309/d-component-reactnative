@@ -2,8 +2,6 @@
  * App Theme - Sizes
  */
 
-import _ from "lodash";
-
 const DefaultFont = {
   iosFont: "Poppins-Regular",
   androidFont: "Poppins-Reg",
