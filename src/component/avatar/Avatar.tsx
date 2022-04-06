@@ -47,12 +47,12 @@ const Avatar: React.FC<IAvatarProps> = ({
   const letterClass = ClassNames(
     "text-white text-center font-weight-bold",
     {
-      "size-80": size === "xx-large",
-      "size-60": size === "x-large",
-      "size-48": size === "large",
-      "size-36": size === "medium",
-      "size-30": size === "small",
-      "size-20": size === "x-small",
+      "font-size-80": size === "xx-large",
+      "font-size-60": size === "x-large",
+      "font-size-48": size === "large",
+      "font-size-36": size === "medium",
+      "font-size-30": size === "small",
+      "font-size-20": size === "x-small",
       h3: size === "xx-small",
       h4: size === "tiny",
     },
