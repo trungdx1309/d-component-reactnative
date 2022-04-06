@@ -9,18 +9,18 @@ export class AppFontClass {
   }
 
   /**
-   * Load custom set of sizes
+   * Load custom set of fonts
    * arguments:
-   * sizes - map of keys and size values e.g {inputHeight: 50, buttonHeight: 30}
+   * fonts - map of keys and font family values e.g {iosFont: Poppins-Regular}
    */
-  loadSizes(sizes: { [key in Partial<AppFontKeyType>]: string | number }) {
-    _.forEach(sizes, (value, key) => {
+  loadFonts(fonts: { [key in Partial<AppFontKeyType>]: string }) {
+    _.forEach(fonts, (value, key) => {
       this[key] = value;
     });
   }
 }
 
 const Fonts = new AppFontClass();
-Fonts.loadSizes(DefaultFont);
+Fonts.loadFonts(DefaultFont);
 
 export default Fonts;
