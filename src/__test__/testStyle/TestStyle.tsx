@@ -15,7 +15,7 @@ const TestStyle: React.FC<ITestStyleProps> = ({ id }) => {
           className="width-50 height-50  border-dashed border-primary my-3"
           colorDarkMode="red"
         />
-        <Text className="h2">
+        <Text className="h0 label">
           width-50 height-50 border-dashed border-primary my-3 width-50
           height-50 border-dashed border-primary my-3 width-50 height-50
           border-dashed border-primary my-3

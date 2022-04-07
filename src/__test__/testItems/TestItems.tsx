@@ -15,7 +15,7 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
   const renderRow = (label: string, component: any) => {
     return (
       <View className="flex-center-y my-2">
-        <Text className="h5">{label} : </Text>
+        <Text className="h4">{label} : </Text>
         {component}
       </View>
     );

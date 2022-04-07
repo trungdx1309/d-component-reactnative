@@ -1,26 +1,14 @@
 /* eslint-disable no-plusplus */
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 import Colors from "../color/_color";
 import Fonts from "../font/_font";
 import { generateStyleValue } from "../modifier";
-
-export const base = {
-  fontSize: 10,
-  // lineHeight: 12,
-  ...Platform.select({
-    ios: {
-      fontFamily: Fonts.iosFont,
-    },
-    android: {
-      fontFamily: Fonts.androidFont,
-    },
-  }),
-};
 
 export const TEXT_ALIGN_VARIANTS = { text: "textAlign" };
 export const TEXT_DECOR_VARIANTS = { text: "textDecorationLine" };
 export const TEXT_TRANSFORM_VARIANTS = { text: "textTransform" };
 export const FONT_WEIGHT_VARIANT = { "font-weight": "fontWeight" };
+export const FONT_SIZE_VARIANT = { "font-size": "fontSize" };
 
 const textSizeClass: any = {};
 for (let i = 0; i < 100; i++) {
@@ -96,83 +84,6 @@ const fontWeightClass = generateStyleValue(
 );
 
 const textStyle = StyleSheet.create({
-  h0: {
-    ...base,
-    fontSize: base.fontSize * 2,
-    // lineHeight: base.fontSize * 2 * 1.1,
-    ...Platform.select({
-      ios: {
-        fontFamily: Fonts.iosFont,
-      },
-      android: {
-        fontFamily: Fonts.androidFont,
-      },
-    }),
-  },
-  h1: {
-    ...base,
-    fontSize: base.fontSize * 1.8,
-    // lineHeight: base.fontSize * 1.8 * 1.2,
-    ...Platform.select({
-      ios: {
-        fontFamily: Fonts.iosFont,
-      },
-      android: {
-        fontFamily: Fonts.androidFont,
-      },
-    }),
-  },
-  h2: {
-    ...base,
-    fontSize: base.fontSize * 1.6,
-    // lineHeight: base.fontSize * 1.6 * 1.3,
-    ...Platform.select({
-      ios: {
-        fontFamily: Fonts.iosFont,
-      },
-      android: {
-        fontFamily: Fonts.androidFont,
-      },
-    }),
-  },
-  h3: {
-    ...base,
-    fontSize: base.fontSize * 1.4,
-    // lineHeight: base.fontSize * 1.4 * 1.4,
-    ...Platform.select({
-      ios: {
-        fontFamily: Fonts.iosFont,
-      },
-      android: {
-        fontFamily: Fonts.androidFont,
-      },
-    }),
-  },
-  h4: {
-    ...base,
-    fontSize: base.fontSize * 1.2,
-    // lineHeight: base.fontSize * 1.2 * 1.5,
-    ...Platform.select({
-      ios: {
-        fontFamily: Fonts.iosFont,
-      },
-      android: {
-        fontFamily: Fonts.androidFont,
-      },
-    }),
-  },
-  h5: {
-    ...base,
-    ...Platform.select({
-      ios: {
-        fontFamily: Fonts.iosFont,
-      },
-      android: {
-        fontFamily: Fonts.androidFont,
-      },
-    }),
-  },
-  text: { ...base },
   ...textColorClass,
   ...textAlignClass,
   ...textDecorClass,
@@ -180,6 +91,7 @@ const textStyle = StyleSheet.create({
   ...textSizeClass,
   ...fontWeightClass,
   ...textLineHeightClass,
+  ...Fonts.fontClass,
 });
 
 export default textStyle;
