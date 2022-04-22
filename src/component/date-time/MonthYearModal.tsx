@@ -5,7 +5,7 @@ import { TextStyle, useColorScheme, ViewStyle } from "react-native";
 import MonthPicker from "react-native-month-picker";
 import { Icon } from "../..";
 import AppColors, { ColorKeyType } from "../../style/constant/AppColors";
-import textStyle from "../../style/text/_text";
+import Fonts from "../../style/font/_font";
 import { getColorValue } from "../../style/modifier";
 import Modal, { IModalProps } from "../modal/Modal";
 
@@ -39,7 +39,7 @@ const MonthYearModal: React.FC<IMonthYearModalProps> = ({
     value || moment().toDate()
   );
   const thisTextStyle: TextStyle = {
-    ...textStyle.h4,
+    ...Fonts.fontClass.h4,
     color: isDarkMode ? "white" : "black",
   };
 

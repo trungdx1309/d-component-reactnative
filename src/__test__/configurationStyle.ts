@@ -5,4 +5,10 @@ import Fonts from "../style/font/_font";
 Colors.loadColors({ primary: "red" });
 //@ts-ignore
 // Sizes.loadSizes({ buttonHeight: 20 });
-Fonts.loadFonts({ iosFont: "Prompt-Light" });
+Fonts.loadFonts({
+  iosFont: "Prompt-Regular",
+  baseFontSize: 12,
+  label: {
+    fontWeight: "900",
+  },
+});
