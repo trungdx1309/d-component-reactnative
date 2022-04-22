@@ -26,6 +26,7 @@ export interface IModalProps
   showHeader?: boolean;
   showFooter?: boolean;
   showCancelButton?: boolean;
+  showSaveButton?: boolean;
   useScrollView?: boolean;
   disabledSave?: boolean;
   onClose?: (props?: any) => void;
@@ -47,6 +48,7 @@ const Modal: React.FC<IModalProps> = ({
   showHeader,
   showFooter,
   showCancelButton = true,
+  showSaveButton = true,
   swipeable = true,
   disabledSave,
   className,
@@ -157,9 +159,11 @@ const Modal: React.FC<IModalProps> = ({
             {cancelText}
           </Button>
         )}
-        <Button disabled={disabledSave} onPress={onSave} {...saveButtonProps}>
-          {saveText}
-        </Button>
+        {showSaveButton && (
+          <Button disabled={disabledSave} onPress={onSave} {...saveButtonProps}>
+            {saveText}
+          </Button>
+        )}
       </View>
     );
   };
