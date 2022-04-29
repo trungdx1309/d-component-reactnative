@@ -40,6 +40,7 @@ export interface IInputTextProps extends TextInputProps, ThemeProps {
   styleInput?: StyleProp<TextStyle>;
   onPressIcon?: (props?: any) => any;
   useKeyboardAvoidingView?: boolean;
+  offsetSpaceKeyboard?: number;
 }
 
 export interface IInputTextMethod {}
@@ -98,6 +99,7 @@ const InputText: React.ForwardRefRenderFunction<
     colorDarkMode,
     useLightColor = true,
     useKeyboardAvoidingView,
+    offsetSpaceKeyboard,
     ...rest
   },
   ref
@@ -155,6 +157,9 @@ const InputText: React.ForwardRefRenderFunction<
     }
     if (!isKeyboardShow) {
       return 0;
+    }
+    if (offsetSpaceKeyboard) {
+      return offsetSpaceKeyboard;
     }
     return Platform.OS === "ios" ? heightKeyboard - 50 : heightKeyboard;
   }, [heightKeyboard, isKeyboardShow, focusing]);
