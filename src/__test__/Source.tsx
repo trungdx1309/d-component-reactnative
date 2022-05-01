@@ -12,11 +12,13 @@ import TestList from "./testList/TestList";
 import TestSelect from "./testSelect/TestSelect";
 import TestStyle from "./testStyle/TestStyle";
 import TestTabStepper from "./testTabStepper/TestTabStepper";
+import TestView from "./testView/TestView";
 
 const DATA_SOURCE: ITabViewProps["dataSource"] = [
   { key: "testStyle", label: "Style", component: <TestStyle /> },
   { key: "testItems", label: "Items", component: <TestItems /> },
   { key: "testInput", label: "Input", component: <TestInput /> },
+  { key: "testView", label: "View", component: <TestView /> },
   { key: "testSelect", label: "Select", component: <TestSelect /> },
   { key: "testButton", label: "Button", component: <TestButton /> },
   { key: "testImage", label: "Image", component: <TestImages /> },

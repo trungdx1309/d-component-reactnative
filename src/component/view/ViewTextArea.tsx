@@ -6,6 +6,7 @@ import View from "./View";
 import Text, { ITextProps } from "../text/Text";
 import Button from "../button/Button";
 import Modal, { IModalProps } from "../modal/Modal";
+import TouchableOpacity from "./TouchableOpacity";
 
 export interface IViewTextAreaProps {
   children: string;
@@ -41,6 +42,8 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
     throw Error("children is not string!");
   }
 
+  const textStyle = "h4";
+
   const isOverFollow = useMemo(() => {
     return children && children?.length > limitedLength;
   }, [children]);
@@ -48,32 +51,59 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
 
   const displayText = useMemo(() => {
     let content = children;
+    if (showFullMessage && variant === "expand") {
+      return content;
+    }
     if (isOverFollow) {
       content = children.substring(0, limitedLength);
     }
     return content;
-  }, [children, isOverFollow]);
+  }, [children, isOverFollow, showFullMessage]);
+
+  const getShowMoreText = () => {
+    if (showFullMessage && variant === "expand") {
+      return showLessText;
+    }
+    return showMoreText;
+  };
+
+  const showDot = useMemo(() => {
+    if (variant === "expand" && showFullMessage) {
+      return false;
+    }
+    if (isOverFollow) {
+      return true;
+    }
+    return false;
+  }, [isOverFollow, showFullMessage]);
 
   return (
-    <View style={style} className={className}>
-      <Text
-        className={classNameContent}
-        style={{ maxHeight: 150, ...styleContent }}
-        {...textContentProps}
-      >
-        {displayText} {isOverFollow && <Text>...</Text>}
-        {isOverFollow && (
-          <Button
-            variant="trans"
-            size="x-small"
-            className="px-0 mt-2 align-self-start"
-            color="secondary"
-            onPress={() => setShowFullMessage(true)}
-          >
-            {showMoreText}
-          </Button>
-        )}
-      </Text>
+    <React.Fragment>
+      <View style={style} className={className}>
+        <Text
+          className={`${textStyle} ${classNameContent}`}
+          style={{ ...styleContent }}
+          {...textContentProps}
+        >
+          {displayText} {showDot && <Text className="text-center">...</Text>}
+          {isOverFollow && (
+            <TouchableOpacity
+              onPress={() => {
+                if (variant === "expand") {
+                  setShowFullMessage(!showFullMessage);
+                } else {
+                  setShowFullMessage(true);
+                }
+              }}
+              colorDarkMode="transparent"
+            >
+              <Text className={`ml-2 text-secondary ${textStyle}`}>
+                {getShowMoreText()}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </Text>
+      </View>
       {showFullMessage && variant === "modal" && (
         <Modal
           open={showFullMessage}
@@ -85,12 +115,12 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
           classNameFooter="justify-content-end"
           {...modalProps}
         >
-          <Text className="text-primary mt-2" colorDarkMode="light">
+          <Text className={`${textStyle} mt-2`} colorDarkMode="light">
             {children}
           </Text>
         </Modal>
       )}
-    </View>
+    </React.Fragment>
   );
 };
 
