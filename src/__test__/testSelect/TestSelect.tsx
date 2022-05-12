@@ -12,37 +12,37 @@ const TestSelect: React.FC<ITestSelectProps> = ({ id }) => {
   const [selectValue, setSelectValue] = useState();
   const [singleValue, setSingleValue] = useState();
 
-  console.log({ singleValue });
-
   return (
-    <ScrollView className="py-3 w-100">
-      <Select
-        valueType="string"
-        label="Select"
-        placeholder="Placeholder"
-        variant="standard"
-        className="my-2"
-        dataSource={SELECT_DATA}
-        getLabel={(item) => item?.label}
-        quickSelect
-        value={selectValue}
-        onChange={(v) => setSelectValue(v)}
-      />
-      <Select
-        showSearch
-        valueType="string"
-        label="Select"
-        placeholder="Placeholder"
-        variant="outline"
-        className="my-2"
-        transformer={(res) => SELECT_DATA}
-        getLabel={(item) => item?.label}
-        value={singleValue}
-        onChange={(v) => setSingleValue(v)}
-        multiple
-        quickRemove
-        // quickSelect
-      />
+    <ScrollView className="py-0">
+      <View className="flex-1 bg-green h-100">
+        <Select
+          valueType="string"
+          label="Select"
+          placeholder="Placeholder"
+          variant="standard"
+          className="my-2"
+          dataSource={SELECT_DATA}
+          getLabel={(item) => item?.label}
+          quickSelect
+          value={selectValue}
+          onChange={(v) => setSelectValue(v)}
+        />
+        <Select
+          showSearch
+          valueType="string"
+          label="Select"
+          placeholder="Placeholder"
+          variant="outline"
+          className="my-2"
+          transformer={(res) => SELECT_DATA}
+          getLabel={(item) => item?.label}
+          value={singleValue}
+          onChange={(v) => setSingleValue(v)}
+          multiple
+          quickRemove
+          // quickSelect
+        />
+      </View>
     </ScrollView>
   );
 };

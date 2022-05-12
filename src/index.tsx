@@ -164,8 +164,8 @@ export { default as ModalCalendar } from "./component/calendar/ModalCalendar";
 // Tab View
 // ---------------------------------------- */
 
-export type { ITabBarProps } from "./component/tab/TabBar";
-export { default as TabBar } from "./component/tab/TabBar";
+export type { ITabBarComponentProps } from "./component/tab/TabBarComponent";
+export { default as TabBarComponent } from "./component/tab/TabBarComponent";
 
 export type {
   IRenderTabViewProps,
@@ -184,6 +184,13 @@ export {
   default as TabStepper,
   TabStepperItem,
 } from "./component/tab/TabStepper";
+
+/* ----------------------------------------
+// Tab Bar
+// ---------------------------------------- */
+
+export type { ITabItem, ITabBarProps } from "./component/tab/TabBar";
+export { default as TabBar } from "./component/tab/TabBar";
 
 /* ----------------------------------------
 // Style

@@ -11,7 +11,8 @@ import TestItems from "./testItems/TestItems";
 import TestList from "./testList/TestList";
 import TestSelect from "./testSelect/TestSelect";
 import TestStyle from "./testStyle/TestStyle";
-import TestTabStepper from "./testTabStepper/TestTabStepper";
+import TestTabBar from "./testTab/TestTabBar";
+import TestTabStepper from "./testTab/TestTabStepper";
 
 const DATA_SOURCE: ITabViewProps["dataSource"] = [
   { key: "testStyle", label: "Style", component: <TestStyle /> },
@@ -24,6 +25,11 @@ const DATA_SOURCE: ITabViewProps["dataSource"] = [
   { key: "testHeader", label: "Header", component: <TestHeader /> },
   { key: "testCalendar", label: "Calendar", component: <TestCalendar /> },
   { key: "testList", label: "List", component: <TestList /> },
+  {
+    key: "testTabBar",
+    label: "Tab Bar",
+    component: <TestTabBar />,
+  },
   {
     key: "testTabStepper",
     label: "Tab Stepper",

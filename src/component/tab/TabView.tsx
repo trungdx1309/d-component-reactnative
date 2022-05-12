@@ -31,7 +31,7 @@ import AwesomeList, {
 } from "../list/awesomeList/AwesomeList";
 import Text from "../text/Text";
 import View from "../view/View";
-import TabBar from "./TabBar";
+import TabBarComponent from "./TabBarComponent";
 
 export interface ITabViewRoute extends Route {
   label?: string;
@@ -206,7 +206,7 @@ function TabView(
       return isDarkMode ? Colors.dark : Colors.light;
     };
     const tabBar = (
-      <TabBar
+      <TabBarComponent
         {...(props as any)}
         style={[styles.tabBar, tabBarStyle]}
         renderLabel={renderLabel}
