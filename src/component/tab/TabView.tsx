@@ -201,9 +201,13 @@ function TabView(
     const tabClass = ClassNames({ "width-auto": scrollEnabled });
     const getIndicatorColor = () => {
       if (!showLabelBgColor) {
-        return getTabViewColorProps(Colors.primary, colorIndicator);
+        return isDarkMode
+          ? getTabViewColorProps(Colors.primary, colorIndicatorDarkMode)
+          : getTabViewColorProps(Colors.primary, colorIndicator);
       }
-      return isDarkMode ? Colors.dark : Colors.light;
+      return isDarkMode
+        ? getTabViewColorProps(Colors.light, colorIndicatorDarkMode)
+        : getTabViewColorProps(Colors.dark, colorIndicator);
     };
     const tabBar = (
       <TabBarComponent

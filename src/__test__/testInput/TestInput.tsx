@@ -50,6 +50,8 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         label="Search Input"
         colorFocus="pink"
         colorDark="yellow"
+        useKeyboardAvoidingView
+        offsetSpaceKeyboard={50}
       />
       <InputDate
         label="Date Input Select Month Year"
