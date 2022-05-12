@@ -39,6 +39,7 @@ export interface ITabBarProps<T extends ITabItem> {
   style?: ViewStyle;
   styleScrollView?: ViewStyle;
   height?: number;
+  indicatorVariant?: "background" | "slide-bottom";
 }
 
 const TabBar: React.FC<ITabBarProps<ITabItem>> = ({
@@ -46,7 +47,6 @@ const TabBar: React.FC<ITabBarProps<ITabItem>> = ({
   value,
   className,
   classNameItem,
-  variant = "horizontal",
   onChange,
   getLabel,
   getItemProps,
@@ -56,6 +56,7 @@ const TabBar: React.FC<ITabBarProps<ITabItem>> = ({
   style,
   styleScrollView,
   height = 40,
+  indicatorVariant = "slide-bottom",
 }) => {
   const wrapperClass = ClassNames(
     `flex-center-y`,
@@ -64,22 +65,24 @@ const TabBar: React.FC<ITabBarProps<ITabItem>> = ({
     },
     className
   );
-  const activateScroll = scrollable && variant === "horizontal";
   const listRef = useRef<ElementRef<typeof FlatList>>(null);
 
   const renderItem = (tabItem: ITabItem, index: number) => {
     const isSelect = value?.id === tabItem?.id;
     const itemClass = ClassNames(
-      "d-tab-bar__item text-small",
+      "",
       {
-        "bg-primary": isSelect,
+        "bg-primary": isSelect && indicatorVariant === "background",
+        "border-bottom-3 border-primary":
+          isSelect && indicatorVariant === "slide-bottom",
       },
       classNameItem
     );
     const itemClassLabel = ClassNames(
-      "text-primary",
+      "h5",
       {
-        "text-white": isSelect,
+        "text-primary": isSelect && indicatorVariant === "slide-bottom",
+        "text-white": isSelect && indicatorVariant === "background",
       },
       classNameItem
     );
@@ -108,7 +111,10 @@ const TabBar: React.FC<ITabBarProps<ITabItem>> = ({
         iconName={icon}
         style={{
           height,
-          minWidth: activateScroll ? minWidthItem : undefined,
+          paddingVertical: 0,
+          borderBottomWidth:
+            isSelect && indicatorVariant === "slide-bottom" ? 5 : undefined,
+          minWidth: minWidthItem,
         }}
         {...buttonProps}
       >
@@ -127,7 +133,6 @@ const TabBar: React.FC<ITabBarProps<ITabItem>> = ({
           {
             width: AppSizes.screenWidth,
             maxHeight: height,
-            backgroundColor: "yellow",
           },
           styleScrollView,
         ]}

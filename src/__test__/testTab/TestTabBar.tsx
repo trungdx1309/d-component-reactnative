@@ -31,6 +31,7 @@ const TestTabBar: React.FC<ITestTabBarProps> = ({ id }) => {
   return (
     <SafeAreaView className="flex-1 w-100">
       <TabBar
+        className="mb-3"
         dataSource={TAB_STEPPER_DATA}
         value={activeTab}
         scrollable
