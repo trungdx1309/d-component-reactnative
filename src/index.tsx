@@ -54,6 +54,9 @@ export type {
 } from "./component/view/TouchableOpacity";
 export { default as TouchableOpacity } from "./component/view/TouchableOpacity";
 
+export type { IViewTextAreaProps } from "./component/view/ViewTextArea";
+export { default as ViewTextArea } from "./component/view/ViewTextArea";
+
 /* ----------------------------------------
 // List
 // ---------------------------------------- */
