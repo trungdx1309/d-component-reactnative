@@ -65,12 +65,6 @@ export interface ITabStepperItemProps {
   isPassed?: boolean;
   onPress?: any;
   style?: ViewStyle;
-  activeColor?: ColorKeyType;
-  activeColorDarkMode?: ColorKeyType;
-  inActiveColor?: ColorKeyType;
-  inActiveColorDarkMode?: ColorKeyType;
-  indexColorDarkMode?: ColorKeyType;
-  indexColor?: ColorKeyType;
   getLabel?: (item: ITabStepperItemData) => any;
   styleTextIndex?: TextStyle;
   styleTextLabel?: TextStyle;
@@ -94,7 +88,6 @@ export const TabStepperItem: React.FC<ITabStepperItemProps> = ({
   style,
   styleTextIndex,
   styleTextLabel,
-
   getLabel = (item) => item?.label,
   variant = "index",
   shape = "circle",
@@ -255,8 +248,6 @@ const TabStepper: React.FC<ITabStepperProps> = ({
   className,
   classNameScrollView,
   scrollable,
-  activeColor,
-  inActiveColor,
   variant,
   shape,
   style,
@@ -290,8 +281,6 @@ const TabStepper: React.FC<ITabStepperProps> = ({
         isLastStep={index === dataSource?.length - 1}
         active={isActive}
         isPassed={isPassed}
-        activeColor={activeColor}
-        inActiveColor={inActiveColor}
         getLabel={() => getLabel && getLabel(iTab, index)}
         onPress={() => onPressItem && onPressItem(iTab, index)}
         variant={variant}
