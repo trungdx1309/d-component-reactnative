@@ -6,6 +6,7 @@ import Badge from "../../component/items/Badge";
 import Text from "../../component/text/Text";
 import View from "../../component/view/View";
 import images from "../testImage/Images";
+import ProgressBar from "../../component/items/ProgressBar";
 
 export interface ITestItemsProps {
   [key: string]: any;
@@ -86,6 +87,16 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
       {renderRow(
         "Pressable Icon",
         <Icon name="arrow-back" onPress={() => {}} size={25} />
+      )}
+      {renderRow(
+        "Progress Bar",
+        <ProgressBar
+          trailColor={"#252525" as any}
+          size="x-large"
+          height={15}
+          percent={0.25}
+          rounded={false}
+        />
       )}
     </ScrollView>
   );
