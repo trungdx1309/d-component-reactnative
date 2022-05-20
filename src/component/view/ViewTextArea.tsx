@@ -85,7 +85,7 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
           style={{ ...styleContent }}
           {...textContentProps}
         >
-          {displayText} {showDot && <Text className="text-center">...</Text>}
+          {displayText} {showDot && <Text className={`${textStyle}`}>...</Text>}
           {isOverFollow && (
             <TouchableOpacity
               onPress={() => {
@@ -97,7 +97,7 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
               }}
               colorDarkMode="transparent"
             >
-              <Text className={`ml-2 text-secondary ${textStyle}`}>
+              <Text className={`ml-1 text-secondary ${textStyle} py-0 h5`}>
                 {getShowMoreText()}
               </Text>
             </TouchableOpacity>
