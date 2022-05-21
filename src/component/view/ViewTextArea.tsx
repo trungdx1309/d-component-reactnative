@@ -8,7 +8,7 @@ import Button from "../button/Button";
 import Modal, { IModalProps } from "../modal/Modal";
 import TouchableOpacity from "./TouchableOpacity";
 
-export interface IViewTextAreaProps {
+export interface IViewTextAreaProps extends ThemeProps {
   children: string;
   style?: ViewStyle;
   styleContent?: TextStyle;
@@ -30,12 +30,15 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
   styleContent = {},
   className,
   classNameContent,
+  classNameShowMore,
   limitedLength = 200,
   textContentProps = {},
   modalProps = {},
   showLessText = "Show Less",
   showMoreText = "Show More",
   variant = "modal",
+  colorDarkMode,
+  useLightColor,
   ...rest
 }) => {
   if (typeof children !== "string") {
@@ -46,7 +49,7 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
 
   const isOverFollow = useMemo(() => {
     return children && children?.length > limitedLength;
-  }, [children]);
+  }, [children, limitedLength]);
   const [showFullMessage, setShowFullMessage] = useState(false);
 
   const displayText = useMemo(() => {
@@ -58,7 +61,7 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
       content = children.substring(0, limitedLength);
     }
     return content;
-  }, [children, isOverFollow, showFullMessage]);
+  }, [children, isOverFollow, showFullMessage, limitedLength]);
 
   const getShowMoreText = () => {
     if (showFullMessage && variant === "expand") {
@@ -79,7 +82,12 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
 
   return (
     <React.Fragment>
-      <View style={style} className={className}>
+      <View
+        style={style}
+        className={className}
+        colorDarkMode={colorDarkMode}
+        useLightColor={useLightColor}
+      >
         <Text
           className={`${textStyle} ${classNameContent}`}
           style={{ ...styleContent }}
@@ -97,7 +105,9 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
               }}
               colorDarkMode="transparent"
             >
-              <Text className={`ml-2 text-secondary ${textStyle}`}>
+              <Text
+                className={`ml-2 text-secondary ${textStyle} ${classNameShowMore}`}
+              >
                 {getShowMoreText()}
               </Text>
             </TouchableOpacity>
