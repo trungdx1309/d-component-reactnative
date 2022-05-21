@@ -12,6 +12,10 @@ export interface IViewTextAreaProps extends ThemeProps {
   children: string;
   style?: ViewStyle;
   styleContent?: TextStyle;
+  styleShowMore?: TextStyle;
+  ƒ;
+  styleShowLess?: TextStyle;
+  ƒ;
   showMoreText?: string;
   showLessText?: string;
   limitedLength?: number;
@@ -28,9 +32,12 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
   children,
   style,
   styleContent = {},
+  styleShowLess,
+  styleShowMore,
   className,
   classNameContent,
   classNameShowMore,
+  classNameShowLess,
   limitedLength = 200,
   textContentProps = {},
   modalProps = {},
@@ -52,6 +59,10 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
   }, [children, limitedLength]);
   const [showFullMessage, setShowFullMessage] = useState(false);
 
+  const displayShowLess = useMemo(() => {
+    return showFullMessage && variant === "expand";
+  }, [showFullMessage, variant]);
+
   const displayText = useMemo(() => {
     let content = children;
     if (showFullMessage && variant === "expand") {
@@ -64,14 +75,14 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
   }, [children, isOverFollow, showFullMessage, limitedLength]);
 
   const getShowMoreText = () => {
-    if (showFullMessage && variant === "expand") {
+    if (displayShowLess) {
       return showLessText;
     }
     return showMoreText;
   };
 
   const showDot = useMemo(() => {
-    if (variant === "expand" && showFullMessage) {
+    if (displayShowLess) {
       return false;
     }
     if (isOverFollow) {
@@ -93,7 +104,8 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
           style={{ ...styleContent }}
           {...textContentProps}
         >
-          {displayText} {showDot && <Text className="text-center">...</Text>}
+          {displayText}{" "}
+          {showDot && <Text className={`${textStyle} h3`}>...</Text>}
           {isOverFollow && (
             <TouchableOpacity
               onPress={() => {
@@ -106,7 +118,10 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
               colorDarkMode="transparent"
             >
               <Text
-                className={`ml-2 text-secondary ${textStyle} ${classNameShowMore}`}
+                className={`ml-2 text-secondary  py-0 h4 ${
+                  displayShowLess ? classNameShowLess : classNameShowMore
+                }`}
+                style={displayShowLess ? styleShowLess : styleShowMore}
               >
                 {getShowMoreText()}
               </Text>
