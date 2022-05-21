@@ -13,9 +13,7 @@ export interface IViewTextAreaProps extends ThemeProps {
   style?: ViewStyle;
   styleContent?: TextStyle;
   styleShowMore?: TextStyle;
-  ƒ;
   styleShowLess?: TextStyle;
-  ƒ;
   showMoreText?: string;
   showLessText?: string;
   limitedLength?: number;
