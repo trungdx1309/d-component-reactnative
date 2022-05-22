@@ -36,6 +36,7 @@ export interface IModalProps
   cancelButtonProps?: IButtonProps;
   saveButtonProps?: IButtonProps;
   swipeable?: boolean;
+  closable?: boolean;
 }
 
 const Modal: React.FC<IModalProps> = ({
@@ -76,6 +77,8 @@ const Modal: React.FC<IModalProps> = ({
   swipeDirection = "down",
   useLightColor = true,
   colorDarkMode,
+  closable = true,
+  onBackdropPress,
   ...rest
 }) => {
   const modalClass = ClassNames(
@@ -168,6 +171,13 @@ const Modal: React.FC<IModalProps> = ({
     );
   };
 
+  const hanldeBackDropPress = () => {
+    if (closable) {
+      return onClose && onClose();
+    }
+    return onBackdropPress;
+  };
+
   return (
     <ModalTrans
       onSwipeMove={onClose}
@@ -179,7 +189,7 @@ const Modal: React.FC<IModalProps> = ({
       isVisible={open}
       backdropTransitionInTiming={700}
       backdropTransitionOutTiming={300}
-      onBackdropPress={onClose as any}
+      onBackdropPress={hanldeBackDropPress}
       hideModalContentWhileAnimating
       className={modalClass}
     >
