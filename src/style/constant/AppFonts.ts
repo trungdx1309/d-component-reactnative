@@ -5,6 +5,8 @@
 const DefaultFont = {
   iosFont: "Poppins-Regular",
   androidFont: "Poppins-Reg",
+  iosBoldFont: "Poppins-Bold",
+  androidBoldFont: "Poppins-Bold",
   baseFontSize: 10,
 };
 

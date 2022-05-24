@@ -1,3 +1,4 @@
+/* eslint-disable react/default-props-match-prop-types */
 /* eslint-disable react/sort-comp */
 /* eslint-disable nonblock-statement-body-position */
 /* eslint-disable no-underscore-dangle */

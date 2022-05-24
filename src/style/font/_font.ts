@@ -15,7 +15,14 @@ export class FontClass {
    * fonts - map of keys and font family values e.g {iosFont: Poppins-Regular}
    */
   loadFonts(fonts: { [key: string]: string | number | TextStyle }) {
-    const { iosFont, androidFont, baseFontSize, ...rest } = fonts || {};
+    const {
+      iosFont,
+      androidFont,
+      baseFontSize,
+      iosBoldFont,
+      androidBoldFont,
+      ...rest
+    } = fonts || {};
     const baseSize = baseFontSize || this.baseFontSize;
     _.forEach(fonts, (value, key) => {
       this.fontClass = {
@@ -54,6 +61,9 @@ export class FontClass {
           // lineHeight: base.fontSize * 2 * 1.1,
           ...this.getFont({ iosFont, androidFont } as any),
         },
+        "font-weight-bold": {
+          ...this.getBoldFont({ iosBoldFont, androidBoldFont } as any),
+        },
         ...rest,
       };
     });
@@ -72,6 +82,23 @@ export class FontClass {
       },
       android: {
         fontFamily: androidFont || this.androidFont,
+      },
+    });
+  }
+
+  getBoldFont({
+    iosBoldFont,
+    androidBoldFont,
+  }: {
+    iosBoldFont?: string;
+    androidBoldFont?: string;
+  }) {
+    return Platform.select({
+      ios: {
+        fontFamily: iosBoldFont || this.iosBoldFont,
+      },
+      android: {
+        fontFamily: androidBoldFont || this.androidBoldFont,
       },
     });
   }
@@ -109,6 +136,9 @@ export class FontClass {
     text: {
       fontSize: this.baseFontSize,
       ...this.getFont({}),
+    },
+    "font-weight-bold": {
+      ...this.getBoldFont({}),
     },
   };
 }

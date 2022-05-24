@@ -9,6 +9,6 @@ Fonts.loadFonts({
   iosFont: "Prompt-Regular",
   baseFontSize: 12,
   label: {
-    fontWeight: "900",
+    fontWeight: "500",
   },
 });
