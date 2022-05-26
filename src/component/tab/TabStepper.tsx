@@ -2,6 +2,7 @@ import ClassNames from "classnames";
 import React, { ElementRef, useEffect, useRef } from "react";
 import {
   FlatList,
+  FlatListProps,
   StyleSheet,
   TextStyle,
   useColorScheme,
@@ -40,6 +41,7 @@ export interface ITabStepperProps extends Partial<ITabStepperItemProps> {
   }) => Partial<ITabStepperItemProps>;
   style?: ViewStyle;
   styleScrollView?: ViewStyle;
+  flatListProps?: FlatListProps<any>;
 }
 
 export interface ITabStepperItemThemeColors {
@@ -252,6 +254,7 @@ const TabStepper: React.FC<ITabStepperProps> = ({
   shape,
   style,
   styleScrollView,
+  flatListProps = {},
   ...rest
 }) => {
   const listRef = useRef<ElementRef<typeof FlatList>>(null);
@@ -307,12 +310,13 @@ const TabStepper: React.FC<ITabStepperProps> = ({
   if (scrollable) {
     return (
       <FlatList
+        showsHorizontalScrollIndicator={false}
+        style={[{ width: AppSizes.screenWidth }, styleScrollView]}
+        {...flatListProps}
         data={dataSource}
         renderItem={({ item, index }) => renderItem(item as any, index)}
-        horizontal
-        style={[{ width: AppSizes.screenWidth }, styleScrollView]}
-        showsHorizontalScrollIndicator={false}
         ref={listRef}
+        horizontal
         onScrollToIndexFailed={({ index }) => {
           listRef.current && listRef.current.scrollToIndex({ index: 0 });
         }}
