@@ -106,6 +106,7 @@ const InputDate: React.ForwardRefRenderFunction<
     customIcon,
     minimumDate,
     maximumDate,
+    locale = "en",
     monthYearModalProps = {},
     ...rest
   },
@@ -256,6 +257,7 @@ const InputDate: React.ForwardRefRenderFunction<
           mode={mode as any}
           timeZoneOffsetInMinutes={420}
           textColor={isDarkMode ? "white" : "black"}
+          locale={locale}
         />
       )}
       {openDateModal.open && openDateModal?.type === "monthYear" && (
