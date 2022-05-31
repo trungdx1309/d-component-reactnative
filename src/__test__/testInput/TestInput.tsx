@@ -81,7 +81,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         label="Date Input Standard"
         variant="standard"
         className="my-2"
-        mode="date"
+        mode="datetime"
         onChange={(v) => {
           setDate(v);
         }}
@@ -144,7 +144,7 @@ const TestInput: React.FC<ITestInputProps> = ({ id }) => {
         label="Input Outline"
         placeholder="Input Outline"
         onPressIcon={() => {}}
-        error="Error Test Input"
+        error=""
         useKeyboardAvoidingView
       />
       <InputText

@@ -29,6 +29,12 @@ const FORM_DATA: IFormItemData<any>[] = [
     type: "inputText",
   },
   {
+    rowsId: "birthDay",
+    label: "birthDay",
+    type: "date",
+    key: "birthDay",
+  },
+  {
     rowsId: "passportExp",
     label: "passportExp",
     type: "time-range",

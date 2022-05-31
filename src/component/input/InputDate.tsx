@@ -250,11 +250,12 @@ const InputDate: React.ForwardRefRenderFunction<
           style={styleDatePicker}
           focusable
           {...rest}
+          androidVariant="nativeAndroid"
           minimumDate={minimumDate}
           maximumDate={maximumDate}
           mode={mode as any}
           timeZoneOffsetInMinutes={420}
-          textColor={isDarkMode ? "white" : undefined}
+          textColor={isDarkMode ? "white" : "black"}
         />
       )}
       {openDateModal.open && openDateModal?.type === "monthYear" && (

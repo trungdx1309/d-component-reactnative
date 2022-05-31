@@ -123,7 +123,7 @@ export const getDefaultValue = (type?: IFormItemType) => {
 export function FormItem({
   onChange,
   data,
-  value = {},
+  value,
   Messages,
   className,
   error,
@@ -142,6 +142,15 @@ export function FormItem({
     dateInputProps,
   } = data;
   const itemLabel = Messages?.[label as any] || label;
+
+  const transformDateValue = (v: any): any => {
+    let transValue: any = null;
+    if (v && typeof v === "string") {
+      transValue = new Date(v);
+    }
+    return transValue || undefined;
+  };
+
   if (type === "date-range" || type === "time-range") {
     let transValue: any = null;
     if (Array.isArray(value)) {
@@ -169,7 +178,10 @@ export function FormItem({
         onChange={(value) => {
           let clone = null;
           if (Array.isArray(value)) {
-            clone = value.map((item) => moment(item).valueOf());
+            clone = value.map((item) => {
+              const dateValue = transformDateValue(value);
+              return dateValue;
+            });
           }
           onChange(key, clone);
         }}
@@ -182,13 +194,10 @@ export function FormItem({
     );
   }
   if (type === "date" || type === "date-time" || type === "time") {
-    let transValue: any = null;
-    if (value) {
-      transValue = moment(value).toDate();
-    }
+    const dateValue = transformDateValue(value);
     return (
       <InputDate
-        value={transValue}
+        value={dateValue}
         //@ts-ignore
         onChange={(value) => {
           return onChange(key, value) as any;

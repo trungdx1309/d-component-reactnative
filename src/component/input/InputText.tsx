@@ -1,4 +1,5 @@
 import ClassNames from "classnames";
+import { isEmpty } from "lodash";
 import React, { useMemo, useState } from "react";
 import {
   Platform,
@@ -62,6 +63,10 @@ export const InputErrorView: React.FC<IInputErrorViewProps> = ({
 }) => {
   const errorClass = ClassNames("flex-center-y", className);
   const textClass = ClassNames("text-error h5 ml-1", classNameText);
+
+  if (isEmpty(error) && typeof error !== "string") {
+    return null;
+  }
 
   return (
     <View className={errorClass}>
@@ -219,7 +224,9 @@ const InputText: React.ForwardRefRenderFunction<
           />
         )}
       </View>
-      {error && <InputErrorView error={error} className={errorClass} />}
+      {!isEmpty(error) && typeof error === "string" && (
+        <InputErrorView error={error} className={errorClass} />
+      )}
     </View>
   );
 
