@@ -1,5 +1,5 @@
 import ClassNames from "classnames";
-import _ from "lodash";
+import _, { filter, some } from "lodash";
 import React, { ElementRef, useEffect, useMemo, useRef, useState } from "react";
 import { Platform, ViewStyle } from "react-native";
 import Sizes from "../../style/size/_size";
@@ -68,6 +68,8 @@ export interface ISelectProps
   // input search props.
   showSearch?: boolean;
   inputSearchProps?: IInputSearchProps;
+  searchOffline?: boolean;
+  keySearchOffline?: Array<string>;
 
   listProps?: IAwesomeListProps<any>;
   chipProps?: IChipProps;
@@ -108,6 +110,8 @@ const Select: React.FC<ISelectProps> = ({
   isPaging,
   showSearch,
   inputSearchProps = {},
+  searchOffline = false,
+  keySearchOffline = ["name"],
   listProps = {},
   chipProps = {},
   dataSource = [],
@@ -224,6 +228,28 @@ const Select: React.FC<ISelectProps> = ({
     return label;
   };
 
+  const getResultFromSearch = (data?: Array<any>) => {
+    if (!data || !Array.isArray(data)) {
+      return [];
+    }
+    if (textSearch && searchOffline) {
+      const textResult = textSearch.toLowerCase();
+      const newData = filter(data, (item) => {
+        if (
+          some(keySearchOffline, (key) => {
+            const value = `${item?.[key]}` ?? "";
+            return value.toLowerCase().indexOf(textResult) !== -1;
+          })
+        ) {
+          return true;
+        }
+        return false;
+      });
+      return newData;
+    }
+    return data;
+  };
+
   const renderContent = () => {
     if (_.isEmpty(value)) {
       if (placeholder) {
@@ -311,7 +337,7 @@ const Select: React.FC<ISelectProps> = ({
           ref={listRef}
           isPaging={isPaging}
           source={() => Promise.resolve()}
-          transformer={(res) => dataSource}
+          transformer={(res) => getResultFromSearch(dataSource)}
           renderItem={renderSelectItem}
           keyExtractor={keyExtractor}
           className="px-3"
@@ -332,7 +358,10 @@ const Select: React.FC<ISelectProps> = ({
           }
           return source && source(payload);
         }}
-        transformer={transformer}
+        transformer={(res) => {
+          const data = transformer && transformer(res);
+          return getResultFromSearch(data);
+        }}
         renderItem={renderSelectItem}
         keyExtractor={keyExtractor}
         className="px-3"
@@ -362,7 +391,10 @@ const Select: React.FC<ISelectProps> = ({
       {error && <InputErrorView error={error} className={errorClass} />}
       <Modal
         open={openModal}
-        onClose={() => setOpenModal(false)}
+        onClose={() => {
+          setOpenModal(false);
+          setTextSearch("");
+        }}
         showHeader
         title={label}
         leftIcon="close"
