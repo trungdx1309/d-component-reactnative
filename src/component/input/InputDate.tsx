@@ -270,6 +270,7 @@ const InputDate: React.ForwardRefRenderFunction<
           onChange={(v) => onChange && onChange(v)}
           minimumDate={minimumDate}
           maximumDate={maximumDate}
+          locale={locale}
         />
       )}
     </View>

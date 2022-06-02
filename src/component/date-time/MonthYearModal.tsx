@@ -19,6 +19,7 @@ export interface IMonthYearModalProps extends IModalProps {
   selectedBackgroundColor?: ColorKeyType;
   style?: ViewStyle;
   monthFormat?: "MMM" | "MMMM" | "MM";
+  locale?: string;
 }
 
 const MonthYearModal: React.FC<IMonthYearModalProps> = ({
@@ -32,6 +33,8 @@ const MonthYearModal: React.FC<IMonthYearModalProps> = ({
   nextText,
   selectedBackgroundColor,
   style,
+  monthFormat,
+  locale,
 }) => {
   const isDarkMode = useColorScheme() === "dark";
 
@@ -82,6 +85,7 @@ const MonthYearModal: React.FC<IMonthYearModalProps> = ({
         selectedBackgroundColor={getColorValue(selectedBackgroundColor)}
         yearTextStyle={thisTextStyle}
         monthTextStyle={thisTextStyle}
+        localeLanguage={locale}
       />
     </Modal>
   );
