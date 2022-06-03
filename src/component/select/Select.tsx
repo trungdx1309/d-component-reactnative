@@ -51,6 +51,7 @@ export interface ISelectProps
   onChange?: (props: any) => any;
   getLabel?: (props: any) => any;
   getValue?: (props: any) => any;
+  getDisplayValue?: (props: any) => any;
   customSelectItem?: ({
     item,
     index,
@@ -99,6 +100,7 @@ const Select: React.FC<ISelectProps> = ({
   onChange,
   getLabel = (item) => item?.name,
   getValue = (item) => item?.id,
+  getDisplayValue,
   source = (paging) => Promise.resolve(),
   transformer = (res) => res,
   keyExtractor = (item, index) => `${item?.id} ${index}`,
@@ -281,7 +283,9 @@ const Select: React.FC<ISelectProps> = ({
         </View>
       );
     }
-    const label = getLabelFromValue(value);
+    const label = getDisplayValue
+      ? getDisplayValue(value)
+      : getLabelFromValue(value);
     return <Text className="flex-1 h4">{label}</Text>;
   };
 
