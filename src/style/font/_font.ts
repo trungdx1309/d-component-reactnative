@@ -21,6 +21,7 @@ export class FontClass {
       baseFontSize,
       iosBoldFont,
       androidBoldFont,
+      locale,
       ...rest
     } = fonts || {};
     const baseSize = baseFontSize || this.baseFontSize;
@@ -67,6 +68,7 @@ export class FontClass {
         ...rest,
       };
     });
+    this.locale = locale;
   }
 
   getFont({
@@ -130,7 +132,7 @@ export class FontClass {
       ...this.getFont({}),
     },
     h5: {
-      fontSize: this.baseFontSize,
+      fontSize: this.baseFonxtSize,
       ...this.getFont({}),
     },
     text: {

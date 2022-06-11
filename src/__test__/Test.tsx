@@ -17,6 +17,7 @@ import TabView, { ITabViewProps } from "../component/tab/TabView";
 import Text from "../component/text/Text";
 import SafeAreaView from "../component/view/SafeAreaView";
 import View from "../component/view/View";
+import StyleStateContext from "../context/StyleContext";
 import "./configurationStyle";
 import DATA_SOURCE from "./Source";
 import TestModal from "./testModal/TestModal";
@@ -68,21 +69,23 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView className="bg-white flex-1 h-full">
-      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-      {renderMainView()}
-      {/* <TestModal onPress={() => setOpenModal(true)} /> */}
-      <Modal
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-        size="fullscreen"
-        className="flex-1"
-        showHeader
-        showFooter
-      >
+    <StyleStateContext.Provider value={{ locale: "th", useFontToLocale: true }}>
+      <SafeAreaView className="bg-white flex-1 h-full">
+        <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
         {renderMainView()}
-      </Modal>
-    </SafeAreaView>
+        {/* <TestModal onPress={() => setOpenModal(true)} /> */}
+        <Modal
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          size="fullscreen"
+          className="flex-1"
+          showHeader
+          showFooter
+        >
+          {renderMainView()}
+        </Modal>
+      </SafeAreaView>
+    </StyleStateContext.Provider>
   );
 };
 
