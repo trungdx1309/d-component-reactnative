@@ -11,4 +11,8 @@ Fonts.loadFonts({
   label: {
     fontWeight: "500",
   },
+  locale: {
+    en: "Poppins-Regular",
+    th: "Prompt-Regular",
+  } as any,
 });

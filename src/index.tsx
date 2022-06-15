@@ -262,3 +262,10 @@ export type {
   IFormProps,
 } from "./component/form/Form";
 export { default as Form } from "./component/form/Form";
+
+/* ----------------------------------------
+// Context
+// ---------------------------------------- */
+
+export type { IStyleStateContext } from "./context/StyleContext";
+export { default as StyleContext } from "./context/StyleContext";
