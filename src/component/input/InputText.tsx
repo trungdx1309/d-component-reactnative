@@ -4,7 +4,6 @@ import ClassNames from "classnames";
 import { isEmpty } from "lodash";
 import React, { useMemo, useState } from "react";
 import {
-    KeyboardAvoidingView,
     Platform,
     StyleProp,
     TextInput as RNTextInput,
@@ -15,9 +14,9 @@ import {
 } from "react-native";
 import useKeyBoard from "../../hooks/useKeyboard";
 import { ThemeProps } from "../../interface/iTheme";
+import Colors from "../../style/color/_color";
 import { ColorKeyType } from "../../style/constant/AppColors";
 import { getThemeColor } from "../../style/modifier";
-import Colors from "../../style/color/_color";
 import Sizes from "../../style/size/_size";
 import { getStyleProps } from "../../style/style";
 import Icon from "../icon/Icon";
@@ -235,15 +234,15 @@ const InputText: React.ForwardRefRenderFunction<
         </View>
     );
 
-    if (useKeyboardAvoidingView && focusing) {
-        return (
-            <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-            >
-                {content}
-            </KeyboardAvoidingView>
-        );
-    }
+    // if (useKeyboardAvoidingView && focusing) {
+    //     return (
+    //         <KeyboardAvoidingView
+    //             behavior={Platform.OS === "ios" ? "padding" : "height"}
+    //         >
+    //             {content}
+    //         </KeyboardAvoidingView>
+    //     );
+    // }
 
     return content;
 };
