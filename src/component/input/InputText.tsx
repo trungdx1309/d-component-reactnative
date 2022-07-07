@@ -243,7 +243,6 @@ const InputText: React.ForwardRefRenderFunction<
     //         </KeyboardAvoidingView>
     //     );
     // }
-
     return content;
 };
 

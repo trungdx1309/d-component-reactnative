@@ -6,7 +6,13 @@
 
 import _ from "lodash";
 import tinycolor from "tinycolor2";
+import { ColorKeyType } from "../../../dist";
 import DefaultColors from "../constant/AppColors";
+
+type ColorsRecord = Partial<Record<ColorKeyType, string>> & {
+    loadColors: (props: any) => any;
+    [key: string]: any;
+};
 
 export class ColorsClass {
     [key: string]: any;
@@ -32,6 +38,6 @@ export const isDark = (color: string) => {
     return lum < 0.55;
 };
 //@ts-ignore
-const Colors = new ColorsClass();
+const Colors: ColorsRecord = new ColorsClass();
 Colors.loadColors(DefaultColors);
 export default Colors;
