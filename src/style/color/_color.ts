@@ -6,8 +6,7 @@
 
 import _ from "lodash";
 import tinycolor from "tinycolor2";
-import { ColorKeyType } from "../../../dist";
-import DefaultColors from "../constant/AppColors";
+import DefaultColors, { ColorKeyType } from "../constant/AppColors";
 
 type ColorsRecord = Partial<Record<ColorKeyType, string>> & {
     loadColors: (props: any) => any;
