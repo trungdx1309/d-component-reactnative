@@ -188,7 +188,6 @@ export function FormItem({
                 }}
                 label={Messages?.[label as any] || label}
                 className={className}
-                isRangePicker
                 error={error}
                 {...dateInputProps}
             />
@@ -423,6 +422,7 @@ const Form: React.FC<IFormProps> = ({
                             );
                             if (React.isValidElement(render)) {
                                 content = React.cloneElement(render, {
+                                    //@ts-ignore
                                     onChange: (value: any) =>
                                         onChangeState({
                                             key,

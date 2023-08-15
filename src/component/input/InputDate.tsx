@@ -56,7 +56,6 @@ export interface IInputDateProps
   disabledColor?: ColorKeyType | null;
   styleDatePicker?: ViewStyle;
   mode?: InputDateModeType;
-
   monthYearModalProps?: Partial<IMonthYearModalProps>;
 }
 

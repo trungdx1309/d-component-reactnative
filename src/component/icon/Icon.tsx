@@ -124,10 +124,10 @@ const Icon: React.FC<IIconProps> = ({
     if (onPress) {
         return (
             <TouchableOpacity
-                onPress={onPress}
-                onPressIn={onPressIn}
-                onPressOut={onPressOut}
-                onLongPress={onPressIn}
+                onPress={onPress as any}
+                onPressIn={onPressIn as any}
+                onPressOut={onPressOut as any}
+                onLongPress={onPressIn as any}
                 colorDarkMode="transparent"
                 className={`p-1 rounded-pill ${classNameWrapper}`}
             >

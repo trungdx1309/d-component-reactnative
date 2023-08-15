@@ -111,6 +111,10 @@ const TestItems: React.FC<ITestItemsProps> = ({ id }) => {
                 "Check Box",
                 <CheckBox checked size={40} iconSize={30} />
             )}
+            {renderRow(
+                "Check Box",
+                <CheckBox pressEnable={false} disabled checked variant="radio" />
+            )}
         </ScrollView>
     );
 };
