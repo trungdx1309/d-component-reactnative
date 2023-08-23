@@ -12,7 +12,6 @@ import IconEvilIcons from "react-native-vector-icons/EvilIcons";
 import IconEntypo from "react-native-vector-icons/Entypo";
 import IconAntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import FontFontAwesome5Pro from "react-native-vector-icons/FontAwesome5Pro";
 import { ThemeProps } from "../../interface/iTheme";
 import { ColorKeyType } from "../../style/constant/AppColors";
 import { getColorValue } from "../../style/modifier";
@@ -114,9 +113,9 @@ const Icon: React.FC<IIconProps> = ({
         case "font-awesome-5":
             <FontAwesome5 {...props} />;
             break;
-        case "font-awesome-5-pro":
-            <FontFontAwesome5Pro {...props} />;
-            break;
+        // case "font-awesome-5-pro":
+        //     <FontFontAwesome5Pro {...props} />;
+        //     break;
         default:
             icon = <IconMaterialIcons {...props} />;
             break;

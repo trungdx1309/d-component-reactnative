@@ -30,7 +30,7 @@ export const getStyleProps = (props: any, key?: string) => {
   if (!isEmpty(classArr)) {
     try {
       forEach(classArr, (name: any) => {
-        if (style[name as keyof typeof style]) {
+        if (style?.[name as keyof typeof style]) {
           styleProps.push(style[name as keyof typeof style]);
         }
       });

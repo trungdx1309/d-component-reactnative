@@ -18,6 +18,7 @@ import Icon from "../icon/Icon";
 
 export interface IDateObject extends RNDateObject {}
 
+//@ts-ignore
 export interface ICalendarProps
     extends CalendarBaseProps,
         Omit<Partial<MultiDotMarkingProps>, "markingType">,

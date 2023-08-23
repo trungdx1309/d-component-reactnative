@@ -129,7 +129,6 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
       </View>
       {showFullMessage && variant === "modal" && (
         <Modal
-          open={showFullMessage}
           onClose={() => setShowFullMessage(false)}
           size="medium"
           showFooter
@@ -137,6 +136,7 @@ const ViewTextArea: React.FC<IViewTextAreaProps> = ({
           showSaveButton={false}
           classNameFooter="justify-content-end"
           {...modalProps}
+          open={showFullMessage}
         >
           <Text className={`${textStyle} mt-2`} colorDarkMode="light">
             {children}
